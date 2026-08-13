@@ -1,0 +1,1372 @@
+/* ═══════════════════════════════════════════════════════════
+   ディスコード宣伝｜共通CSS
+   ★ここには「造形」を書かない。可読性・ナビ開閉・フォーカス・
+     リンクの最低限だけ。見た目は page-styles/{slug}.css が持つ。
+     （こころの09案と同じ分離規則に合わせる）
+   ═══════════════════════════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  font-family:
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", system-ui,
+    sans-serif;
+  font-feature-settings: "palt" 1;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+a {
+  color: inherit;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+p,
+ul,
+ol {
+  margin: 0;
+}
+ul,
+ol {
+  padding-left: 0;
+}
+
+/* 読み上げ・キーボード */
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 999;
+  padding: 12px 20px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+}
+.skip:focus {
+  left: 12px;
+  top: 12px;
+}
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* 横に溢れうるものは必ず自分の中でスクロールさせる */
+.scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* ナビ開閉（挙動だけ。色・形は各ページのCSS） */
+[data-nav] {
+  display: flex;
+  align-items: center;
+}
+[data-burger] {
+  display: none;
+  position: relative;
+  z-index: 91;
+}
+@media (max-width: 900px) {
+  [data-burger] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  [data-nav] {
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.24s;
+    z-index: 90;
+    overflow-y: auto;
+    padding: 70px 20px;
+  }
+  [data-nav][data-open] {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+/* ═══ ★ナビ＝9項目フラット（Hikârű指示「ナビ自体に子はいらない」）
+   ・ドロップダウンを廃止。全ページを1段で並べる
+   ・souseikiri.jp と同じ【日本語＋英語の2段表記】
+   ・項目名はサジェスト実データから取る（宣伝のやり方／宣伝できる場所／…）
+   ・色と枠は各ページの page-styles が持つ                              */
+[data-nav] a {
+  display: block;
+  text-align: center;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+[data-nav] a b {
+  display: block;
+  font-weight: 650;
+}
+[data-nav] a i {
+  display: block;
+  font-style: normal;
+  text-transform: uppercase;
+}
+@media (max-width: 900px) {
+  [data-nav] a {
+    text-align: left;
+  }
+  [data-nav] a b {
+    display: inline;
+  }
+  [data-nav] a i {
+    display: inline;
+    margin-left: 10px;
+  }
+}
+
+/* ═══ ★②斜め断面（Stripe型／台帳②「水平線でセクションを切らない」）
+   角度だけ共通。背景色は各ページが指定する */
+.slant {
+  position: relative;
+  clip-path: polygon(0 3.4vw, 100% 0, 100% calc(100% - 3.4vw), 0 100%);
+  margin-top: -3vw;
+  padding-top: calc(3.4vw + 46px);
+  padding-bottom: calc(3.4vw + 46px);
+}
+.slant-r {
+  clip-path: polygon(0 0, 100% 3.4vw, 100% 100%, 0 calc(100% - 3.4vw));
+}
+.slant > * {
+  position: relative;
+  z-index: 1;
+}
+/* SVGの波（Stripe型）。高さだけ共通 */
+.wave {
+  display: block;
+  width: 100%;
+  height: clamp(60px, 7vw, 120px);
+  margin-bottom: -1px;
+}
+.wave + * {
+  margin-top: 0;
+}
+
+/* ★⑥カウントアップ数字（Stripe型）— 表示の器だけ共通 */
+[data-count] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ★ベースグリッドと共有スケール（Coral Capital 実測より）
+   実測：coralcap.co は TOP／portfolio／insights の3ページとも
+        `l-pc-base-grid-content` = 28.4375px × 48カラム の同じ土台に乗り、
+        その上での配置だけが全く違っていた。
+   → 「骨を変える」と「土台を共有する」は両立する。
+     色と造形は page-styles が持ち、刻みだけをここで共有する。
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  /* 12カラム（48の1/4刻み。12/6/4/3/2列が割り切れる） */
+  --cols: 12;
+  --gut: clamp(14px, 1.6vw, 26px);
+  --pad: clamp(18px, 3.4vw, 44px);
+  --wrap: 1240px;
+  /* 余白スケール（全ページ共通の刻み） */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 16px;
+  --s4: 24px;
+  --s5: 40px;
+  --s6: 64px;
+  --s7: 96px;
+  --s8: 140px;
+  /* 見出しスケール（各ページは色と字体だけ変える） */
+  --f1: clamp(30px, 6.2vw, 72px); /* h1 */
+  --f2: clamp(22px, 3.8vw, 40px); /* h2 */
+  --f3: clamp(17px, 2.3vw, 24px); /* h3 */
+  --fb: 15.5px; /* 本文 */
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: var(--gut);
+}
+.wrap {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+/* 列の取り方（配置だけを変える語彙） */
+.c-12 {
+  grid-column: span 12;
+}
+.c-9 {
+  grid-column: span 9;
+}
+.c-8 {
+  grid-column: span 8;
+}
+.c-7 {
+  grid-column: span 7;
+}
+.c-6 {
+  grid-column: span 6;
+}
+.c-5 {
+  grid-column: span 5;
+}
+.c-4 {
+  grid-column: span 4;
+}
+.c-3 {
+  grid-column: span 3;
+}
+@media (max-width: 900px) {
+  .c-9,
+  .c-8,
+  .c-7,
+  .c-6,
+  .c-5 {
+    grid-column: span 12;
+  }
+  .c-4,
+  .c-3 {
+    grid-column: span 6;
+  }
+}
+@media (max-width: 560px) {
+  .c-4,
+  .c-3 {
+    grid-column: span 12;
+  }
+}
+
+/* ★TOP級のHero（9ページ全部に置く。色と中身は各ページ） */
+.hero {
+  position: relative;
+  min-height: clamp(420px, 64vh, 720px);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.hero-in {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-block: var(--s6) var(--s5);
+}
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.hero-media img,
+.hero-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+/* 動画は動きを減らす設定では出さない（静止画へ） */
+@media (prefers-reduced-motion: reduce) {
+  .hero-media video {
+    display: none;
+  }
+}
+
+/* ★大判ビジュアル帯（本文の途中に挟む“見せ場”） */
+.showcase {
+  position: relative;
+  margin-block: var(--s7);
+  overflow: hidden;
+}
+.showcase img,
+.showcase video {
+  width: 100%;
+  display: block;
+}
+.showcase figcaption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 14px 18px;
+  font-size: 12px;
+}
+
+/* ★ログ（実際の記録を見せる面）— 等幅・行番号つき */
+.log {
+  overflow-x: auto;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.95;
+  counter-reset: lg;
+}
+.log .ln {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 14px;
+  counter-increment: lg;
+}
+.log .ln::before {
+  content: counter(lg, decimal-leading-zero);
+  opacity: 0.45;
+  text-align: right;
+}
+
+/* スクロールで現れる（共通の挙動。動きの量は各ページで上書き） */
+[data-rv] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+[data-rv].in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-rv] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* 目次（構造だけ。装飾は各ページ） */
+.toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.toc a {
+  text-decoration: none;
+}
+
+/* 印刷 */
+@media print {
+  [data-nav],
+  [data-burger],
+  .skip {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+}
+
+/* ═══ ★曲線と斜め断面（Stripe / Linear 実測より） ═══
+   実測：Stripe は clip-path を90箇所、Linear は曲線pathを741本使っていた。
+        レオは0だったので「縦と横だけ」に見えていた。
+   ・.wave-wrap … 曲線SVGの器。色は currentColor で各ページから当てる
+   ・.cut-*     … clip-path による斜め断面（水平線でセクションを切らない）  */
+.wave-wrap {
+  line-height: 0;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  pointer-events: none;
+}
+.wave-wrap .wave {
+  display: block;
+  width: 100%;
+  height: clamp(48px, 6vw, 104px);
+}
+.wave-wrap + * {
+  margin-top: -1px;
+}
+/* 上下反転（セクションの上端に置く時） */
+.wave-flip {
+  transform: scaleY(-1);
+}
+
+/* ★斜め断面：クラスを付けるだけで水平線が消える */
+.cut-b {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3.2vw), 0 100%);
+} /* 下辺が右上がり */
+.cut-b-r {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 3.2vw));
+} /* 下辺が右下がり */
+.cut-t {
+  clip-path: polygon(0 3.2vw, 100% 0, 100% 100%, 0 100%);
+} /* 上辺が右上がり */
+.cut-both {
+  clip-path: polygon(0 3.2vw, 100% 0, 100% calc(100% - 3.2vw), 0 100%);
+}
+@media (max-width: 700px) {
+  .cut-b,
+  .cut-b-r,
+  .cut-t,
+  .cut-both {
+    clip-path: none;
+  } /* 狭い画面では切らない */
+}
+
+/* ═══ ★ニシザキ工芸 塗装部（MUUUUU 優れたレイアウト・構成／2026-08-07）実測の移植 ═══
+   実測: clip-path 0・曲線path 0・mask 0・grid 0 ／★keyframes 22・video 2
+   → 「優れたレイアウト」は大きな造形ではなく【小さな部品が全部動く】ことで出来ていた。
+   下層 /skill/ の骨:
+     .pagecover(733px 開いた瞬間ズーム) → headlead → 本文 → ★.eyecatch(全幅727px) → 本文 → footer
+   レオに無かったのは★中腹の全幅パララックス＝息継ぎ。ここを入れる。            */
+
+/* ── A. ページカバー：開いた瞬間にゆっくりズーム（pagecoverImageZoom 相当） */
+@keyframes coverZoom {
+  from {
+    transform: scale(1.14);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.cover-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+.cover-media img,
+.cover-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: coverZoom 9s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* ── B. ★eyecatch：本文の途中に全幅で挟む息継ぎ（.prlxi＝パララックス） */
+.eyecatch {
+  position: relative;
+  width: 100%;
+  height: clamp(280px, 42vw, 620px);
+  overflow: hidden;
+  margin: var(--s7) 0;
+  isolation: isolate;
+}
+.eyecatch .ec-img {
+  position: absolute;
+  inset: -14% 0;
+  background-position: center;
+  background-size: cover;
+  will-change: transform;
+}
+.eyecatch .ec-cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 26px var(--pad);
+  font-size: 13.5px;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  z-index: 2;
+}
+.eyecatch .ec-cap b {
+  display: block;
+  font-size: clamp(19px, 2.6vw, 30px);
+  font-weight: 800;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.eyecatch::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 34%,
+    rgba(0, 0, 0, 0.62) 100%
+  );
+}
+@media (max-width: 700px) {
+  .eyecatch {
+    height: clamp(220px, 58vw, 340px);
+    margin: var(--s6) 0;
+  }
+}
+
+/* ── C. 矢印が方向別に動く（linelink_arrow_anim_* 相当・6方向のうち4方向） */
+@keyframes arrR {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  45% {
+    transform: translateX(12px);
+    opacity: 0;
+  }
+  46% {
+    transform: translateX(-12px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes arrD {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  45% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  46% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes arrU {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  45% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  46% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.arr {
+  display: inline-block;
+  margin-left: 0.5em;
+  transition: none;
+}
+a:hover .arr,
+button:hover .arr {
+  animation: arrR 0.5s ease both;
+}
+.arr-d {
+  margin-left: 0;
+}
+a:hover .arr-d {
+  animation: arrD 0.5s ease both;
+}
+.arr-u {
+  margin-left: 0;
+}
+a:hover .arr-u {
+  animation: arrU 0.5s ease both;
+}
+
+/* ── D. 読み込み中の点3つ（loadingDot1/2/3 相当） */
+@keyframes dotUp {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  40% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+.dots {
+  display: inline-flex;
+  gap: 5px;
+  vertical-align: middle;
+}
+.dots i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  display: block;
+  animation: dotUp 1.25s ease-in-out infinite;
+}
+.dots i:nth-child(2) {
+  animation-delay: 0.16s;
+}
+.dots i:nth-child(3) {
+  animation-delay: 0.32s;
+}
+
+/* ── F. ページ遷移のマスク（transitionmask 相当） */
+@keyframes maskOut {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+.tmask {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  transform-origin: top;
+  pointer-events: none;
+  animation: maskOut 0.62s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cover-media img,
+  .cover-media video {
+    animation: none;
+  }
+  .site-head .logo svg,
+  .site-head .logo img,
+  .site-head::after,
+  .dots i {
+    animation: none;
+  }
+  .tmask {
+    display: none;
+  }
+}
+
+/* ═══ ★こころのヘッダモーション（assets/header-keyframes-01.css をそのまま） ═══
+   暁月ガジェットの原定義6つ＋常時ヘッダ向けに振幅を抑えた移植版。
+   ★レオが自作した .site-head の動きは撤去し、こころの定義に一本化した。      */
+/*
+ * ディスコード宣伝サイト｜ヘッダ用モーション
+ * 1. 暁月ガジェット実装から、そのまま共有する6定義
+ * 2. 常時表示ヘッダ向けに振幅を抑えた移植用定義
+ * 3. prefers-reduced-motion の静止画差し替え
+ */
+
+/* ── 暁月ガジェットの原定義（改変なし） ───────────────────── */
+@keyframes kougetsu-boot-moon-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes kougetsu-boot-bar-slide {
+  0% {
+    left: -35%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes guide-halo-breathe {
+  0%,
+  100% {
+    transform: scale(0.93);
+    opacity: 0.62;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes media-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 10px rgba(232, 98, 43, 0.8),
+      0 0 20px rgba(232, 98, 43, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 16px rgba(232, 98, 43, 1),
+      0 0 32px rgba(232, 98, 43, 0.6);
+  }
+}
+
+@keyframes media-chunk-moon-spin {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0.7;
+  }
+}
+
+/* 原実装の指定値
+ * animation: kougetsu-boot-moon-breathe 3.6s ease-in-out infinite;
+ * animation: kougetsu-boot-bar-slide 2.2s cubic-bezier(.55,.1,.45,.9) infinite;
+ * animation: blink 1s steps(1) infinite;
+ * animation: guide-halo-breathe 3.8s ease-in-out infinite;
+ * animation: media-pulse 1.8s ease-in-out infinite;
+ * animation: media-chunk-moon-spin 3.5s linear infinite;
+ */
+
+/* ── 常時表示ヘッダ向け：呼吸幅と発光差を抑えた移植版 ─────── */
+@keyframes discord-promo-mark-breathe {
+  0%,
+  100% {
+    transform: translateZ(0) scale(1);
+    filter: drop-shadow(0 0 7px rgb(255 61 127 / 28%));
+  }
+  50% {
+    transform: translateZ(0) scale(1.025);
+    filter: drop-shadow(0 0 12px rgb(255 61 127 / 42%));
+  }
+}
+
+@keyframes discord-promo-type-breathe {
+  0%,
+  100% {
+    opacity: 0.94;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes discord-promo-light-sweep {
+  0% {
+    transform: translate3d(-130%, 0, 0);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.22;
+  }
+  72% {
+    opacity: 0.16;
+  }
+  100% {
+    transform: translate3d(230%, 0, 0);
+    opacity: 0;
+  }
+}
+
+.site-header__logo-mark {
+  transform-origin: 50% 55%;
+  animation: discord-promo-mark-breathe 3.8s ease-in-out infinite;
+}
+
+.site-header__logo-type {
+  animation: discord-promo-type-breathe 4.6s ease-in-out infinite;
+}
+
+.site-header__motion {
+  background: center / cover no-repeat url("assets/header-motion-01.webp");
+  pointer-events: none;
+}
+
+.site-header__light-sweep {
+  animation: discord-promo-light-sweep 5.2s cubic-bezier(0.45, 0.05, 0.55, 0.95)
+    infinite;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 209 102 / 18%),
+    transparent
+  );
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header__logo-mark,
+  .site-header__logo-type,
+  .site-header__light-sweep {
+    animation: none;
+  }
+
+  .site-header__motion {
+    background-image: url("assets/header-motion-01.png");
+  }
+}
+
+/* ── こころの定義を実際に置くための器（レオ側） */
+.site-head {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  overflow: hidden;
+}
+.site-head .hd-in {
+  position: relative;
+  z-index: 2;
+}
+.site-header__motion {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.3;
+}
+.site-header__light-sweep {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 42%;
+  z-index: 1;
+}
+.site-head .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  position: relative;
+  z-index: 2;
+}
+.site-header__logo-mark {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  display: block;
+}
+.site-header__logo-type {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+@media (max-width: 900px) {
+  .site-header__logo-type {
+    height: 18px;
+  }
+  .site-header__logo-mark {
+    width: 29px;
+    height: 29px;
+  }
+}
+/* 現在地の下線が伸びる */
+.site-head nav a {
+  position: relative;
+}
+.site-head nav a::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  bottom: 2px;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.site-head nav a:hover::after,
+.site-head nav a[aria-current]::after {
+  transform: scaleX(1);
+}
+
+/* ── 見出し脇の装飾（こころ heading-deco-01〜03） */
+.doc h2,
+.wall h2,
+.four h2 {
+  position: relative;
+}
+.doc h2::before {
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  translate: 0 -50%;
+  width: 74px;
+  height: 74px;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: -1;
+  background: center/contain no-repeat url("assets/heading-deco-01.webp");
+}
+.doc h2:nth-of-type(3n + 2)::before {
+  background-image: url("assets/heading-deco-02.webp");
+}
+.doc h2:nth-of-type(3n)::before {
+  background-image: url("assets/heading-deco-03.webp");
+}
+@media (max-width: 760px) {
+  .doc h2::before {
+    display: none;
+  }
+}
+
+/* ═══ ★触ると動く（transition）＝「動的に視覚で魅せる」の本体 ═══
+   実測（2026-08-13・窓で測った）
+     DAIICHI SELECT ページ全体 transition 128個 ／ keyframes 16
+     STORES         ヘッダだけで transition 63個 ／ keyframes 0
+     dotsandlines   transition 0（その代わり画像73枚で見せる）
+     ★レオ          ページ全体 15個 ← 8.5倍足りなかった
+   レオは「自動で動くもの（keyframes）」ばかり数えて、
+   「触ると動くもの（transition）」を一度も数えていなかった。   */
+
+:root {
+  --ez: cubic-bezier(0.22, 0.61, 0.36, 1); /* 出て止まる */
+  --ez2: cubic-bezier(0.4, 0, 0.2, 1); /* 素直 */
+  --t1: 0.16s;
+  --t2: 0.24s;
+  --t3: 0.36s;
+}
+
+/* ── カード（貼り紙・タイル・募集票）：浮いて、中の画像が寄る ── */
+.paper,
+.tile,
+.slip,
+.card,
+.row,
+.g-xl,
+.g-m,
+.g-s {
+  transition:
+    transform var(--t2) var(--ez),
+    box-shadow var(--t2) var(--ez),
+    background-color var(--t2) var(--ez2),
+    border-color var(--t2) var(--ez2);
+}
+.paper img,
+.tile img,
+.slip img,
+.card img {
+  transition:
+    transform var(--t3) var(--ez),
+    opacity var(--t2);
+}
+.paper:hover img,
+.tile:hover img,
+.slip:hover img,
+.card:hover img {
+  transform: scale(1.045);
+}
+.p-mo {
+  transition:
+    opacity var(--t3) var(--ez2),
+    transform var(--t3) var(--ez);
+}
+.paper:hover .p-mo {
+  opacity: 0.5;
+  transform: scale(1.06);
+}
+
+/* ── 見出し：脇の装飾が寄る ── */
+.doc h2::before,
+.wall h2::before {
+  transition:
+    transform var(--t3) var(--ez),
+    opacity var(--t2);
+}
+.doc h2:hover::before,
+.wall h2:hover::before {
+  transform: translate(-8px, -50%) rotate(-6deg);
+  opacity: 0.5;
+}
+
+/* ── ボタン ── */
+.go,
+.go-a,
+.go-b,
+.post-btn,
+button {
+  transition:
+    background-color var(--t1) var(--ez2),
+    color var(--t1) var(--ez2),
+    border-color var(--t1) var(--ez2),
+    transform var(--t2) var(--ez),
+    filter var(--t1),
+    box-shadow var(--t2) var(--ez);
+}
+.go:hover,
+.go-a:hover,
+.go-b:hover,
+.post-btn:hover {
+  transform: translateY(-2px);
+}
+.go:active,
+.go-a:active,
+.go-b:active {
+  transform: translateY(0);
+}
+
+/* ── ナビ ── */
+.site-head nav a {
+  transition:
+    color var(--t1) var(--ez2),
+    background-color var(--t1) var(--ez2);
+}
+.site-head nav a b,
+.site-head nav a i {
+  transition: color var(--t1) var(--ez2);
+}
+[data-burger] {
+  transition:
+    border-color var(--t1),
+    background-color var(--t1);
+}
+[data-burger] span {
+  transition:
+    transform var(--t2) var(--ez2),
+    opacity var(--t1);
+}
+
+/* ── 目次・行・タグ ── */
+.toc a {
+  transition:
+    color var(--t1) var(--ez2),
+    padding-left var(--t2) var(--ez2);
+}
+.toc a:hover {
+  padding-left: 6px;
+}
+.row {
+  transition:
+    background-color var(--t1) var(--ez2),
+    transform var(--t2) var(--ez);
+}
+.row:hover {
+  transform: translateX(4px);
+}
+.row time,
+.row .tag,
+.row b,
+.row small {
+  transition: color var(--t1) var(--ez2);
+}
+
+/* ── 数字の帯 ── */
+.c-item b {
+  transition:
+    transform var(--t3) var(--ez),
+    color var(--t2);
+}
+.c-item:hover b {
+  transform: translateY(-3px);
+}
+
+/* ── 息継ぎの画像 ── */
+.eyecatch .ec-img {
+  transition: transform 0.5s var(--ez);
+}
+.eyecatch:hover .ec-img {
+  transform: scale(1.03);
+}
+.eyecatch .ec-cap b {
+  transition: letter-spacing var(--t3) var(--ez2);
+}
+.eyecatch:hover .ec-cap b {
+  letter-spacing: 0.012em;
+}
+
+/* ── 表 ── */
+table tr {
+  transition: background-color var(--t1) var(--ez2);
+}
+table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* ── 画像そのもの ── */
+img {
+  transition: opacity var(--t2) var(--ez2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ── ★文字のリンク（明示セレクタ）──
+   前は main a:not(.paper):not(.go):not(.go-a)… と :not() を6連鎖させたら
+   ::after の content が効かなかった（実測: content:normal）。当てる先を名指しする。 */
+.txt a,
+.doc a,
+.doc li a,
+.txt li a,
+.toc a,
+.notice a,
+.ec-cap a,
+.exit small a {
+  position: relative;
+  text-decoration: none;
+  transition: color var(--t1, 0.16s) var(--ez2, ease);
+}
+.txt a::after,
+.doc a::after,
+.doc li a::after,
+.txt li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--t2, 0.24s) var(--ez2, ease);
+}
+.txt a:hover::after,
+.doc a:hover::after,
+.doc li a:hover::after,
+.txt li a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ═══ ★割れ目に入る図版・動画（こころ納品の motion / demo を置く） ═══ */
+.side-fig {
+  margin: var(--s6, 48px) 0;
+  display: flex;
+  justify-content: flex-end;
+}
+.side-fig picture {
+  display: block;
+  width: min(520px, 62%);
+}
+.side-fig img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.94;
+  transition:
+    transform 0.36s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.24s;
+}
+.side-fig:hover img {
+  transform: translateY(-4px);
+  opacity: 1;
+}
+@media (max-width: 700px) {
+  .side-fig picture {
+    width: 100%;
+  }
+}
+.demo-fig {
+  margin: var(--s6, 48px) 0;
+}
+.demo-fig video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.demo-fig figcaption {
+  margin-top: 10px;
+  font-size: 12.5px;
+  opacity: 0.72;
+  letter-spacing: 0.02em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo-fig video {
+    display: none;
+  }
+}
+
+/* ═══ ★粒子と印 ═══
+   noise-overlay-01.webp は 0バイトで届いた。★こころに再送は頼まない。
+   同じ役目（画面全体に薄い粒を乗せる）を、CSSのグラデーションだけで自作する。
+   画像を1枚も増やさずに済むので、こちらのほうが軽い。                    */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.45) 0 1px,
+      transparent 1px 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.35) 0 1px,
+      transparent 1px 3px
+    );
+  background-size:
+    3px 3px,
+    3px 3px;
+  mix-blend-mode: overlay;
+}
+.on-light-page::after {
+  opacity: 0.032;
+  mix-blend-mode: multiply;
+}
+
+/* 印（アイコン）を置く行 */
+.mark-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 auto var(--s3, 16px);
+  max-width: 1280px;
+  padding: 0 var(--pad, 22px);
+}
+.mark {
+  display: block;
+  width: clamp(38px, 4.4vw, 58px);
+  height: auto;
+}
+.mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.85;
+  transition:
+    opacity 0.24s,
+    transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.mark-row:hover .mark img {
+  opacity: 1;
+  transform: translateY(-3px) rotate(-4deg);
+}
+@media (max-width: 700px) {
+  .mark {
+    width: 34px;
+  }
+}
+
+/* ═══ AKATSUKI SYSTEM 共通フッター ═══
+   ページ固有の色・質感は各CSSに残し、構造・注記・中央コピーライトだけを共通化する。 */
+footer .ft {
+  box-sizing: border-box;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 42px var(--pad, 22px) 22px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px 30px;
+}
+footer .ft h4 {
+  margin: 0 0 11px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+}
+footer .ft a {
+  display: block;
+  padding: 4px 0;
+  color: inherit;
+  font-size: 12.5px;
+  text-decoration: none;
+  opacity: 0.76;
+}
+footer .ft a:hover {
+  opacity: 1;
+}
+footer .ft-notes {
+  box-sizing: border-box;
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding: 4px var(--pad, 22px) 2px;
+  color: inherit;
+  text-align: center;
+}
+footer .ft-notes p {
+  margin: 0;
+  font-size: clamp(9.5px, 0.62vw, 10.5px);
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  opacity: 0.78;
+}
+footer .ft-btm {
+  box-sizing: border-box;
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  justify-content: center !important;
+  align-items: center;
+  text-align: center;
+}
+footer .ft-btm p {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  font-size: clamp(11px, 0.85vw, 13px);
+  letter-spacing: 0.04em;
+}
+@media (max-width: 900px) {
+  footer .ft {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  footer .ft {
+    grid-template-columns: 1fr;
+    padding-top: 34px;
+  }
+  footer .ft-notes p {
+    font-size: 9.5px;
+    line-height: 1.65;
+  }
+}

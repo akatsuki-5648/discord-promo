@@ -1,0 +1,23 @@
+{
+  "name": "ディスコード宣伝",
+  "short_name": "ディスコード宣伝",
+  "description": "ディスコードの宣伝サーバー・掲示板・やり方・運営を解説するガイド",
+  "lang": "ja",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0B1020",
+  "theme_color": "#0B1020",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

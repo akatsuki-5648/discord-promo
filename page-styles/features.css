@@ -1,0 +1,666 @@
+/* ═══════════════════════════════════════════════════════
+   /features/ 専用｜文法＝「1点ずつ立てて見せる陳列」
+   ★真似る先：DAIICHI SELECT https://select.daiichisyokuhin.com/
+     （④ ちょうどいい・評「リッチな動きと質感」）
+     実測 2026-08-13：ジャンプ率 14.5 ／ 最大字 160px ／ 節の落差 12倍
+                      keyframes 16 ／ 曲線6 ／ clip-path 0 ／ mask 0 ／ 画像29
+     ＝ 商品を1点ずつ立てて見せる構造。機能を1つずつ立てるこのページと目的が一致する。
+   ★他ページとの差：places=2カラム、how-to=1枚の紙、find=上固定、create=横スクロール、
+                    manage=格子、recruit=タブ＋ピンボード、
+                    ここは【左右交互の大きな段（1機能＝1画面）】
+   ★独自性：夜明け前の紫。数字だけを極端に大きくする（ジャンプ率をここで作る）
+   ★素材：features-bg / pattern / glow / object / motion-01 / motion-02 / icon（台帳§7の順）
+   ═══════════════════════════════════════════════════════ */
+[data-route="features"] {
+  --bg: #120c1e;
+  --bg-2: #1a1030;
+  --bg-3: #0b0714;
+  --ac: #c77dff;
+  --ac-2: #7b2cbf;
+  --gd: #ffd166;
+  --tx: #ede6f7;
+  --tx-2: #a594c4;
+  --tx-3: #6e5f8a;
+  --ln: #2c1f47;
+  --mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+[data-route="features"] body,
+body[data-route="features"] {
+  background: var(--bg);
+  color: var(--tx);
+}
+
+/* 地（台帳§7：指定背景色 → bg → pattern → glow） */
+[data-route="features"] .veil {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background: var(--bg);
+}
+[data-route="features"] .veil::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/features-bg-01.webp") center/cover no-repeat;
+  opacity: 0.55;
+}
+[data-route="features"] .veil::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/features-pattern-01.webp") center/cover no-repeat;
+  opacity: 0.16;
+  mix-blend-mode: screen;
+}
+
+/* ヘッダ */
+[data-route="features"] .bar {
+  background: rgba(11, 7, 20, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--ln);
+}
+[data-route="features"] .bar-in {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 9px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+[data-route="features"] .bar nav {
+  margin-left: auto;
+  gap: 0;
+  flex-wrap: wrap;
+}
+[data-route="features"] .bar nav a {
+  padding: 6px 9px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+[data-route="features"] .bar nav a b {
+  font-size: 12px;
+  color: var(--tx-2);
+  font-weight: 600;
+  display: block;
+}
+[data-route="features"] .bar nav a i {
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 0.14em;
+  color: var(--tx-3);
+  font-style: normal;
+  display: block;
+  margin-top: 2px;
+}
+[data-route="features"] .bar nav a:hover {
+  background: rgba(199, 125, 255, 0.1);
+}
+[data-route="features"] .bar nav a:hover b {
+  color: var(--tx);
+}
+[data-route="features"] .bar nav a[aria-current] b,
+[data-route="features"] .bar nav a[aria-current] i {
+  color: var(--ac);
+}
+[data-route="features"] [data-burger] {
+  width: 40px;
+  height: 36px;
+  background: none;
+  border: 1px solid var(--ln);
+  border-radius: 4px;
+  flex-direction: column;
+  gap: 4px;
+}
+[data-route="features"] [data-burger] span {
+  width: 16px;
+  height: 1.5px;
+  background: var(--tx);
+  display: block;
+}
+@media (max-width: 1180px) {
+  [data-route="features"] .bar nav a b {
+    font-size: 11px;
+  }
+  [data-route="features"] .bar nav a {
+    padding: 6px 6px;
+  }
+}
+@media (max-width: 900px) {
+  [data-route="features"] [data-nav] {
+    background: rgba(11, 7, 20, 0.985);
+  }
+  [data-route="features"] .bar nav a {
+    padding: 13px 20px;
+  }
+  [data-route="features"] .bar nav a b {
+    font-size: 17px;
+  }
+}
+
+/* Hero */
+[data-route="features"] .hero {
+  min-height: clamp(440px, 62vh, 680px);
+  position: relative;
+  overflow: hidden;
+}
+[data-route="features"] .hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url("../assets/features-glow-01.webp") center/cover no-repeat;
+  opacity: 0.62;
+}
+[data-route="features"] .hero-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 12, 30, 0.42) 0,
+    rgba(18, 12, 30, 0.86) 62%,
+    var(--bg) 100%
+  );
+}
+[data-route="features"] .hero-in {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(80px, 13vh, 150px) var(--pad) clamp(44px, 7vh, 80px);
+}
+[data-route="features"] .crumb {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--tx-3);
+  padding: 0 0 18px;
+}
+[data-route="features"] .crumb a {
+  color: var(--tx-3);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ln);
+}
+[data-route="features"] .crumb a:hover {
+  color: var(--ac);
+  border-color: var(--ac);
+}
+[data-route="features"] .hero .no {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: var(--gd);
+  margin: 0 0 18px;
+}
+/* ★ジャンプ率をここで作る（実測 DAIICHI SELECT 最大字160px） */
+[data-route="features"] .hero h1 {
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-size: clamp(44px, 11vw, 150px);
+}
+[data-route="features"] .hero h1 em {
+  font-style: normal;
+  color: var(--ac);
+}
+[data-route="features"] .hero .lead {
+  margin-top: clamp(22px, 3.4vh, 36px);
+  max-width: 60ch;
+  font-size: clamp(14.5px, 1.15vw, 17px);
+  line-height: 2.1;
+  color: var(--tx-2);
+}
+
+/* フッター：夜明け前の紫を最後まで維持する */
+[data-route="features"] footer {
+  margin-top: 72px;
+  border-top: 1px solid var(--ln);
+  background: var(--bg-3);
+}
+[data-route="features"] .ft h4 {
+  color: var(--gd);
+  font-family: var(--mono);
+}
+[data-route="features"] .ft a {
+  color: var(--tx-2);
+}
+[data-route="features"] .ft a:hover {
+  color: var(--ac);
+}
+[data-route="features"] .ft-btm {
+  padding: 14px var(--pad) 28px;
+  border-top: 1px solid var(--ln);
+  color: var(--tx-2);
+  font-family: var(--mono);
+}
+[data-route="features"] .hero .lead b {
+  color: var(--tx);
+  border-bottom: 1px solid var(--ac-2);
+}
+
+/* ★数字の帯（短い節＝落差をつくる） */
+[data-route="features"] .numbers {
+  background: var(--bg-3);
+  border-block: 1px solid var(--ln);
+}
+[data-route="features"] .num-in {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(30px, 4.6vw, 52px) var(--pad);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gut);
+}
+@media (max-width: 860px) {
+  [data-route="features"] .num-in {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+[data-route="features"] .n-item b {
+  display: block;
+  font-family: var(--mono);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ac);
+  font-size: clamp(38px, 5vw, 72px);
+  letter-spacing: -0.03em;
+}
+[data-route="features"] .n-item span {
+  display: block;
+  margin-top: 11px;
+  font-size: 12.5px;
+  color: var(--tx-2);
+}
+
+/* ★★左右交互の大きな段（1機能＝1画面ぶん） */
+[data-route="features"] .feat {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(60px, 9vw, 128px) var(--pad);
+}
+[data-route="features"] .feat-in {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 4.4vw, 72px);
+  align-items: center;
+}
+[data-route="features"] .feat.rev .feat-in {
+  direction: rtl;
+}
+[data-route="features"] .feat.rev .feat-in > * {
+  direction: ltr;
+}
+@media (max-width: 900px) {
+  [data-route="features"] .feat-in {
+    grid-template-columns: 1fr;
+  }
+  [data-route="features"] .feat.rev .feat-in {
+    direction: ltr;
+  }
+}
+[data-route="features"] .fno {
+  font-family: var(--mono);
+  font-size: clamp(40px, 5.6vw, 84px);
+  font-weight: 800;
+  color: var(--ac-2);
+  line-height: 1;
+  margin: 0 0 10px;
+  opacity: 0.55;
+  letter-spacing: -0.04em;
+}
+[data-route="features"] .feat h2 {
+  font-size: clamp(28px, 4.4vw, 58px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin: 0 0 10px;
+  line-height: 1.1;
+  scroll-margin-top: 76px;
+}
+[data-route="features"] .fsub {
+  font-size: clamp(14px, 1.5vw, 18px);
+  color: var(--ac);
+  margin: 0 0 22px;
+  font-weight: 600;
+}
+[data-route="features"] .feat p {
+  font-size: var(--fb);
+  line-height: 2.05;
+  color: #c9bcdf;
+  margin: 0 0 16px;
+  max-width: 52ch;
+}
+[data-route="features"] .feat p b {
+  color: var(--tx);
+  border-bottom: 1px solid var(--ac-2);
+}
+[data-route="features"] .fpt {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 0;
+}
+[data-route="features"] .fpt li {
+  position: relative;
+  padding: 11px 0 11px 26px;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--tx-2);
+  border-bottom: 1px solid var(--ln);
+}
+[data-route="features"] .fpt li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 19px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ac);
+}
+[data-route="features"] .fpt li b {
+  color: var(--tx);
+}
+[data-route="features"] .fstep {
+  list-style: none;
+  counter-reset: s;
+  padding: 0;
+  margin: 18px 0 0;
+}
+[data-route="features"] .fstep li {
+  counter-increment: s;
+  position: relative;
+  padding: 13px 0 13px 46px;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--tx-2);
+  border-bottom: 1px solid var(--ln);
+}
+[data-route="features"] .fstep li::before {
+  content: counter(s);
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--bg);
+  background: var(--ac);
+  border-radius: 50%;
+  font-weight: 700;
+}
+[data-route="features"] .fstep li b {
+  color: var(--tx);
+}
+[data-route="features"] .feat-v {
+  position: relative;
+}
+[data-route="features"] .feat-v img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+[data-route="features"] .feat:hover .feat-v img {
+  transform: translateY(-6px);
+}
+[data-route="features"] .fnote {
+  margin-top: 22px;
+  padding: 18px 22px;
+  background: var(--bg-2);
+  border-left: 3px solid var(--gd);
+  font-size: 13.5px;
+  line-height: 1.95;
+  color: var(--tx-2);
+}
+[data-route="features"] .fnote b {
+  color: var(--gd);
+}
+[data-route="features"] .fwarn {
+  margin-top: 22px;
+  padding: 18px 22px;
+  background: rgba(199, 125, 255, 0.07);
+  border: 1px solid var(--ac-2);
+  font-size: 13.5px;
+  line-height: 1.95;
+  color: var(--tx-2);
+}
+[data-route="features"] .fwarn b {
+  color: var(--ac);
+}
+[data-route="features"] .fwarn a {
+  color: var(--ac);
+}
+
+/* レベルの3枚 */
+[data-route="features"] .tiers {
+  background: var(--bg-3);
+  border-block: 1px solid var(--ln);
+}
+[data-route="features"] .tiers-in {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(52px, 8vw, 104px) var(--pad);
+}
+[data-route="features"] .tiers h2 {
+  font-size: clamp(24px, 3.4vw, 44px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin: 0 0 clamp(26px, 4vw, 48px);
+}
+[data-route="features"] .tier-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gut);
+}
+@media (max-width: 840px) {
+  [data-route="features"] .tier-row {
+    grid-template-columns: 1fr;
+  }
+}
+[data-route="features"] .tier {
+  background: var(--bg-2);
+  border: 1px solid var(--ln);
+  padding: 26px 24px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 0.2s,
+    transform 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+[data-route="features"] .tier:hover {
+  border-color: var(--ac-2);
+  transform: translateY(-4px);
+}
+[data-route="features"] .tier::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background: url("../assets/features-object-01.webp") right -18% top -22%/62%
+    auto no-repeat;
+}
+[data-route="features"] .tno {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--tx-3);
+  margin: 0 0 6px;
+  position: relative;
+  z-index: 1;
+}
+[data-route="features"] .tno b {
+  color: var(--ac);
+  font-size: 22px;
+}
+/* ★数字だけ極端に大きくする（ジャンプ率の本体） */
+[data-route="features"] .tct {
+  margin: 0 0 18px;
+  font-family: var(--mono);
+  font-size: 16px;
+  color: var(--tx-2);
+  position: relative;
+  z-index: 1;
+}
+[data-route="features"] .tct em {
+  font-style: normal;
+  font-size: clamp(56px, 8.4vw, 124px);
+  font-weight: 800;
+  color: var(--tx);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-right: 6px;
+}
+[data-route="features"] .tier ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+[data-route="features"] .tier li {
+  padding: 9px 0;
+  font-size: 13.5px;
+  color: var(--tx-2);
+  border-top: 1px solid var(--ln);
+  line-height: 1.8;
+}
+[data-route="features"] .tier li b {
+  color: var(--ac);
+}
+
+/* 本文 */
+[data-route="features"] .doc {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: clamp(56px, 8vw, 104px) var(--pad);
+}
+[data-route="features"] .toc {
+  background: var(--bg-2);
+  border: 1px solid var(--ln);
+  border-left: 4px solid var(--ac);
+  padding: 20px 24px;
+  margin: 0 0 var(--s6);
+}
+[data-route="features"] .toc-h {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  color: var(--ac);
+  margin-bottom: 13px;
+}
+[data-route="features"] .toc ol {
+  margin: 0;
+  padding-left: 1.3em;
+}
+[data-route="features"] .toc a {
+  display: block;
+  padding: 5px 0;
+  font-size: 13.5px;
+  color: var(--tx-2);
+  text-decoration: none;
+}
+[data-route="features"] .toc a:hover,
+[data-route="features"] .toc a[data-here] {
+  color: var(--ac);
+}
+[data-route="features"] .doc h2 {
+  font-size: clamp(21px, 2.8vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: var(--s7) 0 10px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid var(--ln);
+  scroll-margin-top: 76px;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+[data-route="features"] .doc h2 .n {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--gd);
+  letter-spacing: 0.2em;
+  border: 1px solid var(--gd);
+  padding: 3px 9px;
+  font-weight: 400;
+  flex: none;
+}
+[data-route="features"] .doc h3 {
+  font-size: clamp(16px, 1.9vw, 21px);
+  font-weight: 700;
+  margin: var(--s5) 0 12px;
+  padding-left: 14px;
+  border-left: 3px solid var(--ac);
+  scroll-margin-top: 76px;
+}
+[data-route="features"] .doc p {
+  font-size: var(--fb);
+  line-height: 2.05;
+  color: #c9bcdf;
+  margin: 0 0 15px;
+  max-width: 74ch;
+}
+[data-route="features"] .doc p b {
+  color: var(--tx);
+  border-bottom: 1px solid var(--ac-2);
+}
+[data-route="features"] .doc a {
+  color: var(--ac);
+}
+
+/* 締め */
+[data-route="features"] .cta {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-3);
+  border-top: 1px solid var(--ln);
+}
+[data-route="features"] .cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.34;
+  background: url("../assets/features-glow-01.webp") center/cover no-repeat;
+  mix-blend-mode: screen;
+}
+[data-route="features"] .cta-in {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(56px, 9vw, 120px) var(--pad);
+  text-align: center;
+}
+[data-route="features"] .cta h2 {
+  font-size: clamp(24px, 4.4vw, 54px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0 0 clamp(20px, 3vw, 34px);
+}
+[data-route="features"] .cta .go {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ac);
+  color: #120c1e;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 16px;
+  padding: 17px 34px;
+}
+[data-route="features"] .cta .go:hover {
+  filter: brightness(1.1);
+}
+[data-route="features"] .cta small {
+  display: block;
+  margin-top: 18px;
+  font-size: 12.5px;
+  color: var(--tx-3);
+}
+
+/* ★ページ別の目標値（11サイト実測・2026-08-13）
+   参考: DAIICHI SELECT／ジャンプ率 14.5／最大字 160px／落差 12
+   ★9ページ全部を同じ数字にしない。にじのわクリニック(不安を扱う)は 1.9 */

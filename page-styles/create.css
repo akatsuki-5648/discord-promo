@@ -1,0 +1,865 @@
+/* ═══════════════════════════════════════════════════════
+   /create/ 専用｜文法＝「青写真／設計図」
+   ★真似る先：Made With Gsap（madewithgsap.com）
+     ・「/ 112」「#100」＝★番号付きコレクション
+     ・「Drag to explore the collection」＝★横に引いて探索させる
+   ★独自性：建築の青写真（方眼・寸法線・図面の折り目・構成図）
+   ★他ページとの差：places/howto=左に追従、find=上に固定、
+                    ここは【横スクロールの工程】＝縦だけで進まない
+   ═══════════════════════════════════════════════════════ */
+[data-route="create"] {
+  --bp: #0a2540;
+  --bp-2: #0d2e4d;
+  --bp-3: #081c30;
+  --ln: #4da6ff;
+  --ln-2: #2b6fb5;
+  --wt: #e8f2ff;
+  --wt-2: #9dbbda;
+  --ac: #ffd166;
+  --gd: rgba(77, 166, 255, 0.16);
+  --mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+[data-route="create"] body,
+body[data-route="create"] {
+  background: var(--bp);
+  color: var(--wt);
+}
+
+/* 方眼の地（青写真そのもの） */
+[data-route="create"] .bp {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--gd) 1px, transparent 1px) 0 0/22px 22px,
+    linear-gradient(180deg, var(--gd) 1px, transparent 1px) 0 0/22px 22px,
+    linear-gradient(90deg, rgba(77, 166, 255, 0.3) 1px, transparent 1px) 0
+      0/110px 110px,
+    linear-gradient(180deg, rgba(77, 166, 255, 0.3) 1px, transparent 1px) 0
+      0/110px 110px,
+    radial-gradient(1000px 620px at 76% -8%, #123a5e 0, transparent 62%),
+    var(--bp);
+}
+[data-route="create"] .bp::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.14;
+  background-image: url("../assets/pattern-circuit-01.webp");
+  background-size: cover;
+  mix-blend-mode: screen;
+}
+
+/* ヘッダ＝図面のタイトルブロック */
+[data-route="create"] .titleblock {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgba(8, 28, 48, 0.93);
+  backdrop-filter: blur(9px);
+  border-bottom: 1px solid var(--ln-2);
+}
+[data-route="create"] .tb-in {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 9px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+[data-route="create"] .titleblock .logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  color: var(--wt);
+}
+[data-route="create"] .titleblock .logo b {
+  font-size: 15px;
+  letter-spacing: 0.03em;
+}
+[data-route="create"] .titleblock .logo i {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--wt-2);
+  display: block;
+}
+[data-route="create"] .titleblock nav {
+  margin-left: auto;
+  gap: 0;
+  flex-wrap: wrap;
+}
+[data-route="create"] .titleblock nav a {
+  padding: 6px 9px;
+}
+[data-route="create"] .titleblock nav a b {
+  font-size: 12px;
+  color: var(--wt-2);
+  font-weight: 600;
+}
+[data-route="create"] .titleblock nav a i {
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 0.14em;
+  color: #6e90b8;
+  margin-top: 2px;
+}
+[data-route="create"] .titleblock nav a:hover b {
+  color: var(--wt);
+}
+[data-route="create"] .titleblock nav a:hover i {
+  color: var(--ln);
+}
+[data-route="create"] .titleblock nav a[aria-current] b,
+[data-route="create"] .titleblock nav a[aria-current] i {
+  color: var(--ac);
+}
+[data-route="create"] [data-burger] {
+  width: 40px;
+  height: 36px;
+  background: none;
+  border: 1px solid var(--ln-2);
+  border-radius: 3px;
+  flex-direction: column;
+  gap: 4px;
+}
+[data-route="create"] [data-burger] span {
+  width: 16px;
+  height: 1.5px;
+  background: var(--wt);
+  display: block;
+}
+@media (max-width: 1180px) {
+  [data-route="create"] .titleblock nav a b {
+    font-size: 11px;
+  }
+  [data-route="create"] .titleblock nav a {
+    padding: 6px 6px;
+  }
+}
+@media (max-width: 900px) {
+  [data-route="create"] [data-nav] {
+    background: rgba(8, 28, 48, 0.985);
+  }
+  [data-route="create"] .titleblock nav a {
+    padding: 13px 20px;
+  }
+  [data-route="create"] .titleblock nav a b {
+    font-size: 17px;
+  }
+}
+
+/* Hero＝図面の1枚目。寸法線つき */
+[data-route="create"] .hero {
+  min-height: clamp(430px, 64vh, 680px);
+}
+[data-route="create"] .hero-veil {
+  background: linear-gradient(180deg, rgba(10, 37, 64, 0.2), var(--bp) 92%);
+}
+[data-route="create"] .crumb {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #6e90b8;
+  padding: 0 0 16px;
+}
+[data-route="create"] .crumb a {
+  color: #6e90b8;
+  text-decoration: none;
+}
+[data-route="create"] .crumb a:hover {
+  color: var(--ln);
+}
+[data-route="create"] .hero .no {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: var(--ac);
+  margin: 0 0 16px;
+}
+[data-route="create"] .hero h1 {
+  font-size: var(--f1);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin: 0;
+  position: relative;
+  display: inline-block;
+}
+[data-route="create"] .hero h1 em {
+  font-style: normal;
+  color: var(--ln);
+}
+/* 寸法線（h1の下・両端に立ち上がり） */
+[data-route="create"] .hero h1::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -16px;
+  height: 1px;
+  background: var(--ac);
+}
+[data-route="create"] .hero h1::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -21px;
+  height: 11px;
+  border-left: 1px solid var(--ac);
+  border-right: 1px solid var(--ac);
+}
+[data-route="create"] .hero .lead {
+  margin-top: var(--s6);
+  max-width: 60ch;
+  font-size: 16px;
+  color: var(--wt-2);
+  line-height: 2.05;
+}
+[data-route="create"] .hero .lead b {
+  color: var(--wt);
+  border-bottom: 1px solid var(--ln);
+}
+
+/* ★★横スクロールの工程（Made With Gsap 型：番号付き・引いて探索） */
+[data-route="create"] .track-h {
+  max-width: 1240px;
+  margin: var(--s7) auto var(--s4);
+  padding: 0 var(--pad);
+  display: flex;
+  align-items: flex-end;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+[data-route="create"] .track-h h2 {
+  font-size: var(--f2);
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+[data-route="create"] .track-h .cnt {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ln);
+  margin-left: auto;
+}
+[data-route="create"] .track-h .drag {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  color: #6e90b8;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+}
+[data-route="create"] .track-h .drag i {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--ln-2), transparent);
+  display: block;
+}
+[data-route="create"] .track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(340px, 78vw);
+  gap: var(--gut);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 6px var(--pad) var(--s5);
+  scrollbar-width: thin;
+}
+[data-route="create"] .track::-webkit-scrollbar {
+  height: 8px;
+}
+[data-route="create"] .track::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+[data-route="create"] .track::-webkit-scrollbar-thumb {
+  background: var(--ln-2);
+  border-radius: 4px;
+}
+[data-route="create"] .step {
+  scroll-snap-align: start;
+  background: var(--bp-2);
+  border: 1px solid var(--ln-2);
+  padding: 22px 22px 24px;
+  position: relative;
+  transition: 0.2s;
+}
+[data-route="create"] .step:hover {
+  border-color: var(--ln);
+  background: #10365b;
+}
+[data-route="create"] .step .n {
+  font-family: var(--mono);
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--ln);
+  line-height: 1;
+  opacity: 0.85;
+}
+[data-route="create"] .step .of {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #6e90b8;
+  margin-left: 6px;
+}
+[data-route="create"] .step h3 {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 14px 0 10px;
+  color: var(--wt);
+  border: 0;
+  padding: 0;
+}
+[data-route="create"] .step p {
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: var(--wt-2);
+  margin: 0;
+}
+[data-route="create"] .step .tick {
+  margin-top: 16px;
+  padding-top: 13px;
+  border-top: 1px dashed var(--ln-2);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ac);
+}
+/* 図面の折り目 */
+[data-route="create"] .step::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(225deg, var(--bp) 50%, transparent 50%);
+}
+
+/* 本文 */
+[data-route="create"] .doc {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 var(--pad) var(--s8);
+}
+[data-route="create"] .toc {
+  background: var(--bp-2);
+  border: 1px solid var(--ln-2);
+  padding: 20px 24px;
+  margin: var(--s6) 0 0;
+}
+[data-route="create"] .toc-h {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  color: var(--ac);
+  margin-bottom: 13px;
+}
+[data-route="create"] .toc ol {
+  columns: 2;
+  column-gap: 34px;
+}
+[data-route="create"] .toc li {
+  break-inside: avoid;
+}
+[data-route="create"] .toc a {
+  display: block;
+  padding: 5px 0;
+  font-size: 13px;
+  color: var(--wt-2);
+  border-bottom: 1px solid rgba(77, 166, 255, 0.14);
+}
+[data-route="create"] .toc a:hover,
+[data-route="create"] .toc a[data-here] {
+  color: var(--ln);
+}
+[data-route="create"] .toc .lv3 {
+  padding-left: 16px;
+  font-size: 12px;
+}
+[data-route="create"] .toc .lv3::before {
+  content: "┗ ";
+  color: var(--ln-2);
+}
+@media (max-width: 760px) {
+  [data-route="create"] .toc ol {
+    columns: 1;
+  }
+}
+
+[data-route="create"] .doc h2 {
+  font-size: var(--f2);
+  font-weight: 800;
+  margin: var(--s7) 0 8px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid var(--ln-2);
+  scroll-margin-top: 78px;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  letter-spacing: -0.02em;
+}
+[data-route="create"] .doc h2 .n {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ac);
+  letter-spacing: 0.2em;
+  border: 1px solid var(--ac);
+  padding: 3px 9px;
+  font-weight: 400;
+  flex: none;
+}
+[data-route="create"] .doc h3 {
+  font-size: var(--f3);
+  font-weight: 700;
+  margin: var(--s5) 0 12px;
+  scroll-margin-top: 78px;
+  padding-left: 18px;
+  position: relative;
+}
+[data-route="create"] .doc h3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 11px;
+  height: 1px;
+  background: var(--ac);
+  box-shadow: 0 4px 0 var(--ac);
+}
+[data-route="create"] .doc h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 22px 0 8px;
+  color: var(--wt-2);
+}
+[data-route="create"] .doc p {
+  font-size: var(--fb);
+  line-height: 2.05;
+  color: #c4d6ea;
+  margin: 0 0 15px;
+  max-width: 76ch;
+}
+[data-route="create"] .doc strong {
+  color: var(--wt);
+  border-bottom: 1px solid var(--ac);
+}
+[data-route="create"] .doc ul {
+  list-style: none;
+  margin: 12px 0 22px;
+}
+[data-route="create"] .doc ul li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 9px;
+  font-size: 14.5px;
+  line-height: 1.95;
+  color: #bacde2;
+}
+[data-route="create"] .doc ul li::before {
+  content: "□";
+  position: absolute;
+  left: 2px;
+  color: var(--ln);
+  font-size: 11px;
+}
+[data-route="create"] .doc ol {
+  list-style: none;
+  margin: 12px 0 22px;
+  counter-reset: c;
+}
+[data-route="create"] .doc ol li {
+  position: relative;
+  padding-left: 36px;
+  margin-bottom: 11px;
+  counter-increment: c;
+  font-size: 14.5px;
+  line-height: 1.95;
+  color: #bacde2;
+}
+[data-route="create"] .doc ol li::before {
+  content: counter(c, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--bp);
+  background: var(--ln);
+  padding: 1px 6px;
+}
+
+/* ★サーバー構成図（作る前に完成形を見せる） */
+[data-route="create"] .plan {
+  background: var(--bp-3);
+  border: 1px solid var(--ln-2);
+  padding: 24px;
+  margin: var(--s5) 0;
+}
+[data-route="create"] .plan-h {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  color: var(--ac);
+  margin-bottom: 18px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+[data-route="create"] .plan-h::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--ln-2);
+}
+[data-route="create"] .cat {
+  margin-bottom: 20px;
+}
+[data-route="create"] .cat > b {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--ln);
+  letter-spacing: 0.1em;
+  margin-bottom: 9px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--ln-2);
+}
+[data-route="create"] .ch {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 7px;
+}
+[data-route="create"] .ch span {
+  font-size: 12.5px;
+  color: #bacde2;
+  padding: 7px 11px;
+  background: rgba(77, 166, 255, 0.07);
+  border-left: 2px solid var(--ln-2);
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+[data-route="create"] .ch span i {
+  font-style: normal;
+  color: #6e90b8;
+  font-size: 11px;
+}
+[data-route="create"] .ch span em {
+  font-style: normal;
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--ac);
+}
+[data-route="create"] .ch span.must {
+  border-left-color: var(--ac);
+}
+
+[data-route="create"] .note {
+  background: rgba(255, 209, 102, 0.08);
+  border: 1px solid rgba(255, 209, 102, 0.34);
+  border-left: 4px solid var(--ac);
+  padding: 17px 20px;
+  margin: 20px 0;
+}
+[data-route="create"] .note b {
+  color: var(--ac);
+}
+[data-route="create"] .note p {
+  margin: 0;
+  font-size: 14.5px;
+  color: #d8e6f5;
+}
+[data-route="create"] .doc table {
+  margin: 18px 0 26px;
+  background: var(--bp-2);
+  border: 1px solid var(--ln-2);
+}
+[data-route="create"] .doc th {
+  background: var(--bp-3);
+  color: var(--ln);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  text-align: left;
+  padding: 11px 14px;
+  white-space: nowrap;
+}
+[data-route="create"] .doc td {
+  padding: 12px 14px;
+  font-size: 13.5px;
+  border-top: 1px solid rgba(77, 166, 255, 0.16);
+  vertical-align: top;
+  line-height: 1.8;
+  color: #bacde2;
+}
+
+[data-route="create"] .back {
+  display: block;
+  margin: var(--s6) 0 0;
+  padding: 23px 25px;
+  background: var(--bp-2);
+  border: 1px solid var(--ln-2);
+  border-left: 4px solid var(--ac);
+  text-decoration: none;
+}
+[data-route="create"] .back b {
+  display: block;
+  font-size: 16.5px;
+  color: var(--wt);
+  margin-bottom: 7px;
+}
+[data-route="create"] .back small {
+  font-size: 13.5px;
+  color: var(--wt-2);
+  line-height: 1.9;
+  display: block;
+}
+[data-route="create"] .back:hover {
+  background: #10365b;
+}
+[data-route="create"] .rel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 13px;
+}
+[data-route="create"] .rel a {
+  background: var(--bp-2);
+  border: 1px solid var(--ln-2);
+  padding: 18px;
+  text-decoration: none;
+  transition: 0.18s;
+}
+[data-route="create"] .rel a:hover {
+  border-color: var(--ln);
+  transform: translateY(-2px);
+}
+[data-route="create"] .rel p {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ac);
+  margin: 0 0 6px;
+}
+[data-route="create"] .rel b {
+  display: block;
+  font-size: 15px;
+  color: var(--wt);
+  margin-bottom: 5px;
+}
+[data-route="create"] .rel small {
+  font-size: 12.5px;
+  color: var(--wt-2);
+}
+[data-route="create"] details {
+  background: var(--bp-2);
+  border: 1px solid var(--ln-2);
+  margin-bottom: -1px;
+}
+[data-route="create"] summary {
+  padding: 15px 20px;
+  font-size: 14.5px;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  gap: 12px;
+  font-weight: 650;
+}
+[data-route="create"] summary::-webkit-details-marker {
+  display: none;
+}
+[data-route="create"] summary::before {
+  content: "?";
+  font-family: var(--mono);
+  color: var(--ac);
+  flex: none;
+}
+[data-route="create"] details[open] summary {
+  color: var(--ln);
+}
+[data-route="create"] details p {
+  padding: 15px 20px 19px 46px;
+  font-size: 14px;
+  color: #bacde2;
+  border-top: 1px solid rgba(77, 166, 255, 0.16);
+  margin: 0;
+}
+[data-route="create"] .cta {
+  border-top: 1px solid var(--ln-2);
+  margin-top: var(--s7);
+  padding: var(--s6) 22px;
+  text-align: center;
+  background: radial-gradient(
+    600px 300px at 50% 0,
+    rgba(77, 166, 255, 0.12),
+    transparent 70%
+  );
+}
+[data-route="create"] .cta h2 {
+  border: 0;
+  justify-content: center;
+  font-size: clamp(21px, 3.6vw, 32px);
+  margin: 0 0 22px;
+}
+[data-route="create"] .cta .go {
+  display: inline-block;
+  background: var(--ac);
+  color: #2a1f00;
+  padding: 15px 38px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 15.5px;
+}
+[data-route="create"] .cta .go:hover {
+  background: #ffdd8a;
+}
+[data-route="create"] .cta small {
+  display: block;
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--wt-2);
+  font-family: var(--mono);
+}
+[data-route="create"] footer {
+  border-top: 1px solid var(--ln-2);
+  background: var(--bp-3);
+}
+[data-route="create"] .ft {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 42px var(--pad) 22px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px 30px;
+}
+[data-route="create"] .ft h4 {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ac);
+  margin-bottom: 11px;
+}
+[data-route="create"] .ft a {
+  display: block;
+  font-size: 12.5px;
+  color: var(--wt-2);
+  text-decoration: none;
+  padding: 4px 0;
+}
+[data-route="create"] .ft a:hover {
+  color: var(--ln);
+}
+[data-route="create"] .ft-btm {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 14px var(--pad) 28px;
+  border-top: 1px solid rgba(77, 166, 255, 0.2);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: #6e90b8;
+  font-family: var(--mono);
+}
+@media (max-width: 900px) {
+  [data-route="create"] .ft {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ═══ ★こころ納品素材の積層（create／台帳§7の順：bg→pattern→glow→object→divider）
+   ★objectは中央に置かず外周へ（台帳の指示） ═══ */
+/* 地：青写真の紙 */
+[data-route="create"] .bp::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/create-bg-01.webp") center/cover no-repeat;
+  opacity: 0.46;
+}
+[data-route="create"] .bp::after {
+  background-image: url("../assets/create-pattern-01.webp");
+  opacity: 0.26;
+}
+/* 青白光 */
+[data-route="create"] .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url("../assets/create-glow-01.webp") center/cover no-repeat;
+  opacity: 0.34;
+}
+/* コンパスの弧・定規（Hero右外周） */
+[data-route="create"] .hero::after {
+  content: "";
+  position: absolute;
+  top: -8%;
+  right: -5%;
+  width: 46%;
+  height: 120%;
+  z-index: 0;
+  background: url("../assets/create-object-01.webp") right center/contain
+    no-repeat;
+  opacity: 0.38;
+}
+/* 図面の折り目（工程トラックの下） */
+[data-route="create"] .track-h {
+  position: relative;
+}
+[data-route="create"] .track-h::after {
+  content: "";
+  position: absolute;
+  left: var(--pad);
+  right: var(--pad);
+  bottom: -14px;
+  height: 20px;
+  background: url("../assets/create-divider-01.webp") center/100% 100% no-repeat;
+  opacity: 0.5;
+}
+
+/* ★波の色と斜め断面 */
+[data-route="create"] .wave-bp2 {
+  color: var(--bp-2);
+}
+[data-route="create"] .hero {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3.2vw), 0 100%);
+}
+@media (max-width: 700px) {
+  [data-route="create"] .hero {
+    clip-path: none;
+  }
+}
+
+/* ═══ ★ページ別の目標値（11サイト実測・2026-08-13） ═══
+   参考: STORES／ジャンプ率 4.3／最大字 56px
+   ★9ページ全部を同じ数字にしない。ページの目的でここまで振れる：
+     にじのわクリニック(不安を扱う) 1.9 … DAIICHI SELECT(商品を立てる) 14.5   */
+[data-route="create"] .hero h1,
+[data-route="create"] h1 {
+  font-size: clamp(29px, 4.6vw, 56px);
+}
+[data-route="create"] .doc h2,
+[data-route="create"] .wall-head h2,
+[data-route="create"] .four-h h2,
+[data-route="create"] .tabs-h h2,
+[data-route="create"] .plan-h h2 {
+  font-size: clamp(20px, 2.6vw, 32px);
+}
+[data-route="create"] .doc h3 {
+  font-size: clamp(16px, 1.8vw, 20px);
+}
+
+/* ★節として潰れないための厚み（実測 2026-08-13）
+   .track-h は見出しを持つ節なのに上下paddingが0で、recruitでは高さ57pxまで潰れていた。
+   実測サイト（すまいとおかね210px / STORES434px）の一番小さい節に合わせて厚みを与える。
+   ★数字合わせではなく、実際に潰れて帯に見えていたので直す。 */
+[data-route="create"] .track-h {
+  padding-top: clamp(40px, 5.5vw, 76px);
+  padding-bottom: clamp(28px, 3.6vw, 48px);
+}

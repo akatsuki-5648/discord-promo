@@ -1,0 +1,1356 @@
+/* ═══════════════════════════════════════════════════════
+   /places/ 専用｜文法＝「ポスター壁」
+   宣伝が物理的に貼り重なった壁。大判タイポ＋層。
+   TOPの「掲示板（夜・藍・紙）」とは別の世界にする：
+     昼のコンクリート壁 × インクの黒 × 蛍光オレンジ
+   ★SEOは早生桐型：h2で大分類／h3でサジェストを1語ずつ／目次に全見出し
+   ═══════════════════════════════════════════════════════ */
+[data-route="places"] {
+  --wall: #e9e6df;
+  --wall-2: #dedad0;
+  --ink: #16150f;
+  --ink-2: #3d3a30;
+  --hi: #ff5a1f;
+  --hi-2: #0f62fe;
+  --line: #c6c0b2;
+  --mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+[data-route="places"] body,
+body[data-route="places"] {
+  background: var(--wall);
+  color: var(--ink);
+}
+
+/* コンクリートの地 */
+[data-route="places"] .wallbg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      1000px 600px at 78% -10%,
+      rgba(255, 90, 31, 0.1) 0,
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 500px at 8% 20%,
+      rgba(15, 98, 254, 0.07) 0,
+      transparent 62%
+    ),
+    var(--wall);
+}
+[data-route="places"] .wallbg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.13;
+  background-image: url("../assets/pattern-particles-01.webp");
+  background-size: cover;
+  mix-blend-mode: multiply;
+}
+
+/* ── ヘッダ＝壁に打たれた鉄の帯 */
+[data-route="places"] .bar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: var(--ink);
+  color: #f3f1ea;
+}
+[data-route="places"] .bar-in {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 10px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+[data-route="places"] .bar .logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  color: inherit;
+}
+[data-route="places"] .bar .logo b {
+  font-size: 16px;
+  letter-spacing: 0.04em;
+}
+[data-route="places"] .bar .logo i {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  color: #9c978a;
+  display: block;
+}
+[data-route="places"] .bar nav {
+  margin-left: auto;
+  gap: 0;
+  flex-wrap: wrap;
+}
+[data-route="places"] .bar nav a {
+  padding: 7px 12px;
+  font-size: 12.5px;
+  text-decoration: none;
+  color: #c8c3b6;
+}
+[data-route="places"] .bar nav a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+[data-route="places"] .bar nav a[aria-current] {
+  color: var(--hi);
+  box-shadow: inset 0 -2px 0 var(--hi);
+}
+[data-route="places"] [data-burger] {
+  width: 40px;
+  height: 36px;
+  background: none;
+  border: 1px solid #454138;
+  border-radius: 4px;
+  flex-direction: column;
+  gap: 4px;
+}
+[data-route="places"] [data-burger] span {
+  width: 16px;
+  height: 1.5px;
+  background: #f3f1ea;
+  display: block;
+}
+@media (max-width: 900px) {
+  [data-route="places"] [data-nav] {
+    background: rgba(22, 21, 15, 0.985);
+  }
+  [data-route="places"] .bar nav a {
+    font-size: 17px;
+    padding: 12px 20px;
+  }
+}
+
+/* ── Hero＝壁一面の大判ポスター */
+[data-route="places"] .poster {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+[data-route="places"] .crumb {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #7a7466;
+  padding: 18px 0 0;
+}
+[data-route="places"] .crumb a {
+  color: #7a7466;
+  text-decoration: none;
+  border-bottom: 1px solid #c6c0b2;
+}
+[data-route="places"] .crumb a:hover {
+  color: var(--hi);
+  border-color: var(--hi);
+}
+[data-route="places"] .poster h1 {
+  font-size: clamp(32px, 7vw, 86px);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+  margin: 22px 0 0;
+  text-transform: none;
+}
+[data-route="places"] .poster h1 span {
+  display: block;
+}
+[data-route="places"] .poster h1 .o {
+  color: var(--hi);
+}
+[data-route="places"] .poster .sub {
+  margin-top: 26px;
+  max-width: 62ch;
+  font-size: 16px;
+  color: var(--ink-2);
+}
+[data-route="places"] .poster .sub b {
+  color: var(--ink);
+  background: linear-gradient(transparent 60%, rgba(255, 90, 31, 0.3) 0);
+}
+[data-route="places"] .rule {
+  height: 6px;
+  background: var(--ink);
+  margin: 34px 0 0;
+}
+[data-route="places"] .rule::after {
+  content: "";
+  display: block;
+  height: 2px;
+  background: var(--hi);
+  margin-top: 4px;
+  width: 38%;
+}
+
+/* ── 目次＝壁に貼った索引（早生桐型：全見出しを載せる） */
+[data-route="places"] .toc {
+  background: #fff;
+  border: 2px solid var(--ink);
+  margin: 40px 0 0;
+  box-shadow: 8px 8px 0 var(--ink);
+}
+[data-route="places"] .toc-h {
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  padding: 9px 18px;
+}
+[data-route="places"] .toc ol {
+  padding: 16px 20px;
+  columns: 2;
+  column-gap: 34px;
+}
+[data-route="places"] .toc li {
+  break-inside: avoid;
+  margin-bottom: 1px;
+}
+[data-route="places"] .toc a {
+  display: block;
+  padding: 5px 0;
+  font-size: 13px;
+  color: #2a281f;
+  border-bottom: 1px dotted var(--line);
+}
+[data-route="places"] .toc a:hover,
+[data-route="places"] .toc a[data-here] {
+  color: var(--hi);
+}
+[data-route="places"] .toc .lv3 {
+  padding-left: 16px;
+  font-size: 12.5px;
+  color: #4b473c;
+}
+[data-route="places"] .toc .lv3::before {
+  content: "└ ";
+  color: #a9a395;
+}
+@media (max-width: 760px) {
+  [data-route="places"] .toc ol {
+    columns: 1;
+  }
+}
+
+/* ── 本文＝インクで刷った面 */
+[data-route="places"] .sheet {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 22px 90px;
+}
+[data-route="places"] .sheet h2 {
+  font-size: clamp(24px, 4vw, 42px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin: 76px 0 6px;
+  padding-bottom: 14px;
+  border-bottom: 5px solid var(--ink);
+  scroll-margin-top: 84px;
+}
+[data-route="places"] .sheet h2 .n {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--hi);
+  display: block;
+  letter-spacing: 0.22em;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+[data-route="places"] .sheet h3 {
+  font-size: clamp(18px, 2.4vw, 25px);
+  font-weight: 800;
+  margin: 42px 0 12px;
+  padding-left: 16px;
+  border-left: 6px solid var(--hi);
+  scroll-margin-top: 84px;
+}
+[data-route="places"] .sheet h4 {
+  font-size: 16px;
+  font-weight: 800;
+  margin: 24px 0 8px;
+  color: var(--ink-2);
+}
+[data-route="places"] .sheet p {
+  font-size: 15.5px;
+  line-height: 2.05;
+  color: #2c2a21;
+  margin: 0 0 15px;
+  max-width: 76ch;
+}
+[data-route="places"] .sheet strong {
+  background: linear-gradient(transparent 58%, rgba(255, 90, 31, 0.34) 0);
+  font-weight: 700;
+}
+[data-route="places"] .sheet ul,
+[data-route="places"] .sheet ol {
+  margin: 12px 0 22px;
+  padding-left: 0;
+  list-style: none;
+}
+[data-route="places"] .sheet li {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 9px;
+  font-size: 15px;
+  line-height: 1.95;
+  color: #333026;
+}
+[data-route="places"] .sheet ul li::before {
+  content: "■";
+  position: absolute;
+  left: 2px;
+  color: var(--hi);
+  font-size: 11px;
+  top: 0.42em;
+}
+[data-route="places"] .sheet ol {
+  counter-reset: o;
+}
+[data-route="places"] .sheet ol li {
+  counter-increment: o;
+}
+[data-route="places"] .sheet ol li::before {
+  content: counter(o);
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: #fff;
+  background: var(--ink);
+  width: 19px;
+  height: 19px;
+  display: grid;
+  place-items: center;
+  border-radius: 2px;
+}
+
+/* 貼り重なったポスター（場所カード） */
+[data-route="places"] .stack {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0;
+  margin: 26px 0 34px;
+}
+[data-route="places"] .pst {
+  position: relative;
+  background: #fff;
+  border: 2px solid var(--ink);
+  padding: 22px 22px 20px;
+  margin: 0 -1px -1px 0;
+  transition: 0.2s;
+}
+[data-route="places"] .pst:hover {
+  background: #fff8f3;
+  z-index: 2;
+  box-shadow: 6px 6px 0 var(--hi);
+}
+[data-route="places"] .pst .k {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--hi);
+}
+[data-route="places"] .pst h4 {
+  font-size: 18px;
+  font-weight: 900;
+  margin: 8px 0 10px;
+  color: var(--ink);
+}
+[data-route="places"] .pst p {
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: #4a473c;
+  margin: 0;
+}
+[data-route="places"] .pst .meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+[data-route="places"] .pst .meta span {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  color: #6b665a;
+}
+
+/* 比較表 */
+[data-route="places"] .sheet table {
+  margin: 18px 0 26px;
+  background: #fff;
+  border: 2px solid var(--ink);
+}
+[data-route="places"] .sheet th {
+  background: var(--ink);
+  color: #fff;
+  font-size: 12.5px;
+  text-align: left;
+  padding: 11px 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+[data-route="places"] .sheet td {
+  padding: 12px 14px;
+  font-size: 13.5px;
+  border-top: 1px solid var(--line);
+  vertical-align: top;
+  line-height: 1.8;
+}
+[data-route="places"] .sheet td b {
+  font-weight: 800;
+}
+
+/* 注意・要点 */
+[data-route="places"] .cau {
+  background: var(--ink);
+  color: #f5f2e9;
+  padding: 18px 22px;
+  margin: 22px 0;
+  border-left: 7px solid var(--hi);
+}
+[data-route="places"] .cau b {
+  color: var(--hi);
+}
+[data-route="places"] .cau p {
+  color: #e3dfd4;
+  font-size: 14.5px;
+  margin: 0;
+}
+[data-route="places"] .pt {
+  background: #fff;
+  border: 2px dashed var(--ink);
+  padding: 18px 22px;
+  margin: 22px 0;
+}
+[data-route="places"] .pt b {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+[data-route="places"] .pt p {
+  font-size: 14px;
+  margin: 0;
+  color: #3a372d;
+}
+
+/* 末尾からTOPへ戻す文脈リンク（早生桐型） */
+[data-route="places"] .back {
+  display: block;
+  margin: 56px 0 0;
+  padding: 24px 26px;
+  background: #fff;
+  border: 2px solid var(--ink);
+  text-decoration: none;
+  box-shadow: 8px 8px 0 var(--hi);
+}
+[data-route="places"] .back b {
+  display: block;
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--ink);
+  margin-bottom: 7px;
+}
+[data-route="places"] .back small {
+  font-size: 13.5px;
+  color: #4a473c;
+  line-height: 1.85;
+  display: block;
+}
+[data-route="places"] .back:hover {
+  background: #fff8f3;
+}
+
+/* 関連 */
+[data-route="places"] .rel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
+  gap: 14px;
+  margin: 22px 0 0;
+}
+[data-route="places"] .rel a {
+  background: #fff;
+  border: 2px solid var(--ink);
+  padding: 18px;
+  text-decoration: none;
+  transition: 0.18s;
+}
+[data-route="places"] .rel a:hover {
+  box-shadow: 5px 5px 0 var(--hi);
+}
+[data-route="places"] .rel p {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--hi);
+  margin: 0 0 6px;
+}
+[data-route="places"] .rel b {
+  display: block;
+  font-size: 15px;
+  color: var(--ink);
+  margin-bottom: 5px;
+}
+[data-route="places"] .rel small {
+  font-size: 12.5px;
+  color: #5a564a;
+}
+
+/* FAQ */
+[data-route="places"] details {
+  background: #fff;
+  border: 2px solid var(--ink);
+  margin-bottom: -2px;
+}
+[data-route="places"] summary {
+  padding: 15px 20px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+[data-route="places"] summary::-webkit-details-marker {
+  display: none;
+}
+[data-route="places"] summary::before {
+  content: "Q";
+  font-family: var(--mono);
+  color: var(--hi);
+  font-weight: 900;
+}
+[data-route="places"] details[open] summary {
+  background: var(--ink);
+  color: #fff;
+}
+[data-route="places"] details[open] summary::before {
+  color: var(--hi);
+}
+[data-route="places"] details p {
+  padding: 16px 20px 20px 46px;
+  font-size: 14.5px;
+  color: #3a372d;
+  border-top: 1px solid var(--line);
+  margin: 0;
+  position: relative;
+}
+[data-route="places"] details p::before {
+  content: "A";
+  position: absolute;
+  left: 20px;
+  top: 16px;
+  font-family: var(--mono);
+  color: var(--hi);
+  font-weight: 900;
+}
+
+/* CTA */
+[data-route="places"] .cta {
+  background: var(--ink);
+  color: #f5f2e9;
+  margin-top: 72px;
+  padding: 60px 22px;
+  text-align: center;
+}
+[data-route="places"] .cta h2 {
+  border: 0;
+  font-size: clamp(23px, 4vw, 38px);
+  margin: 0 0 22px;
+  color: #fff;
+}
+[data-route="places"] .cta .go {
+  display: inline-block;
+  background: var(--hi);
+  color: #fff;
+  padding: 16px 40px;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 16px;
+}
+[data-route="places"] .cta .go:hover {
+  background: #ff7440;
+}
+[data-route="places"] .cta small {
+  display: block;
+  margin-top: 14px;
+  font-size: 12px;
+  color: #a7a296;
+}
+
+/* フッタ */
+[data-route="places"] footer {
+  background: var(--wall-2);
+  border-top: 5px solid var(--ink);
+}
+[data-route="places"] .ft {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 44px 22px 24px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 26px 30px;
+}
+[data-route="places"] .ft h4 {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--hi);
+  margin-bottom: 11px;
+}
+[data-route="places"] .ft a {
+  display: block;
+  font-size: 13px;
+  color: #4a473c;
+  text-decoration: none;
+  padding: 4px 0;
+}
+[data-route="places"] .ft a:hover {
+  color: var(--hi);
+}
+[data-route="places"] .ft-btm {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 15px 22px 28px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 11.5px;
+  color: #4a473c;
+}
+@media (max-width: 900px) {
+  [data-route="places"] .ft {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ═══ ★11番台帳の採用リスト実装（どれを真似たか明示する） ═══
+   ③メガメニュー（Vercel型）／②斜め断面（Stripe型）／⑤UIモック（Linear型） */
+[data-route="places"] .mega {
+  background: #fff;
+  border: 2px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+[data-route="places"] .mega-h {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--hi);
+}
+[data-route="places"] .mega a b {
+  color: var(--ink);
+}
+[data-route="places"] .mega a small {
+  color: #5a564a;
+}
+[data-route="places"] .mega a:hover {
+  background: #fff1e8;
+}
+[data-route="places"] .mega a:hover b {
+  color: var(--hi);
+}
+[data-route="places"] .mega .ic {
+  background: var(--ink);
+  color: #fff;
+  border-radius: 2px;
+}
+@media (max-width: 900px) {
+  [data-route="places"] .mega {
+    background: none;
+    border: 0;
+    box-shadow: none;
+  }
+  [data-route="places"] .mega a b {
+    color: #f3f1ea;
+  }
+}
+
+/* ★②斜め断面（Stripe型） */
+[data-route="places"] .slant {
+  background: linear-gradient(180deg, #e4e0d6, #eeebe3);
+}
+[data-route="places"] .wave path {
+  fill: var(--ink);
+}
+
+/* ★⑤UIモック（Linear型：中で何が起きているかを見せる）
+   ＝宣伝サーバーへ実際に投稿した見え方をHTML/CSSで再現する */
+[data-route="places"] .dcmock {
+  background: #313338;
+  border: 2px solid var(--ink);
+  margin: 22px 0 30px;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  box-shadow: 8px 8px 0 rgba(22, 21, 15, 0.22);
+}
+[data-route="places"] .dc-h {
+  background: #2b2d31;
+  padding: 9px 14px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border-bottom: 1px solid #1e1f22;
+}
+[data-route="places"] .dc-h .hash {
+  color: #80848e;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1;
+}
+[data-route="places"] .dc-h b {
+  color: #f2f3f5;
+  font-size: 13.5px;
+}
+[data-route="places"] .dc-h span {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: #80848e;
+}
+[data-route="places"] .dc-b {
+  padding: 14px;
+}
+[data-route="places"] .dc-msg {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 12px;
+  padding: 8px 6px;
+  border-radius: 5px;
+}
+[data-route="places"] .dc-msg + .dc-msg {
+  margin-top: 2px;
+}
+[data-route="places"] .dc-msg.me {
+  background: rgba(255, 90, 31, 0.1);
+  box-shadow: inset 3px 0 0 var(--hi);
+}
+[data-route="places"] .dc-av {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 14px;
+  color: #fff;
+}
+[data-route="places"] .dc-n {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+[data-route="places"] .dc-n b {
+  color: #f2f3f5;
+  font-size: 14px;
+}
+[data-route="places"] .dc-n time {
+  color: #949ba4;
+  font-size: 10.5px;
+}
+[data-route="places"] .dc-t {
+  color: #dbdee1;
+  font-size: 13.5px;
+  line-height: 1.65;
+  white-space: pre-line;
+}
+[data-route="places"] .dc-t a {
+  color: #00a8fc;
+  text-decoration: none;
+}
+[data-route="places"] .dc-cap {
+  background: #1e1f22;
+  color: #949ba4;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  padding: 8px 14px;
+  border-top: 1px solid #111;
+}
+
+/* ═══ ★レイアウトの骨を組み替える（1ページ＝1個のサイト） ═══
+   places の骨＝【左に目次を固定した2カラム】
+   ・TOP/howto の「縦1本」と骨から変える
+   ・左は追従して現在地が光る（読み進めている場所が常に見える）
+   ・右が本文。UIモック（Linear型）を挟んで“中で何が起きるか”を見せる      */
+[data-route="places"] .two {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 22px 90px;
+  display: grid;
+  grid-template-columns: 264px minmax(0, 1fr);
+  gap: 56px;
+  align-items: start;
+}
+[data-route="places"] .side {
+  position: sticky;
+  top: 64px;
+  max-height: calc(100vh - 92px);
+  overflow-y: auto;
+  padding: 0 4px 20px 0;
+}
+[data-route="places"] .side::-webkit-scrollbar {
+  width: 6px;
+}
+[data-route="places"] .side::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 3px;
+}
+/* 2カラムでは目次の枠を外して“帯”にする（同じ.tocでも見え方を変える） */
+[data-route="places"] .two .toc {
+  background: none;
+  border: 0;
+  box-shadow: none;
+  margin: 26px 0 0;
+}
+[data-route="places"] .two .toc-h {
+  background: none;
+  color: var(--hi);
+  padding: 0 0 10px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 10px;
+}
+[data-route="places"] .two .toc ol {
+  columns: 1;
+  padding: 0;
+}
+[data-route="places"] .two .toc a {
+  border-bottom: 0;
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid transparent;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+[data-route="places"] .two .toc a:hover {
+  border-left-color: var(--line);
+  background: rgba(0, 0, 0, 0.03);
+}
+[data-route="places"] .two .toc a[data-here] {
+  border-left-color: var(--hi);
+  color: var(--hi);
+  background: rgba(255, 90, 31, 0.08);
+  font-weight: 700;
+}
+[data-route="places"] .two .toc .lv3 {
+  padding-left: 22px;
+  font-size: 11.5px;
+}
+/* 右カラム側の余白調整 */
+[data-route="places"] .two .sheet {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+[data-route="places"] .two .sheet h2:first-child {
+  margin-top: 30px;
+}
+@media (max-width: 1000px) {
+  [data-route="places"] .two {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  [data-route="places"] .side {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+  [data-route="places"] .two .toc {
+    background: #fff;
+    border: 2px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--ink);
+    margin: 34px 0 0;
+  }
+  [data-route="places"] .two .toc-h {
+    background: var(--ink);
+    color: #fff;
+    padding: 9px 18px;
+    border-bottom: 0;
+    margin: 0;
+  }
+  [data-route="places"] .two .toc ol {
+    columns: 2;
+    padding: 16px 20px;
+  }
+  [data-route="places"] .two .toc a {
+    padding: 5px 0;
+    border-left: 0;
+    border-bottom: 1px dotted var(--line);
+  }
+}
+@media (max-width: 620px) {
+  [data-route="places"] .two .toc ol {
+    columns: 1;
+  }
+}
+
+/* 左カラムに置く小さな進捗（読んでいる位置） */
+[data-route="places"] .side-lead {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: #7a7466;
+  padding: 22px 0 0;
+}
+[data-route="places"] .side-cta {
+  display: block;
+  margin-top: 22px;
+  padding: 14px 16px;
+  background: var(--ink);
+  color: #f3f1ea;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+[data-route="places"] .side-cta:hover {
+  background: var(--hi);
+}
+[data-route="places"] .side-cta small {
+  display: block;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: #a9a395;
+  margin-top: 5px;
+  letter-spacing: 0.1em;
+}
+[data-route="places"] .side-cta:hover small {
+  color: #ffe0d0;
+}
+
+/* ═══ ★TOP級Hero ＋ 4種類の大判カード ═══
+   ★真似る先：Fluid Glass（fluid.glass）
+     ・全画面Hero＋「Scroll to explore」
+     ・製品4つ（Doors/Windows/Additional/Structural）を★大判画像カードで見せる
+   ★独自性：ポスターが貼り重なる壁／破れた縁／テープ／Discord投稿のUIモック   */
+
+/* Hero＝壁一面 */
+[data-route="places"] .hero {
+  min-height: clamp(460px, 72vh, 760px);
+  background: var(--wall-2);
+}
+[data-route="places"] .hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../assets/pattern-particles-01.webp");
+  background-size: cover;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+}
+[data-route="places"] .hero-veil {
+  background: linear-gradient(
+    180deg,
+    rgba(233, 230, 223, 0.25) 0,
+    rgba(233, 230, 223, 0.75) 62%,
+    var(--wall) 100%
+  );
+}
+[data-route="places"] .hero .crumb {
+  padding: 0 0 18px;
+}
+[data-route="places"] .hero h1 {
+  font-size: var(--f1);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1.04;
+  margin: 0;
+}
+[data-route="places"] .hero h1 span {
+  display: block;
+}
+[data-route="places"] .hero h1 .o {
+  color: var(--hi);
+}
+[data-route="places"] .hero .sub {
+  margin-top: var(--s4);
+  max-width: 60ch;
+  font-size: 16.5px;
+  color: var(--ink-2);
+  line-height: 2;
+}
+[data-route="places"] .hero .sub b {
+  color: var(--ink);
+  background: linear-gradient(transparent 60%, rgba(255, 90, 31, 0.32) 0);
+}
+/* Scroll to explore（Fluid Glass型） */
+[data-route="places"] .scrollhint {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: var(--s5);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: #6b665a;
+}
+[data-route="places"] .scrollhint i {
+  width: 36px;
+  height: 1px;
+  background: var(--ink);
+  display: block;
+  transform-origin: left;
+  animation: sh 2.1s ease-in-out infinite;
+}
+@keyframes sh {
+  0%,
+  100% {
+    transform: scaleX(0.35);
+  }
+  50% {
+    transform: scaleX(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-route="places"] .scrollhint i {
+    animation: none;
+  }
+}
+
+/* ★4種類を大判カードで（Fluid Glass の Product collection 型） */
+[data-route="places"] .four {
+  margin: var(--s7) 0 0;
+}
+[data-route="places"] .four-h {
+  display: flex;
+  align-items: flex-end;
+  gap: 26px;
+  flex-wrap: wrap;
+  border-bottom: 5px solid var(--ink);
+  padding-bottom: 16px;
+  margin-bottom: var(--s5);
+}
+[data-route="places"] .four-h h2 {
+  font-size: var(--f2);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+[data-route="places"] .four-h p {
+  margin: 0 0 4px auto;
+  max-width: 44ch;
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.9;
+}
+[data-route="places"] .cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gut);
+}
+@media (max-width: 1000px) {
+  [data-route="places"] .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  [data-route="places"] .cards {
+    grid-template-columns: 1fr;
+  }
+}
+[data-route="places"] .card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  background: #fff;
+  border: 2px solid var(--ink);
+  transition: 0.24s;
+}
+[data-route="places"] .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 10px 10px 0 var(--hi);
+}
+/* 大判の絵（素材が来たら .card-img の背景を差し替える） */
+[data-route="places"] .card-img {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: linear-gradient(160deg, #2a2820, #16150f);
+}
+[data-route="places"] .card-img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+  background-image: url("../assets/pattern-particles-01.webp");
+  background-size: cover;
+  mix-blend-mode: screen;
+}
+[data-route="places"] .card:nth-child(1) .card-img {
+  background: linear-gradient(160deg, #3a2410, #16150f);
+}
+[data-route="places"] .card:nth-child(2) .card-img {
+  background: linear-gradient(160deg, #10243a, #16150f);
+}
+[data-route="places"] .card:nth-child(3) .card-img {
+  background: linear-gradient(160deg, #103a2a, #16150f);
+}
+[data-route="places"] .card:nth-child(4) .card-img {
+  background: linear-gradient(160deg, #3a1030, #16150f);
+}
+/* 絵の中に大きな記号（貼り紙・掲示板・一覧・自作の違いを図で） */
+[data-route="places"] .card-img svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+[data-route="places"] .card-no {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--hi);
+  z-index: 2;
+}
+[data-route="places"] .card-tag {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  z-index: 2;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+[data-route="places"] .card-tag span {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  color: #e6e2d8;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  padding: 3px 8px;
+}
+[data-route="places"] .card-b {
+  padding: 20px 20px 22px;
+}
+[data-route="places"] .card-b h3 {
+  font-size: 19px;
+  font-weight: 900;
+  color: var(--ink);
+  margin: 0 0 9px;
+  border: 0;
+  padding: 0;
+}
+[data-route="places"] .card-b p {
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: #4a473c;
+  margin: 0 0 12px;
+}
+[data-route="places"] .card-b .go {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: var(--hi);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+[data-route="places"] .card:hover .card-b .go i {
+  transform: translateX(5px);
+}
+[data-route="places"] .card-b .go i {
+  transition: 0.2s;
+  display: inline-block;
+  font-style: normal;
+}
+
+/* 大判の見せ場（本文の途中） */
+[data-route="places"] .showcase {
+  border: 2px solid var(--ink);
+  background: #16150f;
+  aspect-ratio: 21/9;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+[data-route="places"] .showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.34;
+  background-image: url("../assets/pattern-particles-01.webp");
+  background-size: cover;
+}
+[data-route="places"] .showcase figcaption {
+  background: var(--hi);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  z-index: 2;
+}
+
+/* ★9項目フラットナビ（2段表記） */
+[data-route="places"] .bar nav {
+  gap: 0;
+}
+[data-route="places"] .bar nav a {
+  padding: 6px 10px;
+}
+[data-route="places"] .bar nav a b {
+  font-size: 12px;
+  color: #c8c3b6;
+}
+[data-route="places"] .bar nav a i {
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 0.14em;
+  color: #7a7466;
+  margin-top: 2px;
+}
+[data-route="places"] .bar nav a:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+[data-route="places"] .bar nav a:hover b {
+  color: #fff;
+}
+[data-route="places"] .bar nav a[aria-current] {
+  box-shadow: inset 0 -2px 0 var(--hi);
+}
+[data-route="places"] .bar nav a[aria-current] b {
+  color: var(--hi);
+}
+[data-route="places"] .bar nav a[aria-current] i {
+  color: var(--hi);
+}
+@media (max-width: 1180px) {
+  [data-route="places"] .bar nav a b {
+    font-size: 11px;
+  }
+  [data-route="places"] .bar nav a {
+    padding: 6px 7px;
+  }
+}
+@media (max-width: 900px) {
+  [data-route="places"] .bar nav a {
+    padding: 13px 20px;
+  }
+  [data-route="places"] .bar nav a b {
+    font-size: 17px;
+  }
+}
+
+/* ═══ ★こころ納品素材の積層（places／台帳§7の順：bg→pattern→glow→object→divider）
+   ★objectは中央に置かず外周へ（台帳の指示） ═══ */
+/* 地：昼のコンクリート壁 */
+[data-route="places"] .wallbg::after {
+  background-image: url("../assets/places-texture-01.webp");
+  opacity: 0.34;
+}
+[data-route="places"] .wallbg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/places-pattern-01.webp") center/cover no-repeat;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+}
+/* Hero：壁のテクスチャを大きく */
+[data-route="places"] .hero-media::after {
+  background-image: url("../assets/places-texture-01.webp");
+  opacity: 0.5;
+}
+/* 4大判カードに剥がれ紙の層 */
+[data-route="places"] .card-img::before {
+  background-image: url("../assets/places-pattern-01.webp");
+  opacity: 0.34;
+}
+/* テープ片（カード左上・外周へ置く） */
+[data-route="places"] .card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 14px;
+  width: 74px;
+  height: 34px;
+  background: url("../assets/places-object-01.webp") center/contain no-repeat;
+  z-index: 3;
+  transform: rotate(-4deg);
+  pointer-events: none;
+}
+[data-route="places"] .card {
+  overflow: visible;
+}
+/* 破れた紙の縁（セクション境） */
+[data-route="places"] .four-h {
+  position: relative;
+}
+[data-route="places"] .four-h::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -30px;
+  height: 24px;
+  background: url("../assets/places-divider-01.webp") center/100% 100% no-repeat;
+  opacity: 0.55;
+}
+[data-route="places"] .showcase::before {
+  background-image: url("../assets/places-pattern-01.webp");
+  opacity: 0.42;
+}
+
+/* ★波の色と斜め断面 */
+[data-route="places"] .wave-ink {
+  color: var(--wall-2);
+}
+[data-route="places"] .hero {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3.2vw), 0 100%);
+}
+@media (max-width: 700px) {
+  [data-route="places"] .hero {
+    clip-path: none;
+  }
+}
+
+/* ═══ ★ページ別の目標値（11サイト実測・2026-08-13） ═══
+   参考: 株式会社はこ／ジャンプ率 6.7／最大字 80px
+   ★9ページ全部を同じ数字にしない。ページの目的でここまで振れる：
+     にじのわクリニック(不安を扱う) 1.9 … DAIICHI SELECT(商品を立てる) 14.5   */
+[data-route="places"] .hero h1,
+[data-route="places"] h1 {
+  font-size: clamp(34px, 6.6vw, 80px);
+}
+[data-route="places"] .doc h2,
+[data-route="places"] .wall-head h2,
+[data-route="places"] .four-h h2,
+[data-route="places"] .tabs-h h2,
+[data-route="places"] .plan-h h2 {
+  font-size: clamp(22px, 3vw, 38px);
+}
+[data-route="places"] .doc h3 {
+  font-size: clamp(17px, 1.9vw, 22px);
+}
+
+/* ★残っていた素材を使う */
+[data-route="places"] .cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.22;
+  pointer-events: none;
+  background: url("../assets/places-motion-01.webp") center/cover no-repeat;
+}
+[data-route="places"] .cta {
+  position: relative;
+  overflow: hidden;
+}
+[data-route="places"] .cta > * {
+  position: relative;
+  z-index: 1;
+}

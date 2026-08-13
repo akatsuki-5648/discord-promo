@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>
+      【2026年8月最新】ディスコードの荒らし対策｜起きた時の手順・予防・Botまで詳しく解説
+    </title>
+    <meta
+      name="description"
+      content="ディスコードで荒らしが起きた時の手順と、起きる前の備えをまとめます。権限の絞り方、認証、Bot、BANと凍結の違いまで、順番どおりに落ち着いて対処できるように書いています。"
+    />
+    <meta name="theme-color" content="#F7F5F2" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link
+      rel="canonical"
+      href="https://promo.akatsuki-system.online/trouble/"
+    />
+    <link rel="icon" href="../assets/logo-mark-01.svg" type="image/svg+xml" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link
+      rel="icon"
+      href="../favicon-16x16.png"
+      sizes="16x16"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="../favicon-32x32.png"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:site_name" content="ディスコード宣伝" />
+    <meta
+      property="og:title"
+      content="【2026年8月最新】ディスコードの荒らし対策｜起きた時の手順・予防・Bot"
+    />
+    <meta
+      property="og:description"
+      content="荒らしが起きた時の手順と、起きる前の備えを順番どおりに。"
+    />
+    <meta
+      property="og:url"
+      content="https://promo.akatsuki-system.online/trouble/"
+    />
+    <meta
+      property="og:image"
+      content="https://promo.akatsuki-system.online/assets/discord-promo-ogp.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="ディスコード宣伝｜宣伝サーバー・掲示板・運営ガイド"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://promo.akatsuki-system.online/assets/discord-promo-ogp.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="ディスコード宣伝｜宣伝サーバー・掲示板・運営ガイド"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "ディスコードの宣伝とは",
+                "item": "https://promo.akatsuki-system.online/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "荒らし対策",
+                "item": "https://promo.akatsuki-system.online/trouble/"
+              }
+            ]
+          },
+          {
+            "@type": "HowTo",
+            "name": "ディスコードで荒らしが起きた時の手順",
+            "inLanguage": "ja",
+            "description": "荒らしが起きた時に、被害を止めてから元に戻すまでの順番です。",
+            "step": [
+              {
+                "@type": "HowToStep",
+                "name": "まず投稿を止める",
+                "text": "該当チャンネルの低速モードを上げるか、@everyone の発言権限を一時的に外します。犯人を探す前に、まず流れを止めます。"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "招待リンクを止める",
+                "text": "外から増え続けている場合、招待リンクを無効にします。既存のリンクも失効させます。"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "監査ログを見る",
+                "text": "サーバー設定の監査ログで、誰が何をしたかを確認します。90日で消えるので、必要ならこの時点で控えます。"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "対処する",
+                "text": "該当アカウントをBANします。権限を渡していた場合は先に権限を外します。"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "戻す",
+                "text": "止めた権限と低速モードを元に戻します。消されたチャンネルやロールは、サーバーテンプレートを作ってあれば同じ構成を作り直せます。文章そのものは手元の控えから貼り直します。"
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "荒らしが来たらまず何をすればいいですか？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "犯人を探す前に、まず投稿を止めてください。該当チャンネルの低速モードを上げるか、@everyone の発言権限を一時的に外します。流れが止まってから、監査ログで誰が何をしたかを確認します。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "BANと凍結（キック）は何が違いますか？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "キックはサーバーから退出させるだけで、招待リンクがあれば戻ってこられます。BANは再入場を止めます。繰り返し来る相手にはBANが要ります。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "荒らし対策のBotは必要ですか？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "人が少ないうちは、Discordに元から入っている認証レベルと低速モードで足ります。人が増えて手が回らなくなってからで十分です。Botを入れる前に、権限を渡しすぎていないかを先に見てください。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "荒らされる前にできることはありますか？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "権限を渡す人を絞ることです。被害の大きさは、荒らしの強さではなく、渡していた権限の大きさで決まります。あわせて、サーバーテンプレートを作っておくと、チャンネル構成とロールを同じ形で作り直せます。ただしDiscordには会話そのものを戻す仕組みは無いため、消えた会話は戻りません。"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="../styles.css?v=347d1afc" />
+    <link rel="stylesheet" href="../page-styles/trouble.css?v=1ebe18bf" />
+  </head>
+  <body data-route="trouble" class="on-light-page">
+    <a class="skip" href="#main">本文へ移動</a>
+    <div class="paperbg" aria-hidden="true"></div>
+
+    <header class="site-head bar on-light">
+      <span class="site-header__motion" aria-hidden="true"></span
+      ><span class="site-header__light-sweep" aria-hidden="true"></span>
+      <div class="bar-in">
+        <a class="logo" href="../index.html"
+          ><img
+            class="site-header__logo-mark"
+            src="../assets/logo-mark-01.svg"
+            alt=""
+            width="34"
+            height="34" /><img
+            class="site-header__logo-type"
+            src="../assets/logo-type-01.svg"
+            alt="ディスコード宣伝"
+            height="22"
+        /></a>
+        <nav data-nav>
+          <a href="../index.html"><b>宣伝とは</b><i>Promotion</i></a>
+          <a href="../how-to/"><b>宣伝のやり方</b><i>How to</i></a>
+          <a href="../places/"><b>宣伝できる場所</b><i>Places</i></a>
+          <a href="../recruit/"><b>メンバー募集</b><i>Recruit</i></a>
+          <a href="../find/"><b>サーバーの探し方</b><i>Find</i></a>
+          <a href="index.html"><b>サーバーの作り方</b><i>Create</i></a>
+          <a href="../manage/"><b>サーバーの運営</b><i>Manage</i></a>
+          <a href="../features/"><b>タグ・ブースト</b><i>Features</i></a>
+          <a href="index.html" aria-current="page"
+            ><b>荒らし対策</b><i>Security</i></a
+          >
+        </nav>
+        <button data-burger type="button" aria-expanded="false">
+          <span></span><span></span><span></span><i class="sr">メニュー</i>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="hero-media" aria-hidden="true"></div>
+        <div class="hero-in wrap">
+          <p class="crumb">
+            <a href="../index.html">ディスコードの宣伝とは</a> ／ 荒らし対策
+          </p>
+          <p class="no">SECURITY ／ 起きた時と、起きる前</p>
+          <h1>順番どおりにやれば、<br />だいたい戻せます。</h1>
+          <p class="lead">
+            荒らされている最中は、何から手をつけるか分からなくなります。ここには<b>起きた時の手順</b>と、<b>起きる前の備え</b>を、順番のまま置いてあります。上から読んでください。
+          </p>
+        </div>
+      </section>
+
+      <section class="now" id="now">
+        <div class="now-in">
+          <p class="now-h">いま起きている人へ</p>
+          <ol class="steps">
+            <li>
+              <p class="st">1</p>
+              <div>
+                <h2>まず、投稿を止める</h2>
+                <p>
+                  犯人を探すのは後です。該当チャンネルの<b>低速モードを上げる</b>か、<b
+                    >@everyone の発言権限を一時的に外します</b
+                  >。流れが止まるだけで、被害は増えなくなります。
+                </p>
+              </div>
+            </li>
+            <li>
+              <p class="st">2</p>
+              <div>
+                <h2>招待リンクを止める</h2>
+                <p>
+                  外から増え続けている場合、<b>招待リンクを無効にします</b>。既に配られたリンクも失効させてください。増える元を止めないと、何度でも来ます。
+                </p>
+              </div>
+            </li>
+            <li>
+              <p class="st">3</p>
+              <div>
+                <h2>監査ログを見る</h2>
+                <p>
+                  サーバー設定の<b>監査ログ</b>に、誰が何をしたかが残っています。<b>90日で自動的に消える</b>ので、必要な部分はこの時点で控えておいてください。
+                </p>
+              </div>
+            </li>
+            <li>
+              <p class="st">4</p>
+              <div>
+                <h2>対処する</h2>
+                <p>
+                  該当アカウントを<b>BAN</b>します。権限を渡していた相手なら、<b>先に権限を外してから</b>BANしてください。順番が逆だと、外す前に何かされます。
+                </p>
+              </div>
+            </li>
+            <li>
+              <p class="st">5</p>
+              <div>
+                <h2>戻す</h2>
+                <p>
+                  止めた権限と低速モードを元に戻します。消されたチャンネルやロールは、<b>サーバーテンプレート</b>を作ってあれば同じ構成を作り直せます。<b>会話そのものはDiscordの仕組みでは戻りません</b>——ここは正直に書いておきます。
+                </p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!--ICON-->
+      <div class="mark-row" aria-hidden="true">
+        <picture class="mark"
+          ><source srcset="../assets/trouble-icon-01.gif" type="image/gif" />
+          <img
+            src="../assets/trouble-icon-01.png"
+            alt=""
+            loading="lazy"
+            decoding="async"
+        /></picture>
+      </div>
+      <!--ICON-->
+      <section class="doc">
+        <!--FILL-->
+        <div class="toc" data-rv>
+          <p class="toc-h">目次 ／ CONTENTS</p>
+          <ol>
+            <li>
+              <a href="#s1">被害の大きさは、渡した権限の大きさで決まる</a>
+            </li>
+            <li><a href="#s2">BANとキックの違い</a></li>
+            <li><a href="#s3">起きる前にやっておくこと（テンプレート）</a></li>
+            <li><a href="#s4">対策Botは、いつ入れるか</a></li>
+            <li><a href="#s5">宣伝で人が増えた後に来るもの</a></li>
+            <li><a href="#faq">よくある質問</a></li>
+          </ol>
+        </div>
+
+        <h2 id="s1">被害の大きさは、渡した権限の大きさで決まる</h2>
+        <p>
+          荒らしの被害は、相手の技術ではなく<b>こちらが渡していた権限</b>で決まります。発言しかできない相手にできるのは、荒れた発言までです。チャンネルを消せる権限を渡していれば、チャンネルが消えます。
+        </p>
+        <h3>渡しすぎていないか</h3>
+        <p>
+          「手伝ってくれるから」と管理権限を渡した相手が、後で変わることがあります。<b>権限は、その人がいま必要な分だけ</b>で足ります。足りなければ後から足せますが、渡したものを消された後では戻せません。
+        </p>
+
+        <h2 id="s2">BANとキックの違い</h2>
+        <p>
+          <b>キック</b
+          >は退出させるだけです。招待リンクを持っていれば戻ってこられます。<b>BAN</b>は再入場を止めます。繰り返し来る相手にはBANが要ります。
+        </p>
+        <p>
+          どちらも<b>相手のアカウントそのものは消えません</b>。別のアカウントを作られたら、また来られます。だから根本の対策は、<b>入ってすぐ荒らせない状態</b>にしておくことです。
+        </p>
+      </section>
+      <section class="eyecatch" data-rv>
+        <div
+          class="ec-img"
+          style="
+            background-image: url(&quot;../assets/trouble-motion-01.webp&quot;);
+          "
+        ></div>
+        <div class="ec-cap">
+          <b>権限を渡した分だけ、できることが増える</b
+          >発言しかできない相手にできるのは、荒れた発言までです。被害の大きさは、こちらが渡していた権限の大きさで決まります。
+        </div>
+      </section>
+      <section class="doc">
+        <h2 id="s3">起きる前にやっておくこと</h2>
+        <h3>認証レベルを上げる</h3>
+        <p>
+          サーバー設定の<b>認証レベル</b>を上げると、作ったばかりのアカウントや電話番号未登録のアカウントが発言できなくなります。<b>Botを入れる前に、まずここです</b>。元から付いている機能で、費用もかかりません。
+        </p>
+        <h3>低速モードを入れておく</h3>
+        <p>
+          雑談チャンネルに<b>数秒の低速モード</b>を入れておくだけで、連投が物理的にできなくなります。普段の会話にはほとんど影響しません。
+        </p>
+        <h3>サーバーテンプレートを作っておく</h3>
+        <p>
+          Discordには<b>サーバーテンプレート</b>という機能があります。いまのチャンネル構成とロールを1本のリンクとして保存でき、そこから同じ構成のサーバーを作り直せます。<b>費用も道具も要りません</b>。設定を変えたら作り直しておいてください。
+        </p>
+        <div class="fnote">
+          <b>ただし、テンプレートで戻るのは「入れ物」だけです。</b
+          >会話・画像・メンバーは含まれません。<b>Discordには会話そのものを戻す仕組みが無い</b>ので、そこは正直に諦める前提で考えるほうが早いです。
+        </div>
+        <h3>文章と画像は、手元にも置いておく</h3>
+        <p>
+          ルール文・お知らせ・固定メッセージの<b>本文そのもの</b>を、手元のメモにも残しておいてください。消されても貼り直せます。<b>絵文字とアイコンの元画像</b>も同じです。サーバーの中にしか無いものは、消えた時に作り直せません。
+        </p>
+
+        <h2 id="s4">対策Botは、いつ入れるか</h2>
+        <p>
+          人が少ないうちは要りません。<b>認証レベルと低速モードで足ります</b>。人が増えて手が回らなくなってから考えてください。
+        </p>
+        <p>
+          Botを入れる時は、<b>そのBotに渡す権限</b>も同じ話です。全権限を渡す必要があるBotは、乗っ取られた時に全部やられます。
+        </p>
+      </section>
+      <figure class="side-fig" data-rv>
+        <picture
+          ><source
+            srcset="../assets/trouble-motion-02.webp"
+            type="image/webp" />
+          <img
+            src="../assets/trouble-motion-02.png"
+            alt=""
+            loading="lazy"
+            decoding="async"
+        /></picture>
+      </figure>
+      <section class="doc">
+        <h2 id="s5">宣伝で人が増えた後に来るもの</h2>
+        <p>
+          荒らしは、人が増えてから来ます。<a href="../how-to/">宣伝</a
+          >がうまくいった後に必ず通る道なので、<b>増える前に権限を絞っておく</b>ほうが楽です。
+        </p>
+        <p>
+          増えた後に慌てて権限を見直すと、その時点で既に渡した相手が残っています。
+        </p>
+
+        <h2 id="faq">よくある質問</h2>
+        <h3>荒らしが来たらまず何をすればいいですか？</h3>
+        <p>
+          犯人を探す前に、投稿を止めてください。低速モードを上げるか、@everyone
+          の発言権限を一時的に外します。流れが止まってから監査ログを見ます。
+        </p>
+        <h3>荒らし対策のBotは必要ですか？</h3>
+        <p>
+          人が少ないうちは、認証レベルと低速モードで足ります。Botを入れる前に、権限を渡しすぎていないかを先に見てください。
+        </p>
+        <h3>荒らされる前にできることはありますか？</h3>
+        <p>
+          権限を渡す人を絞ることです。被害の大きさは、渡していた権限の大きさで決まります。あわせてサーバーテンプレートを作っておくと、構成だけは作り直せます。
+        </p>
+        <!--FILL-->
+      </section>
+
+      <section class="cta">
+        <div class="cta-in">
+          <h2>渡す権限を絞るほうが、<br />後から取り返すより確実です。</h2>
+          <a class="go" href="../manage/"
+            >サーバーの運営を見る <span class="arr">→</span></a
+          >
+          <small>権限の渡し方と、日々の見かたをまとめています</small>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="ft">
+        <div>
+          <h4>ディスコードの宣伝</h4>
+          <a href="../index.html">ディスコードの宣伝とは</a>
+          <a href="../how-to/">宣伝のやり方</a>
+          <a href="../places/">宣伝できる場所</a>
+          <a href="../recruit/">メンバー募集</a>
+        </div>
+        <div>
+          <h4>サーバーを持つ</h4>
+          <a href="../create/">サーバーの作り方</a>
+          <a href="../manage/">サーバーの運営</a>
+          <a href="../features/">サーバータグ・ブースト</a>
+          <a href="../trouble/">荒らし対策・トラブル</a>
+        </div>
+        <div>
+          <h4>探す</h4>
+          <a href="../find/">サーバーの探し方</a>
+          <a href="../find/#search">検索で出てこない時</a>
+          <a href="../find/#mobile">スマホ・iPhoneで探す</a>
+          <a href="../find/#tag">タグから探す</a>
+        </div>
+        <div>
+          <h4>よく読まれている</h4>
+          <a href="../how-to/#s2-1">紹介文の3行</a>
+          <a href="../how-to/#s2-5">紹介文の添削例</a>
+          <a href="../how-to/#s3-1">期限なしの招待リンク</a>
+          <a href="../places/#s3-3">バンプとは</a>
+        </div>
+      </div>
+      <div class="ft-notes" aria-label="商標・情報・運営に関する注記">
+        <p>
+          ※ Discord ほか記載のサービス名・製品名は各社の商標または登録商標です。
+          ※
+          掲載内容は各記事の作成時点の情報です。仕様・価格は変更されることがあるため、最新情報は各公式サイトをご確認ください。
+          ※ 当サイトは Discord, Inc. とは関係のない非公式サイトです。
+        </p>
+      </div>
+      <div class="ft-btm">
+        <p>Copyright©2026 AKATSUKI SYSTEM All Rights Reserved.</p>
+      </div>
+    </footer>
+    <script src="../app.js?v=57ea167d" defer></script>
+  </body>
+</html>

@@ -1,0 +1,1315 @@
+/* ═══════════════════════════════════════════════════════
+   TOP専用｜文法＝「掲示板／広場」
+   縦に流れる投稿面。密度で見せる。カードは紙。ピンで留まる。
+   参照：サウナイキタイ(軸で全部並べる/フッタ138本) ×
+        日本の掲示板文化の情報密度
+   色：夜の広場（藍）＋掲示の白 ＋ 蛍光ピン（マゼンタ）
+   ═══════════════════════════════════════════════════════ */
+:root[data-route="home"],
+[data-route="home"] {
+  --ink: #0b1020;
+  --ink-2: #141b33;
+  --paper: #f7f5ef;
+  --paper-2: #ede9dd;
+  --pin: #ff3d7f;
+  --pin-2: #ffd166;
+  --line: #2a3354;
+  --tx: #e8eaf2;
+  --tx-2: #a8aec6;
+  --bg: var(--ink);
+  --ac: var(--pin-2);
+  --ac-2: #a90f49;
+  --ln: var(--line);
+  --tx-3: #7f89aa;
+  --ink-3: #37405f;
+  --ink-4: #596079;
+  --mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+[data-route="home"] body,
+body[data-route="home"] {
+  background: var(--ink);
+  color: var(--tx);
+}
+
+/* 夜の広場の地面 */
+[data-route="home"] .ground {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 500px at 12% -6%, #1b2450 0, transparent 60%),
+    radial-gradient(700px 420px at 92% 8%, #221733 0, transparent 62%),
+    var(--ink);
+}
+[data-route="home"] .ground::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../assets/bg-time-night-01.webp");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  mix-blend-mode: screen;
+}
+
+/* ── ヘッダ＝掲示板の看板（木の横板） */
+[data-route="home"] .board-head {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: linear-gradient(
+    180deg,
+    rgba(11, 16, 32, 0.94),
+    rgba(11, 16, 32, 0.72)
+  );
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+}
+[data-route="home"] .board-in {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+[data-route="home"] .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+[data-route="home"] .logo b {
+  font-size: 17px;
+  letter-spacing: 0.06em;
+}
+[data-route="home"] .logo i {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--tx-2);
+  display: block;
+  margin-top: 2px;
+}
+[data-route="home"] .board-head nav {
+  margin-left: auto;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+[data-route="home"] .board-head nav a {
+  padding: 8px 13px;
+  font-size: 13px;
+  text-decoration: none;
+  color: var(--tx-2);
+  border-radius: 6px;
+}
+[data-route="home"] .board-head nav a:hover {
+  color: var(--tx);
+  background: rgba(255, 255, 255, 0.06);
+}
+[data-route="home"] .board-head nav a[aria-current] {
+  color: var(--pin);
+}
+[data-route="home"] .post-btn {
+  background: var(--pin);
+  color: #fff !important;
+  padding: 9px 18px !important;
+  border-radius: 999px !important;
+  font-weight: 700;
+}
+[data-route="home"] [data-burger] {
+  width: 42px;
+  height: 38px;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  flex-direction: column;
+  gap: 4px;
+}
+[data-route="home"] [data-burger] span {
+  width: 17px;
+  height: 1.5px;
+  background: var(--tx);
+  display: block;
+}
+@media (max-width: 900px) {
+  [data-route="home"] [data-nav] {
+    background: rgba(11, 16, 32, 0.98);
+  }
+  [data-route="home"] .board-head nav a {
+    font-size: 17px;
+    padding: 12px 20px;
+  }
+}
+
+/* ── Hero＝広場の中心。巨大な貼り紙 */
+[data-route="home"] .plaza {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 78px 22px 44px;
+}
+[data-route="home"] .plaza .kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  color: var(--pin-2);
+  margin-bottom: 20px;
+}
+[data-route="home"] .plaza h1 {
+  font-size: clamp(34px, 6.4vw, 74px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.16;
+}
+[data-route="home"] .plaza h1 em {
+  font-style: normal;
+  color: var(--pin);
+  text-decoration: underline;
+  text-decoration-thickness: 0.09em;
+  text-underline-offset: 0.14em;
+}
+[data-route="home"] .plaza .lead {
+  max-width: 60ch;
+  margin-top: 24px;
+  font-size: 16px;
+  color: var(--tx-2);
+}
+[data-route="home"] .plaza .lead b {
+  color: var(--tx);
+}
+
+/* 貼り紙が実際に貼ってある感じ＝紙が微妙に傾いて重なる */
+[data-route="home"] .pinned {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(238px, 1fr));
+  gap: 18px;
+  margin-top: 48px;
+}
+[data-route="home"] .paper {
+  position: relative;
+  background: var(--paper);
+  color: #151515;
+  padding: 22px 20px 20px;
+  border-radius: 2px;
+  text-decoration: none;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.44);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+[data-route="home"] .paper:nth-child(2n) {
+  transform: rotate(-0.7deg);
+}
+[data-route="home"] .paper:nth-child(3n) {
+  transform: rotate(0.9deg);
+}
+[data-route="home"] .paper:hover {
+  transform: rotate(0) translateY(-5px);
+  box-shadow: 0 22px 46px rgba(0, 0, 0, 0.55);
+}
+/* 画鋲 */
+[data-route="home"] .paper::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  translate: -50% 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 34% 32%,
+    #fff 0,
+    var(--pin) 46%,
+    #8f0034 100%
+  );
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+}
+[data-route="home"] .paper .no {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: #8a8578;
+}
+[data-route="home"] .paper h3 {
+  font-size: 17px;
+  margin: 8px 0 8px;
+  font-weight: 800;
+}
+[data-route="home"] .paper p {
+  font-size: 13px;
+  color: #4b4b4b;
+  line-height: 1.8;
+}
+[data-route="home"] .paper .q {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: #7a7568;
+  border-top: 1px dashed #c9c3b3;
+  padding-top: 9px;
+  width: 100%;
+}
+
+/* ── 掲示の列（本文）＝板に貼られた告知が縦に流れる */
+[data-route="home"] .wall {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 34px 22px 90px;
+}
+[data-route="home"] .wall-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 12px;
+  margin: 64px 0 26px;
+}
+[data-route="home"] .wall-head h2 {
+  font-size: clamp(21px, 3vw, 30px);
+  font-weight: 800;
+}
+[data-route="home"] .wall-head span {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--pin-2);
+  margin-left: auto;
+}
+[data-route="home"] .rows {
+  display: grid;
+  gap: 2px;
+}
+[data-route="home"] .row {
+  display: grid;
+  grid-template-columns: 104px 1fr auto;
+  gap: 18px;
+  align-items: center;
+  padding: 15px 16px;
+  background: rgba(255, 255, 255, 0.028);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: 0.18s;
+}
+[data-route="home"] .row:hover {
+  background: rgba(255, 61, 127, 0.1);
+  border-left-color: var(--pin);
+}
+[data-route="home"] .row time {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--tx-2);
+}
+[data-route="home"] .row b {
+  font-size: 15px;
+  font-weight: 650;
+}
+[data-route="home"] .row small {
+  display: block;
+  font-size: 12.5px;
+  color: var(--tx-2);
+  margin-top: 3px;
+  font-weight: 400;
+}
+[data-route="home"] .row .tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--tx-2);
+  white-space: nowrap;
+}
+@media (max-width: 720px) {
+  [data-route="home"] .row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  [data-route="home"] .row .tag {
+    justify-self: start;
+  }
+}
+
+/* 目次＝掲示板の索引（紙） */
+[data-route="home"] .toc {
+  background: var(--paper-2);
+  color: #1b1b1b;
+  padding: 22px 24px;
+  border-radius: 2px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  margin: 40px 0 8px;
+}
+[data-route="home"] .toc-h {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: #7a7568;
+  margin-bottom: 14px;
+}
+[data-route="home"] .toc ol {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px 26px;
+  counter-reset: t;
+}
+[data-route="home"] .toc li {
+  counter-increment: t;
+  border-bottom: 1px dotted #c3bcaa;
+}
+[data-route="home"] .toc a {
+  display: block;
+  padding: 9px 2px;
+  font-size: 13.5px;
+  color: #25252b;
+}
+[data-route="home"] .toc a::before {
+  content: counter(t, decimal-leading-zero);
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--pin);
+  margin-right: 10px;
+}
+[data-route="home"] .toc a:hover {
+  color: var(--pin);
+}
+@media (max-width: 640px) {
+  [data-route="home"] .toc ol {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 本文（掲示の中身） */
+[data-route="home"] .txt h3 {
+  font-size: 19px;
+  margin: 34px 0 12px;
+  padding-left: 13px;
+  border-left: 4px solid var(--pin);
+}
+[data-route="home"] .txt p {
+  font-size: 15px;
+  color: #d3d7e6;
+  margin-bottom: 14px;
+  max-width: 74ch;
+}
+[data-route="home"] .txt strong {
+  color: #fff;
+  background: linear-gradient(transparent 62%, rgba(255, 61, 127, 0.32) 0);
+}
+[data-route="home"] .txt ul {
+  list-style: none;
+  display: grid;
+  gap: 9px;
+  margin: 14px 0 22px;
+}
+[data-route="home"] .txt li {
+  padding-left: 22px;
+  position: relative;
+  font-size: 14.5px;
+  color: #c6cbdd;
+}
+[data-route="home"] .txt li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--pin-2);
+}
+
+/* 注意書き＝黄色い紙 */
+[data-route="home"] .notice {
+  background: linear-gradient(180deg, #fff4cc, #ffeaa6);
+  color: #3a2f00;
+  padding: 16px 20px;
+  border-radius: 2px;
+  font-size: 14px;
+  margin: 20px 0;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.36);
+  transform: rotate(-0.35deg);
+}
+[data-route="home"] .notice b {
+  font-weight: 800;
+}
+
+/* 参加（広場の出口） */
+[data-route="home"] .exit {
+  border-top: 2px solid var(--line);
+  margin-top: 70px;
+  padding: 56px 0 10px;
+  text-align: center;
+}
+[data-route="home"] .exit h2 {
+  font-size: clamp(22px, 3.4vw, 34px);
+  font-weight: 800;
+  margin-bottom: 22px;
+}
+[data-route="home"] .exit .go {
+  display: inline-block;
+  background: var(--pin);
+  color: #fff;
+  padding: 16px 40px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 16px;
+  box-shadow: 0 12px 30px rgba(255, 61, 127, 0.34);
+}
+[data-route="home"] .exit .go:hover {
+  transform: translateY(-2px);
+}
+[data-route="home"] .exit small {
+  display: block;
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--tx-2);
+}
+
+/* フッタ＝掲示板の裏（索引を全部貼る） */
+[data-route="home"] footer {
+  border-top: 1px solid var(--line);
+  margin-top: 72px;
+  background: rgba(0, 0, 0, 0.34);
+}
+[data-route="home"] .ft {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 46px 22px 26px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 26px 30px;
+}
+[data-route="home"] .ft h4 {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--pin-2);
+  margin-bottom: 12px;
+}
+[data-route="home"] .ft a {
+  display: block;
+  font-size: 13px;
+  color: var(--tx-2);
+  text-decoration: none;
+  padding: 4px 0;
+}
+[data-route="home"] .ft a:hover {
+  color: var(--pin);
+}
+[data-route="home"] .ft-btm {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 22px 30px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 11.5px;
+  color: var(--tx-2);
+}
+@media (max-width: 900px) {
+  [data-route="home"] .ft {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ═══ ★11番台帳の採用リスト実装（どれを真似たか明示する） ═══
+   ③メガメニュー（Vercel型）／②斜め断面（Stripe型）／⑥カウントアップ（Stripe型）
+   ①キネティックタイポ（Locomotive型）は index.html の .kinetic */
+[data-route="home"] .mega {
+  background: #111931;
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
+[data-route="home"] .mega-h {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--pin-2);
+}
+[data-route="home"] .mega a b {
+  color: var(--tx);
+}
+[data-route="home"] .mega a small {
+  color: var(--tx-2);
+}
+[data-route="home"] .mega a:hover {
+  background: rgba(255, 61, 127, 0.12);
+}
+[data-route="home"] .mega a:hover b {
+  color: var(--pin);
+}
+[data-route="home"] .mega .ic {
+  background: rgba(255, 61, 127, 0.16);
+  color: var(--pin);
+}
+@media (max-width: 900px) {
+  [data-route="home"] .mega {
+    background: none;
+    border: 0;
+    box-shadow: none;
+  }
+}
+
+/* ★①キネティックタイポ（Locomotive型：一語ずつ積み上がる） */
+[data-route="home"] .kinetic {
+  display: block;
+}
+[data-route="home"] .kinetic .ln {
+  display: block;
+  overflow: hidden;
+}
+[data-route="home"] .kinetic .ln > span {
+  display: block;
+  transform: translateY(102%);
+  animation: kin 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+[data-route="home"] .kinetic .ln:nth-child(1) > span {
+  animation-delay: 0.05s;
+}
+[data-route="home"] .kinetic .ln:nth-child(2) > span {
+  animation-delay: 0.22s;
+}
+[data-route="home"] .kinetic .ln:nth-child(3) > span {
+  animation-delay: 0.39s;
+}
+[data-route="home"] .kinetic .ln:nth-child(4) > span {
+  animation-delay: 0.56s;
+}
+@keyframes kin {
+  to {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-route="home"] .kinetic .ln > span {
+    animation: none;
+    transform: none;
+  }
+}
+
+/* ★⑥カウントアップ（Stripe型：動く数字） */
+[data-route="home"] .stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin: 44px 0 0;
+}
+[data-route="home"] .stats div {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 22px 20px;
+}
+[data-route="home"] .stats b {
+  display: block;
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 800;
+  color: var(--pin);
+  font-family: var(--mono);
+  letter-spacing: -0.02em;
+}
+[data-route="home"] .stats small {
+  display: block;
+  font-size: 12px;
+  color: var(--tx-2);
+  margin-top: 6px;
+}
+[data-route="home"] .stats i {
+  display: block;
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  color: var(--tx-3, #6b7290);
+  margin-bottom: 9px;
+}
+
+/* ★②斜め断面（Stripe型：水平線でセクションを切らない） */
+[data-route="home"] .slant {
+  background: linear-gradient(180deg, #0e152b, #0b1020);
+}
+
+/* ★9項目フラットナビ（2段表記） */
+[data-route="home"] .board-head nav {
+  gap: 0;
+}
+[data-route="home"] .board-head nav a {
+  padding: 7px 10px;
+  border-radius: 5px;
+}
+[data-route="home"] .board-head nav a b {
+  font-size: 12.5px;
+  color: var(--tx-2);
+}
+[data-route="home"] .board-head nav a i {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  color: #5d6486;
+  margin-top: 2px;
+}
+[data-route="home"] .board-head nav a:hover b {
+  color: var(--tx);
+}
+[data-route="home"] .board-head nav a:hover i {
+  color: var(--pin-2);
+}
+[data-route="home"] .board-head nav a[aria-current] b {
+  color: var(--pin);
+}
+[data-route="home"] .board-head nav a[aria-current] i {
+  color: var(--pin);
+}
+[data-route="home"] .board-in {
+  gap: 12px;
+}
+@media (max-width: 1180px) {
+  [data-route="home"] .board-head nav a b {
+    font-size: 11.5px;
+  }
+  [data-route="home"] .board-head nav a {
+    padding: 6px 7px;
+  }
+}
+@media (max-width: 900px) {
+  [data-route="home"] .board-head nav a {
+    padding: 13px 20px;
+  }
+  [data-route="home"] .board-head nav a b {
+    font-size: 17px;
+  }
+  [data-route="home"] .board-head nav a i {
+    font-size: 9px;
+  }
+}
+
+/* ═══ ★こころ納品素材の積層（home／台帳§7の順：bg→pattern→glow→object→divider）
+   ★objectは中央に置かず外周へ（台帳の指示） ═══ */
+/* 地：夜の広場 */
+[data-route="home"] .ground {
+  background:
+    radial-gradient(900px 500px at 12% -6%, #1b2450 0, transparent 60%),
+    radial-gradient(700px 420px at 92% 8%, #221733 0, transparent 62%),
+    var(--ink);
+}
+[data-route="home"] .ground::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/home-bg-01.webp") center/cover no-repeat;
+  opacity: 0.42;
+  mix-blend-mode: screen;
+}
+[data-route="home"] .ground::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/home-glow-01.webp") center/cover no-repeat;
+  opacity: 0.34;
+  mix-blend-mode: screen;
+}
+/* 紙の繊維（貼り紙に質感を乗せる） */
+[data-route="home"] .paper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url("../assets/home-texture-01.webp") center/cover;
+  opacity: 0.3;
+  mix-blend-mode: multiply;
+}
+[data-route="home"] .paper {
+  overflow: hidden;
+}
+/* 画鋲を実素材へ差し替え */
+[data-route="home"] .paper::before {
+  width: 26px;
+  height: 26px;
+  top: -11px;
+  background: url("../assets/home-object-01.webp") center/contain no-repeat;
+  box-shadow: none;
+  border-radius: 0;
+}
+/* セクションの区切り */
+[data-route="home"] .wall-head {
+  position: relative;
+}
+[data-route="home"] .wall-head::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -22px;
+  height: 26px;
+  background: url("../assets/home-divider-01.webp") center/100% 100% no-repeat;
+  opacity: 0.5;
+}
+
+/* ★波の色と斜め断面 */
+[data-route="home"] .wave-ink {
+  color: var(--ink-2);
+}
+[data-route="home"] .hero {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3.2vw), 0 100%);
+}
+@media (max-width: 700px) {
+  [data-route="home"] .hero {
+    clip-path: none;
+  }
+}
+
+/* ═══ ★5サイト実測にもとづく作り直し（2026-08-13） ═══
+   HELLO CYCLING / すまいとおかね / 株式会社はこ / STORES / STUDIO DETAILS を
+   同じ物差しで測った結果、足りないのは【画像・節の数・文字の大きさ】だった。
+   clip-path と mask は 4/5・5/5 がゼロ＝足りていた（増やすほうが間違い）。   */
+
+/* ── ① Hero を全画面に。こころの bg-time-* を時刻で切り替える ── */
+[data-route="home"] .stage {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  isolation: isolate;
+}
+[data-route="home"] .stage-sky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--sky, url("../assets/bg-time-dusk-01.webp")) center/cover
+    no-repeat;
+  animation: coverZoom 14s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+[data-route="home"] .stage-tex {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.34;
+  mix-blend-mode: overlay;
+  background: url("../assets/home-texture-01.webp") center/cover no-repeat;
+}
+[data-route="home"] .stage-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.5;
+  mix-blend-mode: screen;
+  background: url("../assets/home-glow-01.webp") center/cover no-repeat;
+}
+[data-route="home"] .stage-obj {
+  position: absolute;
+  right: -4%;
+  bottom: -6%;
+  width: min(660px, 58vw);
+  z-index: 3;
+  opacity: 0.62;
+  pointer-events: none;
+}
+[data-route="home"] .stage-obj img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+[data-route="home"] .stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(11, 16, 32, 0.3) 0%,
+    rgba(11, 16, 32, 0.06) 32%,
+    rgba(11, 16, 32, 0.72) 76%,
+    var(--bg) 100%
+  );
+}
+/* 時間帯で空が変わる（js が data-time を付ける） */
+[data-route="home"][data-time="day"] .stage-sky {
+  background-image: url("../assets/bg-time-day-01.webp");
+}
+[data-route="home"][data-time="dusk"] .stage-sky {
+  background-image: url("../assets/bg-time-dusk-01.webp");
+}
+[data-route="home"][data-time="night"].stage-sky {
+  background-image: url("../assets/bg-time-night-01.webp");
+}
+@media (max-width: 700px) {
+  [data-route="home"] .stage-sky {
+    background-image: url("../assets/bg-hero-mobile-01.webp");
+  }
+  [data-route="home"] .stage-obj {
+    width: 82vw;
+    right: -14%;
+    opacity: 0.42;
+  }
+}
+
+[data-route="home"] .stage-in {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--pad) clamp(72px, 11vh, 132px);
+}
+[data-route="home"] .stage .kicker {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.28em;
+  color: var(--ac);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 clamp(18px, 3vh, 30px);
+}
+[data-route="home"] .stage .kicker em {
+  font-style: normal;
+  color: var(--tx-3);
+  letter-spacing: 0.18em;
+}
+/* ★文字のジャンプ率を 2.4 → 6.5 へ（実測：はこ6.7／STORES4.3／すまい3.4） */
+[data-route="home"] .stage h1 {
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  font-size: clamp(38px, 7.6vw, 104px);
+}
+[data-route="home"] .stage h1 .l1,
+[data-route="home"] .stage h1 .l2 {
+  display: block;
+}
+[data-route="home"] .stage h1 .l2 {
+  margin-top: 0.06em;
+}
+[data-route="home"] .stage h1 em {
+  font-style: normal;
+  color: var(--ac);
+  position: relative;
+  white-space: nowrap;
+}
+[data-route="home"] .stage h1 em::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.06em;
+  height: 0.075em;
+  background: var(--ac);
+  opacity: 0.85;
+}
+[data-route="home"] .stage .lead {
+  margin: clamp(20px, 3.4vh, 34px) 0 0;
+  max-width: 62ch;
+  font-size: clamp(14.5px, 1.15vw, 17px);
+  line-height: 2.1;
+  color: var(--tx-2);
+}
+[data-route="home"] .stage .lead b {
+  color: var(--tx);
+  border-bottom: 1px solid var(--ac);
+}
+[data-route="home"] .stage-go {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: clamp(24px, 4vh, 40px);
+}
+[data-route="home"] .go-a,
+[data-route="home"] .go-b {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 15px 26px;
+  transition: 0.2s;
+}
+[data-route="home"] .go-a {
+  background: var(--ac);
+  color: #0b1020;
+}
+[data-route="home"] .go-a:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+[data-route="home"] .go-b {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: var(--tx);
+}
+[data-route="home"] .go-b:hover {
+  border-color: var(--ac);
+  color: var(--ac);
+}
+[data-route="home"] .stage-down {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  translate: -50% 0;
+  z-index: 6;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  color: var(--tx-3);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+}
+[data-route="home"] .stage-down:hover {
+  color: var(--ac);
+  border-color: var(--ac);
+}
+@media (max-width: 700px) {
+  [data-route="home"] .stage-down {
+    display: none;
+  }
+}
+
+/* ── ② 数字の帯（短い節＝落差をつくる。実測: 節高 210〜434px の短節が必ずある） ── */
+[data-route="home"] .count {
+  background: var(--ink-2);
+  border-block: 1px solid var(--ln);
+}
+[data-route="home"] .count-in {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(34px, 5vw, 58px) var(--pad);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gut);
+}
+@media (max-width: 860px) {
+  [data-route="home"] .count-in {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+[data-route="home"] .c-item b {
+  display: block;
+  font-family: var(--mono);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ac);
+  font-size: clamp(40px, 5.4vw, 78px);
+  letter-spacing: -0.03em;
+}
+[data-route="home"] .c-item span {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--tx);
+}
+[data-route="home"] .c-item small {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--tx-3);
+  line-height: 1.75;
+}
+
+/* ── ③ 落差のある格子（同じ大きさで並べない。実測: 落差 2.9〜4.6倍） ── */
+[data-route="home"] .pick {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(56px, 8vw, 104px) var(--pad) clamp(40px, 6vw, 72px);
+}
+[data-route="home"] .pick-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: clamp(22px, 3.4vw, 38px);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--ln);
+}
+[data-route="home"] .pick-head h2 {
+  margin: 0;
+  font-size: clamp(21px, 2.6vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+[data-route="home"] .pick-head span {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  color: var(--tx-3);
+}
+[data-route="home"] .pick-in {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--gut);
+}
+[data-route="home"] .g-xl {
+  grid-column: span 6;
+  min-height: clamp(300px, 32vw, 430px);
+}
+[data-route="home"] .g-m {
+  grid-column: span 3;
+  min-height: clamp(190px, 19vw, 250px);
+}
+[data-route="home"] .g-s {
+  grid-column: span 2;
+  min-height: clamp(150px, 15vw, 196px);
+}
+@media (max-width: 900px) {
+  [data-route="home"] .g-xl,
+  [data-route="home"] .g-m {
+    grid-column: span 6;
+  }
+  [data-route="home"] .g-s {
+    grid-column: span 3;
+  }
+}
+@media (max-width: 560px) {
+  [data-route="home"] .g-s {
+    grid-column: span 6;
+    min-height: 130px;
+  }
+}
+[data-route="home"] .pick-in .paper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: clamp(20px, 2.4vw, 32px);
+  text-decoration: none;
+  background: var(--paper);
+  color: var(--ink);
+  transition:
+    transform 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.22s;
+}
+[data-route="home"] .pick-in .paper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+}
+/* 大きいカードには こころの動く素材を敷く */
+[data-route="home"] .g-xl .p-mo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.3;
+  pointer-events: none;
+  background: url("../assets/home-motion-01.webp") right center/auto 118%
+    no-repeat;
+}
+[data-route="home"] .g-xl > * {
+  position: relative;
+  z-index: 1;
+}
+[data-route="home"] .g-xl h3 {
+  font-size: clamp(24px, 3.2vw, 42px) !important;
+  letter-spacing: -0.025em;
+}
+[data-route="home"] .g-xl p {
+  font-size: 15px !important;
+  max-width: 46ch;
+}
+[data-route="home"] .g-m h3 {
+  font-size: clamp(18px, 2vw, 23px) !important;
+}
+[data-route="home"] .g-s h3 {
+  font-size: 16px !important;
+}
+[data-route="home"] .g-s p {
+  font-size: 12.5px !important;
+}
+[data-route="home"] .pick-in .paper .no {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ac-2);
+  margin-bottom: auto;
+}
+[data-route="home"] .pick-in .paper h3 {
+  margin: 14px 0 8px;
+  font-weight: 800;
+}
+[data-route="home"] .pick-in .paper p {
+  margin: 0;
+  line-height: 1.85;
+  color: var(--ink-3);
+}
+[data-route="home"] .pick-in .paper .q {
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-4);
+}
+
+/* ═══ ★節を割った先（実測：5サイト中4サイトが節8〜10・落差2.9〜4.6倍） ═══
+   .wall が4,622pxの1節だったのを、本文／更新履歴／FAQ／締め に分けた。
+   ★短い節（実測 210px・434px）を必ず挟むのが共通項だったので .rec を短くする。 */
+[data-route="home"] .rec {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 72px) var(--pad);
+}
+[data-route="home"] .ask {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 88px) var(--pad);
+}
+[data-route="home"] .close {
+  background: var(--ink-2);
+  border-top: 1px solid var(--ln);
+}
+[data-route="home"] .close .exit {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(56px, 9vw, 110px) var(--pad);
+  text-align: center;
+}
+[data-route="home"] .close .exit h2 {
+  font-size: clamp(26px, 4.6vw, 58px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.18;
+  margin: 0 0 clamp(20px, 3vw, 32px);
+}
+[data-route="home"] .close .exit .go {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ac);
+  color: #0b1020;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 16px;
+  padding: 17px 34px;
+}
+[data-route="home"] .close .exit .go:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+[data-route="home"] .close .exit small {
+  display: block;
+  margin-top: 18px;
+  font-size: 12.5px;
+  color: var(--tx-3);
+}
+[data-route="home"] .rec .wall-head,
+[data-route="home"] .ask .wall-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 0 0 clamp(18px, 2.6vw, 30px);
+  padding-bottom: 13px;
+  border-bottom: 1px solid var(--ln);
+}
+[data-route="home"] .rec .wall-head h2,
+[data-route="home"] .ask .wall-head h2 {
+  margin: 0;
+  font-size: clamp(20px, 2.5vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+[data-route="home"] .rec .wall-head span,
+[data-route="home"] .ask .wall-head span {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  color: var(--tx-3);
+}
+
+/* ═══ ★締めの節（実測：どのサイトも最後に強い1画面を置く） ═══ */
+[data-route="home"] .close {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--ink-2);
+  border-top: 0;
+}
+[data-route="home"] .close::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.42;
+  background: url("../assets/home-object-01.webp") center/cover no-repeat;
+}
+[data-route="home"] .close::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.34;
+  mix-blend-mode: screen;
+  background: url("../assets/home-divider-01.webp") center bottom/100% auto
+    no-repeat;
+}
+[data-route="home"] .close .exit {
+  position: relative;
+  z-index: 2;
+}
+[data-route="home"] .wave-close {
+  color: var(--ink-2);
+}
+
+/* ★汎用素材（bg-hero / glow-orb / overlay-light-ray / world-observation）を使い切る */
+[data-route="home"] .count {
+  position: relative;
+  overflow: hidden;
+}
+[data-route="home"] .count::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.26;
+  pointer-events: none;
+  background: url("../assets/overlay-light-ray-01.webp") center/cover no-repeat;
+  mix-blend-mode: screen;
+}
+[data-route="home"] .count-in {
+  position: relative;
+  z-index: 1;
+}
+[data-route="home"] .pick {
+  position: relative;
+}
+[data-route="home"] .pick::before {
+  content: "";
+  position: absolute;
+  right: -6%;
+  top: 4%;
+  width: min(420px, 42vw);
+  height: min(420px, 42vw);
+  z-index: -1;
+  opacity: 0.3;
+  pointer-events: none;
+  background: url("../assets/glow-orb-01.webp") center/contain no-repeat;
+}
+[data-route="home"] .ask {
+  position: relative;
+  overflow: hidden;
+}
+[data-route="home"] .ask::before {
+  content: "";
+  position: absolute;
+  left: -8%;
+  bottom: -6%;
+  width: min(480px, 52vw);
+  height: min(480px, 52vw);
+  z-index: -1;
+  opacity: 0.2;
+  pointer-events: none;
+  background: url("../assets/world-observation-01.webp") center/contain
+    no-repeat;
+}
+@media (max-width: 700px) {
+  [data-route="home"] .stage-sky {
+    background-image: url("../assets/bg-hero-mobile-01.webp");
+  }
+}
+@media (min-width: 701px) and (max-width: 1100px) {
+  [data-route="home"] .stage-sky {
+    background-image: url("../assets/bg-hero-01.webp");
+  }
+}

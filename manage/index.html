@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>
+      【2026年8月最新】ディスコードのサーバー運営｜ルール・コツ・Bot・費用・鯖主変更まで詳しく解説
+    </title>
+    <meta
+      name="description"
+      content="ディスコードのサーバー運営のやり方を、最初に決めるルール・続けるコツ・Botの入れ方・費用・鯖主の変更と引き継ぎまで日本語で解説します。人が増えた後に何をするかまで。"
+    />
+    <meta name="theme-color" content="#0A1F1C" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://promo.akatsuki-system.online/manage/" />
+    <link rel="icon" href="../assets/logo-mark-01.svg" type="image/svg+xml" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link
+      rel="icon"
+      href="../favicon-16x16.png"
+      sizes="16x16"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="../favicon-32x32.png"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:site_name" content="ディスコード宣伝" />
+    <meta
+      property="og:title"
+      content="【2026年8月最新】ディスコードのサーバー運営｜ルール・コツ・Bot・費用"
+    />
+    <meta
+      property="og:description"
+      content="運営のやり方を、ルール・コツ・Bot・費用・鯖主変更まで。"
+    />
+    <meta
+      property="og:url"
+      content="https://promo.akatsuki-system.online/manage/"
+    />
+    <meta
+      property="og:image"
+      content="https://promo.akatsuki-system.online/assets/discord-promo-ogp.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="ディスコード宣伝｜宣伝サーバー・掲示板・運営ガイド"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://promo.akatsuki-system.online/assets/discord-promo-ogp.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="ディスコード宣伝｜宣伝サーバー・掲示板・運営ガイド"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "ディスコードの宣伝とは",
+                "item": "https://promo.akatsuki-system.online/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "サーバーの運営",
+                "item": "https://promo.akatsuki-system.online/manage/"
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "ディスコードのサーバー運営で最初に決めることは何ですか？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ルールと、自分が対応できる範囲です。禁止事項を3つ程度に絞って書き、対応できない時間帯があることも先に伝えておくと、後で揉めません。完璧な体制を作ってから始める必要はありません。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "サーバー運営に費用はかかりますか？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "基本的にかかりません。サーバーの作成・運営・Botの導入はほとんど無料でできます。費用が発生するのはサーバーブースト、一部Botの有料プラン、外部サービスの連携などで、いずれも必須ではありません。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "運営のコツはありますか？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "自分が続けられる範囲に収めることです。部屋を増やしすぎない、毎日書こうとしない、対応できない時は対応できないと言う。運営が疲れて止まるのが、サーバーが終わる一番多い理由です。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Botは入れたほうがいいですか？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "人数が増えてからで十分です。最初から多くのBotを入れると管理が複雑になります。荒らし対策や認証など、必要になった時点で1つずつ足すほうが確実です。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "鯖主（サーバー所有者）は変更できますか？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "できます。サーバー設定のメンバー一覧から対象者の権限メニューで所有権を譲渡します。譲渡すると元の所有者は通常のメンバーになり、自分では戻せません。渡す相手と手順を必ず確認してから実行してください。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "運営をやめたくなったらどうすればいいですか？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "所有権を誰かに譲渡するか、サーバーを閉じるかです。黙って放置すると、荒らされた時に止める人がいない状態になります。続けられないと判断した時点で、どちらかを選ぶほうが健全です。"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="../styles.css?v=347d1afc" />
+    <link rel="stylesheet" href="../page-styles/manage.css?v=73b178a0" />
+  </head>
+  <body data-route="manage">
+    <a class="skip" href="#main">本文へ移動</a>
+    <div class="deck" aria-hidden="true"></div>
+
+    <header class="site-head console">
+      <span class="site-header__motion" aria-hidden="true"></span
+      ><span class="site-header__light-sweep" aria-hidden="true"></span>
+      <div class="cs-in">
+        <a class="logo" href="../index.html"
+          ><img
+            class="site-header__logo-mark"
+            src="../assets/logo-mark-01.svg"
+            alt=""
+            width="34"
+            height="34" /><img
+            class="site-header__logo-type"
+            src="../assets/logo-type-01.svg"
+            alt="ディスコード宣伝"
+            height="22"
+        /></a>
+        <nav data-nav>
+          <a href="../index.html"><b>宣伝とは</b><i>Promotion</i></a>
+          <a href="../how-to/"><b>宣伝のやり方</b><i>How to</i></a>
+          <a href="../places/"><b>宣伝できる場所</b><i>Places</i></a>
+          <a href="../recruit/"><b>メンバー募集</b><i>Recruit</i></a>
+          <a href="../find/"><b>サーバーの探し方</b><i>Find</i></a>
+          <a href="../create/"><b>サーバーの作り方</b><i>Create</i></a>
+          <a href="index.html" aria-current="page"
+            ><b>サーバーの運営</b><i>Manage</i></a
+          >
+          <a href="../features/"><b>タグ・ブースト</b><i>Features</i></a>
+          <a href="../trouble/"><b>荒らし対策</b><i>Security</i></a>
+        </nav>
+        <button data-burger type="button" aria-expanded="false">
+          <span></span><span></span><span></span><i class="sr">メニュー</i>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="hero-media" aria-hidden="true">
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            poster="../assets/manage-demo-01.jpg"
+          >
+            <source src="../assets/manage-demo-01.webm" type="video/webm" />
+            <source src="../assets/manage-demo-01.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="hero-veil" aria-hidden="true"></div>
+        <div class="hero-in wrap">
+          <nav class="crumb" aria-label="パンくず">
+            <a href="../index.html">ディスコードの宣伝とは</a> ／ サーバーの運営
+          </nav>
+          <p class="no">MANAGE ／ 管制卓</p>
+          <h1>宣伝で人は来る。<br /><em>残るかどうかは、運営で決まる。</em></h1>
+          <p class="lead">
+            宣伝がうまくいくほど、次に来るのは<b>「入ったのに残らない」</b>という問題です。ここでは最初に決めるルールから、続けるコツ、Bot、費用、鯖主の引き継ぎまでを書きます。
+          </p>
+        </div>
+      </section>
+
+      <!-- ★骨＝格子（読み物ではなく盤面） -->
+      <!--WAVE-->
+      <div class="wave-wrap wave-bg2">
+        <svg
+          class="wave"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M0 57 C230 91 430 24 700 59 C940 90 1190 39 1440 65 L1440 120 L0 120 Z"
+            fill="currentColor"
+            opacity=".38"
+          />
+          <path
+            d="M0 78 C210 49 440 102 690 74 C940 48 1180 94 1440 70 L1440 120 L0 120 Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+      <!--WAVE-->
+      <section class="board" aria-label="運営で見る指標">
+        <div class="tile t4">
+          <span class="lb">FIRST 3 RULES</span>
+          <span class="big" data-count="3">0</span
+          ><span class="unit">個で足りる</span>
+          <p class="cap">
+            禁止事項は3つに絞る。多いほど読まれず、守られません。
+          </p>
+        </div>
+        <div class="tile t4">
+          <span class="lb">COST</span>
+          <span class="big" data-count="0">0</span
+          ><span class="unit">円で運営できる</span>
+          <p class="cap">作成・運営・主要なBotは無料。有料は全部おまけです。</p>
+        </div>
+        <div class="tile t4 warn">
+          <span class="lb">WHY SERVERS DIE</span>
+          <span class="big">運営の</span><span class="unit">疲れ</span>
+          <p class="cap">
+            荒らしより多い終わり方。続けられる範囲に収めることが一番の対策。
+          </p>
+        </div>
+        <div class="tile t8">
+          <h3>盤面で見るのは「人数」ではない</h3>
+          <p>
+            総人数が増えても、発言する人が増えていなければ何も変わっていません。運営で見る数字は<strong
+              >①発言した人の数 ②何日続いているか
+              ③新しく来た人が3日残るか</strong
+            >の3つで足ります。人数は宣伝の結果であって、運営の結果ではありません。
+          </p>
+          <div class="cap">
+            ※Discordはこれらを自動では出しません。感覚で構いません。毎日きっちり測る必要はありません。
+          </div>
+        </div>
+        <div class="tile t4">
+          <span class="lb">BOT</span>
+          <span class="big">後から</span>
+          <p class="cap">最初から入れない。必要になった時に1つずつ。</p>
+        </div>
+      </section>
+
+      <!--WAVE-->
+      <div class="wave-wrap wave-bg2">
+        <svg
+          class="wave"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M0 62 C180 50 330 74 510 61 C690 48 840 70 1020 58 C1180 47 1320 56 1440 51 L1440 120 L0 120 Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+      <!--WAVE-->
+
+      <!--SPLIT--><!--ICON-->
+      <div class="mark-row" aria-hidden="true">
+        <picture class="mark"
+          ><source srcset="../assets/manage-icon-01.gif" type="image/gif" />
+          <img
+            src="../assets/manage-icon-01.png"
+            alt=""
+            loading="lazy"
+            decoding="async"
+        /></picture>
+      </div>
+      <!--ICON-->
+      <section class="doc">
+        <!--SPLIT2-->
+        <div class="toc">
+          <p class="toc-h">目次 / CONTENTS</p>
+          <ol>
+            <li><a href="#s1">1. ディスコードのサーバー運営とは</a></li>
+            <li><a class="lv3" href="#s1-1">運営がやることは3つだけ</a></li>
+            <li><a class="lv3" href="#s1-2">完璧な体制から始めない</a></li>
+            <li><a href="#s2">2. 最初に決めるルール</a></li>
+            <li><a class="lv3" href="#s2-1">禁止事項は3つに絞る</a></li>
+            <li><a class="lv3" href="#s2-2">対応できない時間を先に言う</a></li>
+            <li><a class="lv3" href="#s2-3">ルールの置き場所</a></li>
+            <li><a href="#s3">3. 運営のコツ</a></li>
+            <li><a class="lv3" href="#s3-1">部屋を増やしすぎない</a></li>
+            <li><a class="lv3" href="#s3-2">毎日書こうとしない</a></li>
+            <li><a class="lv3" href="#s3-3">新しく来た人への一言</a></li>
+            <li><a class="lv3" href="#s3-4">運営が疲れたら止まる</a></li>
+            <li><a href="#s4">4. Botで自動化する</a></li>
+            <li><a class="lv3" href="#s4-1">最初は入れない</a></li>
+            <li><a class="lv3" href="#s4-2">必要になる順番</a></li>
+            <li><a class="lv3" href="#s4-3">Botを入れる時の注意</a></li>
+            <li><a href="#cost">5. 運営の費用</a></li>
+            <li><a class="lv3" href="#s5-1">無料でできる範囲</a></li>
+            <li><a class="lv3" href="#s5-2">お金がかかる場面</a></li>
+            <li><a href="#s6">6. 鯖主の変更・引き継ぎ</a></li>
+            <li><a class="lv3" href="#s6-1">所有権を譲渡する手順</a></li>
+            <li><a class="lv3" href="#s6-2">譲渡は取り消せない</a></li>
+            <li><a class="lv3" href="#s6-3">やめる時にやること</a></li>
+            <li><a href="#day">7. 運営の1日</a></li>
+            <li><a href="#faq">よくある質問</a></li>
+          </ol>
+        </div>
+
+        <h2 id="s1"><span class="n">01</span>ディスコードのサーバー運営とは</h2>
+
+        <h3 id="s1-1">運営がやることは3つだけ</h3>
+        <p>
+          サーバー運営と聞くと大変そうに見えますが、実際にやることは<strong
+            >①場を整える ②困っている人に返事をする
+            ③まずいことが起きたら止める</strong
+          >の3つです。それ以上は、やりたければやる、という位置づけで構いません。
+        </p>
+
+        <h3 id="s1-2">完璧な体制から始めない</h3>
+        <p>
+          モデレーターを揃えて、ルールを作り込んで、Botを入れて——という順で始めると、<strong>人が来る前に力尽きます。</strong>最初は自分ひとりで、部屋3つ、ルール3行で足ります。
+        </p>
+      </section>
+      <div class="wave-wrap wave-bg2">
+        <svg
+          class="wave"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path d="M0 16 L1440 91 L1440 120 L0 120 Z" fill="currentColor" />
+        </svg>
+      </div>
+      <section class="doc">
+        <h2 id="s2"><span class="n">02</span>最初に決めるルール</h2>
+
+        <h3 id="s2-1">禁止事項は3つに絞る</h3>
+        <p>
+          <strong>ルールは多いほど読まれません。</strong
+          >最初は次の3つで十分です。
+        </p>
+        <ul>
+          <li>他の人を攻撃しない</li>
+          <li>許可のない宣伝をしない</li>
+          <li>年齢制限のある話題を持ち込まない</li>
+        </ul>
+        <p>
+          足りないものが出てきたら、その時に足せば構いません。<strong
+            >先回りして書いた10個より、実際に起きてから足した4つ目のほうが守られます。</strong
+          >
+        </p>
+
+        <h3 id="s2-2">対応できない時間を先に言う</h3>
+        <div class="note">
+          <p>
+            <b>これを書いておくだけで、後の揉め事がかなり減ります。</b
+            >「平日の日中は見ていません」「返事が遅れることがあります」——先に言ってあれば、待たせても不誠実になりません。<b
+              >言っていないと、同じ状況が「放置された」に変わります。</b
+            >
+          </p>
+        </div>
+
+        <h3 id="s2-3">ルールの置き場所</h3>
+        <p>
+          ルール専用の部屋を1つ作り、<strong>入った直後に目に入る位置</strong>に置きます。作り方は<a
+            href="../create/"
+            >サーバーの作り方</a
+          >で書いています。
+        </p>
+
+        <h2 id="s3"><span class="n">03</span>運営のコツ</h2>
+
+        <h3 id="s3-1">部屋を増やしすぎない</h3>
+        <p>
+          部屋が多いと<strong>会話が薄く広がって、どこも過疎に見えます。</strong>10人のサーバーに部屋が15個あれば、全部が無人に見えます。<strong
+            >人が増えてから足すほうが、常に賑わって見えます。</strong
+          >
+        </p>
+
+        <h3 id="s3-2">毎日書こうとしない</h3>
+        <p>
+          運営が毎日投稿して場を持たせようとすると、<strong>運営が止まった瞬間にサーバーも止まります。</strong>それは場ではなく、運営の個人配信になっています。反応する側に回るほうが長持ちします。
+        </p>
+
+        <h3 id="s3-3">新しく来た人への一言</h3>
+        <p>
+          <strong
+            >入ってきた人に一言あるかどうかで、残る確率が変わります。</strong
+          >長い挨拶は要りません。「ようこそ」だけで十分です。誰も反応しない場所は、数分で抜けられます。
+        </p>
+
+        <h3 id="s3-4">運営が疲れたら止まる</h3>
+        <div class="caution">
+          <p>
+            <b>サーバーが終わる一番多い理由は、荒らしではなく運営の疲れです。</b
+            >頑張りすぎている運営ほど、ある日ぱったり来なくなります。<b
+              >続けられる範囲に収めることが、最大の運営技術です。</b
+            >
+          </p>
+        </div>
+
+        <!--SPLIT2-->
+      </section>
+      <div class="wave-wrap wave-bg2">
+        <svg
+          class="wave"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M0 62 C180 50 330 74 510 61 C690 48 840 70 1020 58 C1180 47 1320 56 1440 51 L1440 120 L0 120 Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+      <section class="eyecatch" data-rv>
+        <div
+          class="ec-img"
+          style="
+            background-image: url(&quot;../assets/manage-motion-01.webp&quot;);
+          "
+        ></div>
+        <div class="ec-cap">
+          <b>数字は、増やすためでなく気づくために見る</b
+          >入った人数より「入った翌日に喋った人数」。荒れる前に、数字の側が先に変わります。
+        </div>
+      </section>
+      <section class="doc">
+        <h2 id="s4"><span class="n">04</span>Botで自動化する</h2>
+
+        <h3 id="s4-1">最初は入れない</h3>
+        <p>
+          Botは便利ですが、<strong>最初から複数入れると管理が複雑になります。</strong>権限の設定を間違えると、Botが荒らしの入口になることもあります。人数が少ないうちは自分の手で足ります。
+        </p>
+
+        <h3 id="s4-2">必要になる順番</h3>
+        <ol>
+          <li><strong>認証</strong>——人が増えて、なりすましが来始めたら</li>
+          <li>
+            <strong>荒らし対策</strong
+            >——実際に荒らされたか、その気配が出たら（<a href="../trouble/"
+              >荒らし対策</a
+            >へ）
+          </li>
+          <li><strong>ロール付与</strong>——役割を分けたくなったら</li>
+          <li><strong>通知・連携</strong>——外部の情報を流したくなったら</li>
+        </ol>
+
+        <h3 id="s4-3">Botを入れる時の注意</h3>
+        <ul>
+          <li><strong>権限を全部渡さない</strong>——必要な権限だけにする</li>
+          <li>
+            <strong>作者と更新日を見る</strong
+            >——更新が止まっているBotは動かなくなることがあります
+          </li>
+          <li>
+            <strong>入れたBotを記録しておく</strong
+            >——後で「何のBotか分からない」が起きます
+          </li>
+        </ul>
+
+        <h2 id="cost"><span class="n">05</span>運営の費用</h2>
+
+        <h3 id="s5-1">無料でできる範囲</h3>
+        <p>
+          <strong
+            >サーバーの作成、運営、主要なBotの導入まで、すべて無料です。</strong
+          >「discordサーバー運営
+          費用」で検索している方の答えは、<strong>基本的に0円</strong>です。
+        </p>
+
+        <h3 id="s5-2">お金がかかる場面</h3>
+        <div class="scroll-x">
+          <table>
+            <thead>
+              <tr>
+                <th>項目</th>
+                <th>必須か</th>
+                <th>何が変わるか</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>サーバーブースト</b></td>
+                <td>任意</td>
+                <td>
+                  絵文字枠・音質・アップロード上限などが上がります。詳しくは<a
+                    href="../features/"
+                    >タグ・ブースト</a
+                  >へ
+                </td>
+              </tr>
+              <tr>
+                <td><b>一部Botの有料プラン</b></td>
+                <td>任意</td>
+                <td>機能の解放。無料の範囲で足りることが多いです</td>
+              </tr>
+              <tr>
+                <td><b>外部サービス連携</b></td>
+                <td>任意</td>
+                <td>自動投稿などを外部に置く場合。自前で動かせば無料です</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          <strong>どれも「無いと運営できない」ものではありません。</strong
+          >お金をかける前に、まず無料の範囲でやり切ってください。
+        </p>
+
+        <h2 id="s6"><span class="n">06</span>鯖主の変更・引き継ぎ</h2>
+
+        <h3 id="s6-1">所有権を譲渡する手順</h3>
+        <ol>
+          <li>サーバー設定を開く</li>
+          <li>メンバー一覧から、渡す相手を選ぶ</li>
+          <li>そのメンバーのメニューから<strong>所有権の譲渡</strong>を選ぶ</li>
+          <li>確認のチェックを入れて実行する</li>
+        </ol>
+
+        <h3 id="s6-2">譲渡は取り消せない</h3>
+        <div class="caution">
+          <p>
+            <b
+              >譲渡すると、元の所有者は通常のメンバーになります。自分では戻せません。</b
+            >相手が返してくれない限り、そのサーバーは相手のものです。渡す相手と、渡した後どうするかを必ず先に確認してください。
+          </p>
+        </div>
+
+        <h3 id="s6-3">やめる時にやること</h3>
+        <p>
+          運営を続けられないと判断したら、<strong
+            >①誰かに譲渡する ②閉じる</strong
+          >のどちらかを選んでください。<strong>黙って放置するのが一番まずい</strong>です。荒らされた時に止める人がいない状態になり、そこにいる人が困ります。
+        </p>
+      </section>
+      <div class="wave-wrap wave-bg2">
+        <svg
+          class="wave"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path d="M0 16 L1440 91 L1440 120 L0 120 Z" fill="currentColor" />
+        </svg>
+      </div>
+      <figure class="side-fig" data-rv>
+        <picture
+          ><img
+            src="../assets/manage-glow-01.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+        /></picture>
+      </figure>
+      <section class="doc">
+        <h2 id="day"><span class="n">07</span>運営の1日</h2>
+        <p>実際にやることは、これくらいです。全部やる必要もありません。</p>
+        <div class="log">
+          <div class="ln">
+            <span><b>朝</b> 通知を見る。荒らし・通報が無ければ何もしない</span>
+          </div>
+          <div class="ln">
+            <span><b>昼</b> 新しく入った人がいれば「ようこそ」だけ返す</span>
+          </div>
+          <div class="ln">
+            <span
+              ><b>夜</b> 会話が動いていれば混ざる。動いていなければ<em
+                >無理に投稿しない</em
+              ></span
+            >
+          </div>
+          <div class="ln">
+            <span><b>週末</b> 使われていない部屋がないか見る。あれば畳む</span>
+          </div>
+          <div class="ln">
+            <span><b>月1</b> ルールを読み直す。増えすぎていたら削る</span>
+          </div>
+          <div class="ln">
+            <span><b>随時</b> <em>疲れたら休む。休むと言ってから休む</em></span>
+          </div>
+        </div>
+
+        <a class="back" href="../index.html">
+          <b>「ディスコードの宣伝とは？」へ戻る</b>
+          <small
+            >運営が回り始めたら、また宣伝に戻ってきてください。中身が育ったサーバーは、同じ紹介文でも反応が変わります。</small
+          >
+        </a>
+
+        <h2 id="faq"><span class="n">FAQ</span>よくある質問</h2>
+        <details>
+          <summary>
+            ディスコードのサーバー運営で最初に決めることは何ですか？
+          </summary>
+          <p>
+            ルールと、自分が対応できる範囲です。禁止事項を3つ程度に絞って書き、対応できない時間帯があることも先に伝えておくと、後で揉めません。完璧な体制を作ってから始める必要はありません。
+          </p>
+        </details>
+        <details>
+          <summary>サーバー運営に費用はかかりますか？</summary>
+          <p>
+            基本的にかかりません。サーバーの作成・運営・Botの導入はほとんど無料でできます。費用が発生するのはサーバーブースト、一部Botの有料プラン、外部サービスの連携などで、いずれも必須ではありません。
+          </p>
+        </details>
+        <details>
+          <summary>運営のコツはありますか？</summary>
+          <p>
+            自分が続けられる範囲に収めることです。部屋を増やしすぎない、毎日書こうとしない、対応できない時は対応できないと言う。運営が疲れて止まるのが、サーバーが終わる一番多い理由です。
+          </p>
+        </details>
+        <details>
+          <summary>Botは入れたほうがいいですか？</summary>
+          <p>
+            人数が増えてからで十分です。最初から多くのBotを入れると管理が複雑になります。荒らし対策や認証など、必要になった時点で1つずつ足すほうが確実です。
+          </p>
+        </details>
+        <details>
+          <summary>鯖主（サーバー所有者）は変更できますか？</summary>
+          <p>
+            できます。サーバー設定のメンバー一覧から対象者の権限メニューで所有権を譲渡します。譲渡すると元の所有者は通常のメンバーになり、自分では戻せません。渡す相手と手順を必ず確認してから実行してください。
+          </p>
+        </details>
+        <details>
+          <summary>運営をやめたくなったらどうすればいいですか？</summary>
+          <p>
+            所有権を誰かに譲渡するか、サーバーを閉じるかです。黙って放置すると、荒らされた時に止める人がいない状態になります。続けられないと判断した時点で、どちらかを選ぶほうが健全です。
+          </p>
+        </details>
+
+        <h2><span class="n">NEXT</span>次に読むページ</h2>
+        <div class="rel">
+          <a href="../trouble/"
+            ><p>SECURITY</p>
+            <b>荒らし対策</b
+            ><small>人が増えた後に必ず来る問題への備え。</small></a
+          >
+          <a href="../features/"
+            ><p>FEATURES</p>
+            <b>タグ・ブースト</b
+            ><small>ブーストで何が変わるか。費用の話も。</small></a
+          >
+          <a href="../recruit/"
+            ><p>RECRUIT</p>
+            <b>メンバー募集</b
+            ><small>足りない役割を、宣伝ではなく募集で埋める。</small></a
+          >
+        </div>
+      </section>
+      <!--SPLIT-->
+
+      <section class="cta">
+        <h2>運営が回れば、<br />宣伝の効きも変わる。</h2>
+        <a class="go" href="../how-to/">宣伝のやり方を見る →</a>
+        <small>紹介文の3行・添削・投稿間隔</small>
+      </section>
+    </main>
+
+    <footer>
+      <div class="ft">
+        <div>
+          <h4>ディスコードの宣伝</h4>
+          <a href="../index.html">ディスコードの宣伝とは</a>
+          <a href="../how-to/">宣伝のやり方</a>
+          <a href="../places/">宣伝できる場所</a>
+          <a href="../recruit/">メンバー募集</a>
+        </div>
+        <div>
+          <h4>サーバーを持つ</h4>
+          <a href="../create/">サーバーの作り方</a>
+          <a href="../manage/">サーバーの運営</a>
+          <a href="../features/">サーバータグ・ブースト</a>
+          <a href="../trouble/">荒らし対策・トラブル</a>
+        </div>
+        <div>
+          <h4>探す</h4>
+          <a href="../find/">サーバーの探し方</a>
+          <a href="../find/#search">検索で出てこない時</a>
+          <a href="../find/#mobile">スマホ・iPhoneで探す</a>
+          <a href="../find/#tag">タグから探す</a>
+        </div>
+        <div>
+          <h4>よく読まれている</h4>
+          <a href="../how-to/#s2-1">紹介文の3行</a>
+          <a href="../how-to/#s2-5">紹介文の添削例</a>
+          <a href="../how-to/#s3-1">期限なしの招待リンク</a>
+          <a href="../places/#s3-3">バンプとは</a>
+        </div>
+      </div>
+      <div class="ft-notes" aria-label="商標・情報・運営に関する注記">
+        <p>
+          ※ Discord ほか記載のサービス名・製品名は各社の商標または登録商標です。
+          ※
+          掲載内容は各記事の作成時点の情報です。仕様・価格は変更されることがあるため、最新情報は各公式サイトをご確認ください。
+          ※ 当サイトは Discord, Inc. とは関係のない非公式サイトです。
+        </p>
+      </div>
+      <div class="ft-btm">
+        <p>Copyright©2026 AKATSUKI SYSTEM All Rights Reserved.</p>
+      </div>
+    </footer>
+    <script src="../app.js?v=57ea167d" defer></script>
+  </body>
+</html>

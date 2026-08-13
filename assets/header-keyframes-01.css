@@ -1,0 +1,161 @@
+/*
+ * ディスコード宣伝サイト｜ヘッダ用モーション
+ * 1. 暁月ガジェット実装から、そのまま共有する6定義
+ * 2. 常時表示ヘッダ向けに振幅を抑えた移植用定義
+ * 3. prefers-reduced-motion の静止画差し替え
+ */
+
+/* ── 暁月ガジェットの原定義（改変なし） ───────────────────── */
+@keyframes kougetsu-boot-moon-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes kougetsu-boot-bar-slide {
+  0% {
+    left: -35%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes guide-halo-breathe {
+  0%,
+  100% {
+    transform: scale(0.93);
+    opacity: 0.62;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes media-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 10px rgba(232, 98, 43, 0.8),
+      0 0 20px rgba(232, 98, 43, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 16px rgba(232, 98, 43, 1),
+      0 0 32px rgba(232, 98, 43, 0.6);
+  }
+}
+
+@keyframes media-chunk-moon-spin {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0.7;
+  }
+}
+
+/* 原実装の指定値
+ * animation: kougetsu-boot-moon-breathe 3.6s ease-in-out infinite;
+ * animation: kougetsu-boot-bar-slide 2.2s cubic-bezier(.55,.1,.45,.9) infinite;
+ * animation: blink 1s steps(1) infinite;
+ * animation: guide-halo-breathe 3.8s ease-in-out infinite;
+ * animation: media-pulse 1.8s ease-in-out infinite;
+ * animation: media-chunk-moon-spin 3.5s linear infinite;
+ */
+
+/* ── 常時表示ヘッダ向け：呼吸幅と発光差を抑えた移植版 ─────── */
+@keyframes discord-promo-mark-breathe {
+  0%,
+  100% {
+    transform: translateZ(0) scale(1);
+    filter: drop-shadow(0 0 7px rgb(255 61 127 / 28%));
+  }
+  50% {
+    transform: translateZ(0) scale(1.025);
+    filter: drop-shadow(0 0 12px rgb(255 61 127 / 42%));
+  }
+}
+
+@keyframes discord-promo-type-breathe {
+  0%,
+  100% {
+    opacity: 0.94;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes discord-promo-light-sweep {
+  0% {
+    transform: translate3d(-130%, 0, 0);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.22;
+  }
+  72% {
+    opacity: 0.16;
+  }
+  100% {
+    transform: translate3d(230%, 0, 0);
+    opacity: 0;
+  }
+}
+
+.site-header__logo-mark {
+  transform-origin: 50% 55%;
+  animation: discord-promo-mark-breathe 3.8s ease-in-out infinite;
+}
+
+.site-header__logo-type {
+  animation: discord-promo-type-breathe 4.6s ease-in-out infinite;
+}
+
+.site-header__motion {
+  background: center / cover no-repeat url("header-motion-01.webp");
+  pointer-events: none;
+}
+
+.site-header__light-sweep {
+  animation: discord-promo-light-sweep 5.2s cubic-bezier(0.45, 0.05, 0.55, 0.95)
+    infinite;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 209 102 / 18%),
+    transparent
+  );
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header__logo-mark,
+  .site-header__logo-type,
+  .site-header__light-sweep {
+    animation: none;
+  }
+
+  .site-header__motion {
+    background-image: url("header-motion-01.png");
+  }
+}

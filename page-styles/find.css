@@ -1,0 +1,1204 @@
+/* ═══════════════════════════════════════════════════════
+   /find/ 専用｜文法＝「検索コンソール／暗いターミナル」
+   検索窓が主役。走査線・格子・等幅・★実際に動く絞り込み。
+   他3ページと別世界にする：
+     TOP=夜の藍と紙 / places=昼のコンクリート / howto=生成りの紙
+     ここは【ほぼ黒 × ターミナル緑】
+   ★造形の核＝「画面の中で本当に絞り込める」こと。静止画では伝わらない体験。
+   ═══════════════════════════════════════════════════════ */
+[data-route="find"] {
+  --bg: #08090c;
+  --bg-2: #0d1014;
+  --panel: #101419;
+  --line: #1e242c;
+  --line-2: #2a323c;
+  --tx: #e6e9ef;
+  --tx-2: #8b93a1;
+  --tx-3: #5a626e;
+  --gr: #22e07a;
+  --gr-2: #0e7a42;
+  --am: #ffb020;
+  --rd: #ff5a5a;
+  --mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
+}
+[data-route="find"] body,
+body[data-route="find"] {
+  background: var(--bg);
+  color: var(--tx);
+}
+
+/* 走査線とグリッドの地 */
+[data-route="find"] .term {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      800px 460px at 50% -8%,
+      rgba(34, 224, 122, 0.1) 0,
+      transparent 64%
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px) 0
+      0/48px 48px,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px) 0
+      0/48px 48px,
+    var(--bg);
+}
+[data-route="find"] .term::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0 2px,
+    rgba(0, 0, 0, 0.28) 2px 3px
+  );
+}
+
+/* ── ヘッダ＝コマンドバー */
+[data-route="find"] .cmd {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgba(8, 9, 12, 0.9);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+}
+[data-route="find"] .cmd-in {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 9px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+[data-route="find"] .cmd .logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  color: var(--tx);
+}
+[data-route="find"] .cmd .logo b {
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+[data-route="find"] .cmd .logo i {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  color: var(--tx-3);
+  display: block;
+}
+[data-route="find"] .cmd nav {
+  margin-left: auto;
+  gap: 0;
+  flex-wrap: wrap;
+}
+[data-route="find"] .cmd nav a {
+  padding: 7px 11px;
+  font-size: 12.5px;
+  text-decoration: none;
+  color: var(--tx-2);
+  font-family: var(--mono);
+}
+[data-route="find"] .cmd nav a:hover {
+  color: var(--gr);
+  background: rgba(34, 224, 122, 0.07);
+}
+[data-route="find"] .cmd nav a[aria-current] {
+  color: var(--gr);
+}
+[data-route="find"] .cmd nav a[aria-current]::before {
+  content: "› ";
+  color: var(--gr);
+}
+[data-route="find"] [data-burger] {
+  width: 40px;
+  height: 34px;
+  background: none;
+  border: 1px solid var(--line-2);
+  border-radius: 3px;
+  flex-direction: column;
+  gap: 4px;
+}
+[data-route="find"] [data-burger] span {
+  width: 15px;
+  height: 1.5px;
+  background: var(--tx);
+  display: block;
+}
+@media (max-width: 900px) {
+  [data-route="find"] [data-nav] {
+    background: rgba(8, 9, 12, 0.985);
+  }
+  [data-route="find"] .cmd nav a {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+}
+
+/* ── Hero＝プロンプト */
+[data-route="find"] .head {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+[data-route="find"] .crumb {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--tx-3);
+  padding: 20px 0 0;
+}
+[data-route="find"] .crumb a {
+  color: var(--tx-3);
+  text-decoration: none;
+}
+[data-route="find"] .crumb a:hover {
+  color: var(--gr);
+}
+[data-route="find"] .prompt {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--gr);
+  margin-top: 30px;
+}
+[data-route="find"] .prompt::before {
+  content: "$ ";
+  color: var(--gr-2);
+}
+[data-route="find"] .head h1 {
+  font-size: clamp(29px, 5.4vw, 58px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 14px 0 0;
+}
+[data-route="find"] .head h1 em {
+  font-style: normal;
+  color: var(--gr);
+}
+[data-route="find"] .head h1 .cur {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.02em;
+  background: var(--gr);
+  vertical-align: -0.12em;
+  margin-left: 0.12em;
+  animation: bl 1.1s steps(2) infinite;
+}
+@keyframes bl {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-route="find"] .head h1 .cur {
+    animation: none;
+  }
+}
+[data-route="find"] .head .lead {
+  margin-top: 24px;
+  max-width: 62ch;
+  font-size: 15.5px;
+  color: var(--tx-2);
+  line-height: 2.05;
+}
+[data-route="find"] .head .lead b {
+  color: var(--tx);
+  border-bottom: 1px solid var(--gr-2);
+}
+
+/* ── ★動く絞り込みパネル（このページの核） */
+[data-route="find"] .console {
+  background: var(--panel);
+  border: 1px solid var(--line-2);
+  border-radius: 8px;
+  margin: 40px 0 0;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+[data-route="find"] .console-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #0b0e12;
+  border-bottom: 1px solid var(--line);
+}
+[data-route="find"] .console-bar i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #2a323c;
+  display: block;
+}
+[data-route="find"] .console-bar i:nth-child(1) {
+  background: #ff5f57;
+}
+[data-route="find"] .console-bar i:nth-child(2) {
+  background: #febc2e;
+}
+[data-route="find"] .console-bar i:nth-child(3) {
+  background: #28c840;
+}
+[data-route="find"] .console-bar span {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--tx-3);
+  margin-left: 8px;
+}
+[data-route="find"] .console-body {
+  padding: 20px;
+}
+[data-route="find"] .qwrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  padding: 0 16px;
+  transition: 0.2s;
+}
+[data-route="find"] .qwrap:focus-within {
+  border-color: var(--gr);
+  box-shadow: 0 0 0 3px rgba(34, 224, 122, 0.12);
+}
+[data-route="find"] .qwrap svg {
+  flex: none;
+  opacity: 0.6;
+}
+[data-route="find"] .qwrap input {
+  flex: 1;
+  background: none;
+  border: 0;
+  outline: none;
+  color: var(--tx);
+  font-family: var(--mono);
+  font-size: 15px;
+  padding: 15px 0;
+}
+[data-route="find"] .qwrap input::placeholder {
+  color: var(--tx-3);
+}
+[data-route="find"] .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 14px;
+}
+[data-route="find"] .chips button {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid var(--line-2);
+  color: var(--tx-2);
+  transition: 0.16s;
+}
+[data-route="find"] .chips button:hover {
+  border-color: var(--gr-2);
+  color: var(--tx);
+}
+[data-route="find"] .chips button[data-on] {
+  background: rgba(34, 224, 122, 0.14);
+  border-color: var(--gr);
+  color: var(--gr);
+}
+[data-route="find"] .hitline {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--tx-3);
+  margin: 16px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+[data-route="find"] .hitline b {
+  color: var(--gr);
+  font-size: 14px;
+}
+[data-route="find"] .hitline::before {
+  content: "";
+  flex: 1;
+  order: 2;
+  height: 1px;
+  background: var(--line);
+}
+[data-route="find"] .list {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+[data-route="find"] .item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 15px 16px;
+  background: var(--panel);
+  transition: 0.16s;
+}
+[data-route="find"] .item:hover {
+  background: #141a21;
+}
+[data-route="find"] .item b {
+  font-size: 14.5px;
+  font-weight: 650;
+  display: block;
+}
+[data-route="find"] .item small {
+  display: block;
+  font-size: 12.5px;
+  color: var(--tx-2);
+  margin-top: 4px;
+  line-height: 1.75;
+}
+[data-route="find"] .item .tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 9px;
+}
+[data-route="find"] .item .tags span {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--tx-3);
+  border: 1px solid var(--line-2);
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+[data-route="find"] .item .st {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--gr);
+  text-align: right;
+  white-space: nowrap;
+}
+[data-route="find"] .item .st em {
+  font-style: normal;
+  display: block;
+  color: var(--tx-3);
+  font-size: 10px;
+  margin-top: 3px;
+}
+[data-route="find"] .empty {
+  padding: 26px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--tx-3);
+}
+[data-route="find"] .note-demo {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--tx-3);
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line-2);
+}
+@media (max-width: 600px) {
+  [data-route="find"] .item {
+    grid-template-columns: 1fr;
+  }
+  [data-route="find"] .item .st {
+    text-align: left;
+  }
+}
+
+/* ── 目次 */
+[data-route="find"] .toc {
+  background: var(--panel);
+  border: 1px solid var(--line-2);
+  border-radius: 8px;
+  padding: 20px 22px;
+  margin: 44px 0 0;
+}
+[data-route="find"] .toc-h {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  color: var(--gr);
+  margin-bottom: 14px;
+}
+[data-route="find"] .toc ol {
+  columns: 2;
+  column-gap: 34px;
+}
+[data-route="find"] .toc li {
+  break-inside: avoid;
+}
+[data-route="find"] .toc a {
+  display: block;
+  padding: 6px 0;
+  font-size: 13px;
+  color: var(--tx-2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  font-family: var(--mono);
+}
+[data-route="find"] .toc a:hover,
+[data-route="find"] .toc a[data-here] {
+  color: var(--gr);
+}
+[data-route="find"] .toc .lv3 {
+  padding-left: 16px;
+  font-size: 12px;
+}
+[data-route="find"] .toc .lv3::before {
+  content: "› ";
+  color: var(--tx-3);
+}
+@media (max-width: 760px) {
+  [data-route="find"] .toc ol {
+    columns: 1;
+  }
+}
+
+/* ── 本文 */
+[data-route="find"] .doc {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 22px 90px;
+}
+[data-route="find"] .doc h2 {
+  font-size: clamp(21px, 3.4vw, 33px);
+  font-weight: 700;
+  margin: 74px 0 8px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid var(--line-2);
+  scroll-margin-top: 76px;
+  display: flex;
+  align-items: baseline;
+  gap: 13px;
+}
+[data-route="find"] .doc h2 .n {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--gr);
+  letter-spacing: 0.18em;
+  flex: none;
+  font-weight: 400;
+}
+[data-route="find"] .doc h3 {
+  font-size: clamp(16.5px, 2.2vw, 22px);
+  font-weight: 650;
+  margin: 38px 0 12px;
+  scroll-margin-top: 76px;
+  font-family: var(--mono);
+  color: var(--tx);
+}
+[data-route="find"] .doc h3::before {
+  content: "// ";
+  color: var(--gr-2);
+}
+[data-route="find"] .doc h4 {
+  font-size: 15px;
+  font-weight: 650;
+  margin: 22px 0 8px;
+  color: var(--tx-2);
+}
+[data-route="find"] .doc p {
+  font-size: 15px;
+  line-height: 2.1;
+  color: #c3c9d4;
+  margin: 0 0 15px;
+  max-width: 76ch;
+}
+[data-route="find"] .doc strong {
+  color: var(--tx);
+  border-bottom: 1px solid var(--gr-2);
+}
+[data-route="find"] .doc ul {
+  list-style: none;
+  margin: 12px 0 22px;
+}
+[data-route="find"] .doc ul li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 9px;
+  font-size: 14.5px;
+  line-height: 1.95;
+  color: #b9c0cb;
+}
+[data-route="find"] .doc ul li::before {
+  content: "▸";
+  position: absolute;
+  left: 2px;
+  color: var(--gr);
+  font-size: 11px;
+}
+[data-route="find"] .doc ol {
+  list-style: none;
+  margin: 12px 0 22px;
+  counter-reset: n;
+}
+[data-route="find"] .doc ol li {
+  position: relative;
+  padding-left: 34px;
+  margin-bottom: 11px;
+  counter-increment: n;
+  font-size: 14.5px;
+  line-height: 1.95;
+  color: #b9c0cb;
+}
+[data-route="find"] .doc ol li::before {
+  content: counter(n, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.06em;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--gr);
+}
+
+/* 診断ブロック（症状→原因→対処） */
+[data-route="find"] .diag {
+  background: var(--panel);
+  border: 1px solid var(--line-2);
+  border-left: 3px solid var(--am);
+  padding: 18px 20px;
+  margin: 20px 0;
+}
+[data-route="find"] .diag .sym {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--am);
+  letter-spacing: 0.14em;
+  margin-bottom: 9px;
+}
+[data-route="find"] .diag b {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+[data-route="find"] .diag p {
+  margin: 0;
+  font-size: 14px;
+  color: #b9c0cb;
+}
+[data-route="find"] .warn {
+  background: rgba(255, 90, 90, 0.07);
+  border: 1px solid rgba(255, 90, 90, 0.3);
+  border-left: 3px solid var(--rd);
+  padding: 17px 20px;
+  margin: 20px 0;
+}
+[data-route="find"] .warn b {
+  color: var(--rd);
+}
+[data-route="find"] .warn p {
+  margin: 0;
+  font-size: 14.5px;
+  color: #cfd4dd;
+}
+[data-route="find"] .tip {
+  background: rgba(34, 224, 122, 0.06);
+  border: 1px solid rgba(34, 224, 122, 0.24);
+  padding: 17px 20px;
+  margin: 20px 0;
+}
+[data-route="find"] .tip b {
+  color: var(--gr);
+}
+[data-route="find"] .tip p {
+  margin: 0;
+  font-size: 14.5px;
+  color: #cfd4dd;
+}
+
+/* 表 */
+[data-route="find"] .doc table {
+  margin: 18px 0 26px;
+  background: var(--panel);
+  border: 1px solid var(--line-2);
+}
+[data-route="find"] .doc th {
+  background: #0b0e12;
+  color: var(--gr);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  text-align: left;
+  padding: 11px 14px;
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+}
+[data-route="find"] .doc td {
+  padding: 12px 14px;
+  font-size: 13.5px;
+  border-top: 1px solid var(--line);
+  vertical-align: top;
+  line-height: 1.8;
+  color: #b9c0cb;
+}
+[data-route="find"] .doc td b {
+  color: var(--tx);
+}
+
+/* 戻る・関連・FAQ・CTA・フッタ */
+[data-route="find"] .back {
+  display: block;
+  margin: 56px 0 0;
+  padding: 23px 25px;
+  background: var(--panel);
+  border: 1px solid var(--line-2);
+  border-left: 3px solid var(--gr);
+  text-decoration: none;
+  border-radius: 0 6px 6px 0;
+}
+[data-route="find"] .back b {
+  display: block;
+  font-size: 16.5px;
+  color: var(--tx);
+  margin-bottom: 7px;
+}
+[data-route="find"] .back small {
+  font-size: 13.5px;
+  color: var(--tx-2);
+  line-height: 1.9;
+  display: block;
+}
+[data-route="find"] .back:hover {
+  background: #141a21;
+}
+[data-route="find"] .rel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 13px;
+}
+[data-route="find"] .rel a {
+  background: var(--panel);
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  padding: 18px;
+  text-decoration: none;
+  transition: 0.18s;
+}
+[data-route="find"] .rel a:hover {
+  border-color: var(--gr);
+  transform: translateY(-2px);
+}
+[data-route="find"] .rel p {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--gr);
+  margin: 0 0 6px;
+}
+[data-route="find"] .rel b {
+  display: block;
+  font-size: 15px;
+  color: var(--tx);
+  margin-bottom: 5px;
+}
+[data-route="find"] .rel small {
+  font-size: 12.5px;
+  color: var(--tx-2);
+}
+[data-route="find"] details {
+  background: var(--panel);
+  border: 1px solid var(--line-2);
+  margin-bottom: -1px;
+}
+[data-route="find"] summary {
+  padding: 15px 20px;
+  font-size: 14.5px;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  gap: 12px;
+  font-weight: 650;
+}
+[data-route="find"] summary::-webkit-details-marker {
+  display: none;
+}
+[data-route="find"] summary::before {
+  content: "?";
+  font-family: var(--mono);
+  color: var(--gr);
+  flex: none;
+}
+[data-route="find"] details[open] summary {
+  color: var(--gr);
+}
+[data-route="find"] details p {
+  padding: 15px 20px 19px 46px;
+  font-size: 14px;
+  color: #b9c0cb;
+  border-top: 1px solid var(--line);
+  margin: 0;
+  position: relative;
+}
+[data-route="find"] details p::before {
+  content: ">";
+  position: absolute;
+  left: 20px;
+  top: 15px;
+  font-family: var(--mono);
+  color: var(--gr-2);
+}
+[data-route="find"] .cta {
+  border-top: 1px solid var(--line-2);
+  margin-top: 70px;
+  padding: 56px 22px;
+  text-align: center;
+  background: radial-gradient(
+    600px 300px at 50% 0,
+    rgba(34, 224, 122, 0.09),
+    transparent 70%
+  );
+}
+[data-route="find"] .cta h2 {
+  border: 0;
+  justify-content: center;
+  font-size: clamp(21px, 3.6vw, 32px);
+  margin: 0 0 22px;
+}
+[data-route="find"] .cta .go {
+  display: inline-block;
+  background: var(--gr);
+  color: #04120a;
+  padding: 15px 38px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15.5px;
+  border-radius: 6px;
+  font-family: var(--mono);
+}
+[data-route="find"] .cta .go:hover {
+  background: #3de98d;
+}
+[data-route="find"] .cta small {
+  display: block;
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--tx-3);
+  font-family: var(--mono);
+}
+[data-route="find"] footer {
+  border-top: 1px solid var(--line);
+  background: #06070a;
+}
+[data-route="find"] .ft {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 42px 22px 22px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px 30px;
+}
+[data-route="find"] .ft h4 {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--gr);
+  margin-bottom: 11px;
+}
+[data-route="find"] .ft a {
+  display: block;
+  font-size: 12.5px;
+  color: var(--tx-2);
+  text-decoration: none;
+  padding: 4px 0;
+}
+[data-route="find"] .ft a:hover {
+  color: var(--gr);
+}
+[data-route="find"] .ft-btm {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 14px 22px 28px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: var(--tx-2);
+  font-family: var(--mono);
+}
+@media (max-width: 900px) {
+  [data-route="find"] .ft {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ═══ ★9項目フラットナビ（2段表記） ═══ */
+[data-route="find"] .cmd nav {
+  gap: 0;
+}
+[data-route="find"] .cmd nav a {
+  padding: 6px 9px;
+  border-radius: 4px;
+}
+[data-route="find"] .cmd nav a b {
+  font-size: 12px;
+  color: var(--tx-2);
+  font-weight: 600;
+}
+[data-route="find"] .cmd nav a i {
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 0.14em;
+  color: var(--tx-3);
+  margin-top: 2px;
+}
+[data-route="find"] .cmd nav a:hover {
+  background: rgba(34, 224, 122, 0.08);
+}
+[data-route="find"] .cmd nav a:hover b {
+  color: var(--gr);
+}
+[data-route="find"] .cmd nav a[aria-current] b {
+  color: var(--gr);
+}
+[data-route="find"] .cmd nav a[aria-current] i {
+  color: var(--gr);
+}
+[data-route="find"] .cmd nav a[aria-current]::before {
+  content: none;
+}
+@media (max-width: 1180px) {
+  [data-route="find"] .cmd nav a b {
+    font-size: 11px;
+  }
+  [data-route="find"] .cmd nav a {
+    padding: 6px 6px;
+  }
+}
+@media (max-width: 900px) {
+  [data-route="find"] .cmd nav a {
+    padding: 13px 20px;
+  }
+  [data-route="find"] .cmd nav a b {
+    font-size: 17px;
+  }
+}
+
+/* ═══ ★骨＝「上に検索窓を固定・下が結果」 ═══
+   ★真似る先：AAA11Y（aaa11y.com）
+     ・適合レベル×タイプ×カテゴリ×カラーの【多段フィルタ】
+     ・「検索結果 1,559サイト」と★件数を出す
+     ・「条件をクリア」ボタン
+   ★独自性：黒いターミナル／走査線／等幅／プロンプト記号
+   ★他ページとの差：placesとhowtoは「左に追従」。ここは【上に固定】。 */
+/* ★セクション全体をstickyにしない。
+   実測：.stick の高さ1088px（画面の121%）が丸ごと貼り付き、
+        スクロールしても位置432pxのまま＝本文が永久に画面へ出なかった。
+   → 固定するのは【フィルタ枠だけ】。結果リストは普通に流す。 */
+[data-route="find"] .stick {
+  position: relative;
+  padding: var(--s4) 0 var(--s5);
+  margin-bottom: var(--s4);
+}
+[data-route="find"] .filters {
+  position: sticky;
+  top: 52px;
+  z-index: 50;
+  background: rgba(16, 20, 25, 0.97);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--line-2);
+  border-radius: 8px;
+  padding: 16px 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+[data-route="find"] .frow {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
+}
+[data-route="find"] .frow:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+[data-route="find"] .flabel {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--tx-3);
+  padding-top: 8px;
+}
+[data-route="find"] .fbtns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+[data-route="find"] .fbtns button {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  padding: 6px 13px;
+  border-radius: 4px;
+  background: transparent;
+  border: 1px solid var(--line-2);
+  color: var(--tx-2);
+  transition: 0.15s;
+}
+[data-route="find"] .fbtns button:hover {
+  border-color: var(--gr-2);
+  color: var(--tx);
+}
+[data-route="find"] .fbtns button[data-on] {
+  background: rgba(34, 224, 122, 0.15);
+  border-color: var(--gr);
+  color: var(--gr);
+}
+[data-route="find"] .fclear {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  background: none;
+  border: 0;
+  color: var(--tx-3);
+  text-decoration: underline;
+  padding: 6px 2px;
+}
+[data-route="find"] .fclear:hover {
+  color: var(--rd);
+}
+[data-route="find"] .fhead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+[data-route="find"] .fhead .t {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  color: var(--gr);
+}
+@media (max-width: 640px) {
+  [data-route="find"] .frow {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  [data-route="find"] .flabel {
+    padding-top: 0;
+  }
+}
+
+/* 結果（AAA11Y型：件数を大きく出す） */
+[data-route="find"] .rescount {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--tx-2);
+  margin: 0 0 12px;
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+}
+[data-route="find"] .rescount b {
+  font-size: 24px;
+  color: var(--gr);
+  font-weight: 700;
+}
+[data-route="find"] .rescount span {
+  color: var(--tx-3);
+}
+[data-route="find"] .results {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+[data-route="find"] .res {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 16px;
+  background: var(--panel);
+  transition: 0.15s;
+}
+[data-route="find"] .res:hover {
+  background: #141a21;
+}
+[data-route="find"] .res[hidden] {
+  display: none;
+}
+[data-route="find"] .res-ic {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 700;
+  background: #1a2029;
+  color: var(--gr);
+}
+[data-route="find"] .res b {
+  font-size: 15px;
+  display: block;
+  margin-bottom: 4px;
+}
+[data-route="find"] .res p {
+  font-size: 13px;
+  color: var(--tx-2);
+  margin: 0;
+  line-height: 1.75;
+}
+[data-route="find"] .res .tg {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 9px;
+}
+[data-route="find"] .res .tg span {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--tx-3);
+  border: 1px solid var(--line-2);
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+[data-route="find"] .res .how {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--gr);
+  text-align: right;
+  white-space: nowrap;
+  line-height: 1.7;
+}
+[data-route="find"] .res .how em {
+  font-style: normal;
+  display: block;
+  color: var(--tx-3);
+  font-size: 9.5px;
+}
+[data-route="find"] .noresult {
+  padding: 34px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--tx-3);
+  background: var(--panel);
+  border: 1px dashed var(--line-2);
+}
+@media (max-width: 600px) {
+  [data-route="find"] .res {
+    grid-template-columns: 40px minmax(0, 1fr);
+  }
+  [data-route="find"] .res .how {
+    grid-column: 1/-1;
+    text-align: left;
+  }
+  [data-route="find"] .res-ic {
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+  }
+}
+
+/* ═══ ★こころ納品素材の積層（find／台帳§7の順：bg→pattern→glow→object→divider）
+   ★objectは中央に置かず外周へ（台帳の指示） ═══ */
+/* 地：黒の検索コンソール */
+[data-route="find"] .term::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/find-bg-01.webp") center/cover no-repeat;
+  opacity: 0.55;
+}
+[data-route="find"] .term::after {
+  background:
+    repeating-linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0 2px,
+      rgba(0, 0, 0, 0.28) 2px 3px
+    ),
+    url("../assets/find-pattern-01.webp") center/cover no-repeat;
+  opacity: 0.5;
+}
+/* 緑の光（検索窓の周り） */
+[data-route="find"] .stick::before {
+  content: "";
+  position: absolute;
+  inset: -40px -10% auto;
+  height: 260px;
+  background: url("../assets/find-glow-01.webp") center/cover no-repeat;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: -1;
+}
+/* ★ここで position:sticky に戻してしまい、L235の修正を打ち消していた。
+   緑の光は .filters 側へ移す（固定するのはフィルタだけ）。 */
+[data-route="find"] .stick {
+  isolation: isolate;
+}
+[data-route="find"] .stick::before {
+  inset: -30px 0 auto;
+  height: 230px;
+}
+/* レンズ・焦点弧（Heroの右外周） */
+[data-route="find"] .head:first-of-type {
+  position: relative;
+  overflow: hidden;
+}
+[data-route="find"] .head:first-of-type::after {
+  content: "";
+  position: absolute;
+  top: -10%;
+  right: -6%;
+  width: 44%;
+  height: 130%;
+  background: url("../assets/find-object-01.webp") right center/contain
+    no-repeat;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* ★波の色と斜め断面 */
+[data-route="find"] .wave-panel {
+  color: var(--panel);
+}
+[data-route="find"] .hero {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3.2vw), 0 100%);
+}
+@media (max-width: 700px) {
+  [data-route="find"] .hero {
+    clip-path: none;
+  }
+}
+
+/* ═══ ★ページ別の目標値（11サイト実測・2026-08-13） ═══
+   参考: SOMEWHERE／ジャンプ率 8.3／最大字 100px
+   ★9ページ全部を同じ数字にしない。ページの目的でここまで振れる：
+     にじのわクリニック(不安を扱う) 1.9 … DAIICHI SELECT(商品を立てる) 14.5   */
+[data-route="find"] .hero h1,
+[data-route="find"] h1 {
+  font-size: clamp(36px, 8vw, 100px);
+}
+[data-route="find"] .doc h2,
+[data-route="find"] .wall-head h2,
+[data-route="find"] .four-h h2,
+[data-route="find"] .tabs-h h2,
+[data-route="find"] .plan-h h2 {
+  font-size: clamp(23px, 3.4vw, 42px);
+}
+[data-route="find"] .doc h3 {
+  font-size: clamp(17px, 2vw, 23px);
+}
+
+/* ★節として潰れないための厚み（実測 2026-08-13）
+   .head は見出しを持つ節なのに上下paddingが0で、recruitでは高さ57pxまで潰れていた。
+   実測サイト（すまいとおかね210px / STORES434px）の一番小さい節に合わせて厚みを与える。
+   ★数字合わせではなく、実際に潰れて帯に見えていたので直す。 */
+[data-route="find"] .head {
+  padding-top: clamp(40px, 5.5vw, 76px);
+  padding-bottom: clamp(28px, 3.6vw, 48px);
+}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">ディスコード宣伝 ロゴマーク</title>
+  <desc id="desc">掲示板、重なった掲示紙、一本の画鋲を抽象化した独自マーク</desc>
+  <defs>
+    <filter id="pinkGlow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="15" result="blur"/>
+      <feFlood flood-color="#FF3D7F" flood-opacity=".42"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <path d="M104 156 L386 121 L420 341 L138 382 Z" fill="#FFD166" fill-opacity=".08" stroke="#FFD166" stroke-width="16" stroke-linejoin="round"/>
+  <path d="M84 126 L375 146 L357 395 L66 365 Z" fill="#0B1020" fill-opacity=".82" stroke="#FF3D7F" stroke-width="22" stroke-linejoin="round" filter="url(#pinkGlow)"/>
+  <path d="M357 318 L357 395 L280 387 Z" fill="#FFD166" fill-opacity=".95" stroke="#0B1020" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M126 218 C178 207 246 211 315 222" fill="none" stroke="#F7F5EF" stroke-width="17" stroke-linecap="round" opacity=".94"/>
+  <path d="M120 278 C180 266 222 270 286 281" fill="none" stroke="#FF3D7F" stroke-width="17" stroke-linecap="round" opacity=".96"/>
+  <path d="M116 329 C162 319 199 321 245 330" fill="none" stroke="#F7F5EF" stroke-width="13" stroke-linecap="round" opacity=".72"/>
+  <path d="M249 86 L244 185" stroke="#FFD166" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="252" cy="79" r="44" fill="#0B1020" stroke="#FF3D7F" stroke-width="13" opacity=".96"/>
+  <circle cx="252" cy="79" r="27" fill="#FFD166"/>
+  <circle cx="242" cy="68" r="8" fill="#F7F5EF" opacity=".78"/>
+</svg>

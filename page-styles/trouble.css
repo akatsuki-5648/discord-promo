@@ -1,0 +1,470 @@
+/* ═══════════════════════════════════════════════════════
+   /trouble/ 専用｜文法＝「落ち着いた案内書」
+   ★真似る先：にじのわクリニック https://nijinowa-clinic.jp/
+     （② SANKOU! シンプル×病院・訪問診療／制作 y2）
+     実測 2026-08-13：ジャンプ率 1.9（★11サイト中で最低）／ 最大字 21px
+                      節の落差 4.8 ／ keyframes 7 ／ 曲線0 / clip0 / mask1 ／ 画像38
+     ＝ 不安を持って来た人を落ち着かせる構造。文字で叫ばない。
+   ★このページで一番やってはいけないのは「煽ること」。
+     荒らしの被害を大きく見せると、対策より先に恐怖が残る。
+     順番（起きたら→まず何を→次に何を）を、ほぼ同じ大きさの文字で淡々と置く。
+   ★他ページとの差：features=巨大な数字で立てる（J率14.5）
+                    ⇔ ここは【均一な文字で落ち着かせる】（J率1.9）
+   ★独自性：紙の白。警告色を面で使わない（線1本だけに留める）
+   ★素材：trouble-texture / pattern / glow / object / divider / motion（台帳§7の順）
+   ═══════════════════════════════════════════════════════ */
+[data-route="trouble"] {
+  --pp: #f7f5f2;
+  --pp-2: #ffffff;
+  --pp-3: #efebe5;
+  --ik: #2e2b26;
+  --ik-2: #5a544b;
+  --ik-3: #8a8278;
+  --ac: #4a7c6f; /* 落ち着いた緑（安心の側） */
+  --wn: #c2703c; /* 警告は線1本だけに使う */
+  --ln: #ddd7ce;
+  --mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+[data-route="trouble"] body,
+body[data-route="trouble"] {
+  background: var(--pp);
+  color: var(--ik);
+}
+
+/* 地（台帳§7：texture → pattern。glowは使わない＝眩しくしない） */
+[data-route="trouble"] .paperbg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background: var(--pp);
+}
+[data-route="trouble"] .paperbg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/trouble-texture-01.webp") center/cover no-repeat;
+  opacity: 0.42;
+  mix-blend-mode: multiply;
+}
+[data-route="trouble"] .paperbg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/trouble-pattern-01.webp") center/cover no-repeat;
+  opacity: 0.1;
+  mix-blend-mode: multiply;
+}
+
+/* ヘッダ（明るい地なので座布団は共通CSSの .on-light が効く） */
+[data-route="trouble"] .bar {
+  background: rgba(247, 245, 242, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--ln);
+}
+[data-route="trouble"] .bar-in {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 10px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+[data-route="trouble"] .bar nav {
+  margin-left: auto;
+  gap: 0;
+  flex-wrap: wrap;
+}
+[data-route="trouble"] .bar nav a {
+  padding: 6px 9px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+[data-route="trouble"] .bar nav a b {
+  font-size: 12px;
+  color: var(--ik-2);
+  font-weight: 600;
+  display: block;
+}
+[data-route="trouble"] .bar nav a i {
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 0.14em;
+  color: var(--ik-3);
+  font-style: normal;
+  display: block;
+  margin-top: 2px;
+}
+[data-route="trouble"] .bar nav a:hover {
+  background: rgba(74, 124, 111, 0.08);
+}
+[data-route="trouble"] .bar nav a:hover b {
+  color: var(--ik);
+}
+[data-route="trouble"] .bar nav a[aria-current] b,
+[data-route="trouble"] .bar nav a[aria-current] i {
+  color: var(--ac);
+}
+[data-route="trouble"] [data-burger] {
+  width: 40px;
+  height: 36px;
+  background: none;
+  border: 1px solid var(--ln);
+  border-radius: 4px;
+  flex-direction: column;
+  gap: 4px;
+}
+[data-route="trouble"] [data-burger] span {
+  width: 16px;
+  height: 1.5px;
+  background: var(--ik);
+  display: block;
+}
+@media (max-width: 1180px) {
+  [data-route="trouble"] .bar nav a b {
+    font-size: 11px;
+  }
+  [data-route="trouble"] .bar nav a {
+    padding: 6px 6px;
+  }
+}
+@media (max-width: 900px) {
+  [data-route="trouble"] [data-nav] {
+    background: rgba(247, 245, 242, 0.985);
+  }
+  [data-route="trouble"] .bar nav a {
+    padding: 13px 20px;
+  }
+  [data-route="trouble"] .bar nav a b {
+    font-size: 17px;
+  }
+}
+
+/* Hero＝静か。全画面にしない・写真を大きく敷かない */
+[data-route="trouble"] .hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--ln);
+}
+[data-route="trouble"] .hero-media {
+  position: absolute;
+  right: -6%;
+  top: -10%;
+  width: min(560px, 52%);
+  height: 130%;
+  z-index: 0;
+  opacity: 0.3;
+  pointer-events: none;
+  background: url("../assets/trouble-object-01.webp") right center/contain
+    no-repeat;
+}
+@media (max-width: 900px) {
+  [data-route="trouble"] .hero-media {
+    width: 88%;
+    opacity: 0.16;
+  }
+}
+[data-route="trouble"] .hero-in {
+  position: relative;
+  z-index: 1;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(56px, 9vh, 104px) var(--pad) clamp(44px, 7vh, 80px);
+}
+[data-route="trouble"] .crumb {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ik-3);
+  padding: 0 0 18px;
+}
+[data-route="trouble"] .crumb a {
+  color: var(--ik-3);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ln);
+}
+[data-route="trouble"] .crumb a:hover {
+  color: var(--ac);
+  border-color: var(--ac);
+}
+[data-route="trouble"] .hero .no {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--ac);
+  margin: 0 0 18px;
+}
+
+/* フッター：警告色で煽らず、本文と同じ落ち着いた紙面で閉じる */
+[data-route="trouble"] footer {
+  margin-top: 72px;
+  border-top: 1px solid var(--ln);
+  background: var(--pp-3);
+}
+[data-route="trouble"] .ft h4 {
+  color: var(--ac);
+  font-family: var(--mono);
+}
+[data-route="trouble"] .ft a {
+  color: var(--ik-2);
+}
+[data-route="trouble"] .ft a:hover {
+  color: var(--ac);
+}
+[data-route="trouble"] .ft-btm {
+  padding: 14px var(--pad) 28px;
+  border-top: 1px solid var(--ln);
+  color: var(--ik-2);
+  font-family: var(--mono);
+}
+/* ★ジャンプ率を上げない（実測 にじのわ 1.9）。h1も控えめに止める */
+[data-route="trouble"] .hero h1 {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.5;
+  font-size: clamp(21px, 2.5vw, 31px);
+}
+[data-route="trouble"] .hero .lead {
+  margin-top: 22px;
+  max-width: 58ch;
+  font-size: 15.5px;
+  line-height: 2.1;
+  color: var(--ik-2);
+}
+[data-route="trouble"] .hero .lead b {
+  color: var(--ik);
+  border-bottom: 1px solid var(--ac);
+}
+
+/* ★★いま起きている人へ（このページの本体・番号付きの順番） */
+[data-route="trouble"] .now {
+  background: var(--pp-2);
+  border-bottom: 1px solid var(--ln);
+}
+[data-route="trouble"] .now-in {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(44px, 7vw, 88px) var(--pad);
+}
+[data-route="trouble"] .now-h {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--wn);
+  margin: 0 0 clamp(26px, 4vw, 44px);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--wn);
+}
+[data-route="trouble"] .steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: none;
+}
+[data-route="trouble"] .steps li {
+  display: flex;
+  gap: clamp(16px, 2.6vw, 32px);
+  padding: clamp(20px, 3vw, 32px) 0;
+  border-bottom: 1px solid var(--ln);
+}
+[data-route="trouble"] .steps li:last-child {
+  border-bottom: 0;
+}
+[data-route="trouble"] .steps .st {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  margin: 2px 0 0;
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--pp-2);
+  background: var(--ac);
+  border-radius: 50%;
+}
+/* ★見出しを大きくしない（h2 でも本文＋4px まで） */
+[data-route="trouble"] .steps h2 {
+  margin: 0 0 9px;
+  font-size: 17.5px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.6;
+  scroll-margin-top: 76px;
+  border: 0;
+  padding: 0;
+}
+[data-route="trouble"] .steps p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 2;
+  color: var(--ik-2);
+  max-width: 60ch;
+}
+[data-route="trouble"] .steps p b {
+  color: var(--ik);
+  border-bottom: 1px solid var(--ac);
+}
+
+/* 本文 */
+[data-route="trouble"] .doc {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 96px) var(--pad);
+}
+[data-route="trouble"] .toc {
+  background: var(--pp-2);
+  border: 1px solid var(--ln);
+  border-left: 4px solid var(--ac);
+  padding: 20px 24px;
+  margin: 0 0 var(--s6);
+}
+[data-route="trouble"] .toc-h {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  color: var(--ac);
+  margin-bottom: 13px;
+}
+[data-route="trouble"] .toc ol {
+  margin: 0;
+  padding-left: 1.3em;
+}
+[data-route="trouble"] .toc a {
+  display: block;
+  padding: 5px 0;
+  font-size: 13.5px;
+  color: var(--ik-2);
+  text-decoration: none;
+}
+[data-route="trouble"] .toc a:hover,
+[data-route="trouble"] .toc a[data-here] {
+  color: var(--ac);
+}
+/* ★見出しの段差を小さく保つ（J率を上げないため） */
+[data-route="trouble"] .doc h2 {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin: var(--s7) 0 12px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid var(--ln);
+  scroll-margin-top: 76px;
+  position: relative;
+}
+[data-route="trouble"] .doc h2::before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 6px;
+  bottom: 14px;
+  width: 2px;
+  background: var(--ac);
+}
+[data-route="trouble"] .doc h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: var(--s5) 0 10px;
+  color: var(--ik);
+  scroll-margin-top: 76px;
+}
+[data-route="trouble"] .doc p {
+  font-size: 15px;
+  line-height: 2.05;
+  color: var(--ik-2);
+  margin: 0 0 15px;
+  max-width: 70ch;
+}
+[data-route="trouble"] .doc p b {
+  color: var(--ik);
+  border-bottom: 1px solid var(--ac);
+}
+[data-route="trouble"] .doc a {
+  color: var(--ac);
+}
+
+/* 締め＝仕切りの絵を1本だけ使う */
+[data-route="trouble"] .cta {
+  position: relative;
+  background: var(--pp-3);
+  border-top: 1px solid var(--ln);
+}
+[data-route="trouble"] .cta::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 64px;
+  opacity: 0.34;
+  pointer-events: none;
+  background: url("../assets/trouble-divider-01.webp") center top/100% auto
+    no-repeat;
+}
+[data-route="trouble"] .cta-in {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(52px, 8vw, 104px) var(--pad);
+  text-align: center;
+}
+[data-route="trouble"] .cta h2 {
+  font-size: clamp(19px, 2.4vw, 28px);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.7;
+  margin: 0 0 26px;
+  border: 0;
+  padding: 0;
+}
+[data-route="trouble"] .cta .go {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ac);
+  color: var(--pp-2);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 16px 32px;
+  border-radius: 3px;
+}
+[data-route="trouble"] .cta .go:hover {
+  filter: brightness(1.08);
+}
+[data-route="trouble"] .cta small {
+  display: block;
+  margin-top: 16px;
+  font-size: 12.5px;
+  color: var(--ik-3);
+}
+
+/* ★ヘッダの光の帯を弱める（このページは静かにする） */
+[data-route="trouble"] .site-header__light-sweep {
+  opacity: 0.05;
+}
+[data-route="trouble"] .site-header__motion {
+  opacity: 0.1;
+  mix-blend-mode: multiply;
+}
+
+/* ★残っていた素材を使う（追加依頼はしない） */
+[data-route="trouble"] .now::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.2;
+  pointer-events: none;
+  background: url("../assets/trouble-glow-01.webp") center/cover no-repeat;
+  mix-blend-mode: multiply;
+}
+[data-route="trouble"] .now {
+  position: relative;
+}
+[data-route="trouble"] .now-in {
+  position: relative;
+  z-index: 1;
+}

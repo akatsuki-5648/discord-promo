@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>
+      【2026年8月最新】ディスコードのサーバーの作り方｜部屋・権限・入口の設計まで詳しく解説
+    </title>
+    <meta
+      name="description"
+      content="ディスコードのサーバーの作り方を、最初に作る部屋・おすすめ設定・権限・入口の作り方まで手順で解説します。宣伝の前に整えておくと、来た人が抜けなくなります。"
+    />
+    <meta name="theme-color" content="#0A2540" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://promo.akatsuki-system.online/create/" />
+    <link rel="icon" href="../assets/logo-mark-01.svg" type="image/svg+xml" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link
+      rel="icon"
+      href="../favicon-16x16.png"
+      sizes="16x16"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="../favicon-32x32.png"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:site_name" content="ディスコード宣伝" />
+    <meta
+      property="og:title"
+      content="【2026年8月最新】ディスコードのサーバーの作り方｜部屋・権限・入口"
+    />
+    <meta
+      property="og:description"
+      content="最初に作る部屋・おすすめ設定・権限・入口の設計を手順で。"
+    />
+    <meta
+      property="og:url"
+      content="https://promo.akatsuki-system.online/create/"
+    />
+    <meta
+      property="og:image"
+      content="https://promo.akatsuki-system.online/assets/discord-promo-ogp.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="ディスコード宣伝｜宣伝サーバー・掲示板・運営ガイド"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://promo.akatsuki-system.online/assets/discord-promo-ogp.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="ディスコード宣伝｜宣伝サーバー・掲示板・運営ガイド"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "ディスコードの宣伝とは",
+                "item": "https://promo.akatsuki-system.online/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "サーバーの作り方",
+                "item": "https://promo.akatsuki-system.online/create/"
+              }
+            ]
+          },
+          {
+            "@type": "HowTo",
+            "name": "ディスコードのサーバーの作り方",
+            "inLanguage": "ja",
+            "description": "入った人が迷わないサーバーを作る手順を、部屋・権限・入口の順で解説します。",
+            "step": [
+              {
+                "@type": "HowToStep",
+                "name": "サーバーを作る",
+                "text": "Discordの左側にある＋からサーバーを作成します。テンプレートは使わず、自分で作るを選んで構いません。"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "部屋を3つだけ作る",
+                "text": "ルール・雑談・自己紹介の3つから始めます。最初から多く作ると、どこも無人に見えます。"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "入口を整える",
+                "text": "入った直後に見える部屋にルールと案内を置きます。ここが空だと数秒で抜けられます。"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "権限を決める",
+                "text": "@everyoneから管理系の権限を外し、必要なものだけ与えます。最初は自分ひとりで足ります。"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "期限なしの招待リンクを作る",
+                "text": "宣伝に使うリンクは有効期限をなし、使用回数を無制限にして発行します。"
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "ディスコードのサーバーの作り方を教えてください。",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Discordの左側にある＋からサーバーを作成し、部屋をルール・雑談・自己紹介の3つだけ作ります。入口にルールと案内を置き、@everyoneの権限を絞ってから、期限なしの招待リンクを発行します。ここまでで宣伝を始められます。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "最初にいくつ部屋を作ればいいですか？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "3つで十分です。ルール・雑談・自己紹介から始めてください。人数が少ないうちに部屋を増やすと、会話が薄く広がってどこも無人に見えます。必要になってから足すほうが常に賑わって見えます。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "サーバーテンプレートは使ったほうがいいですか？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "使わなくて構いません。テンプレートは部屋が多く作られることがあり、人数が少ないうちは過疎に見える原因になります。自分で3つ作るほうが早く、後から自由に変えられます。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "おすすめの設定はありますか？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "@everyoneからチャンネル管理・メンバー管理・メンション全体などの権限を外すこと、招待リンクを期限なしにすること、入った直後に見える部屋を1つに絞ることの3つです。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "コミュニティ機能は有効にしたほうがいいですか？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "人数が増えてからで構いません。有効にするとルール画面やオンボーディングが使えますが、設定項目が増えます。まず人が来るところまで進めてから検討してください。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "作ったのに人が来ません。",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "サーバーは作っただけでは誰にも見つかりません。宣伝サーバーやサーバー一覧サイトへ貼る必要があります。貼れる場所と書き方は宣伝のページで解説しています。"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="../styles.css?v=347d1afc" />
+    <link rel="stylesheet" href="../page-styles/create.css?v=d8fc93c9" />
+  </head>
+  <body data-route="create">
+    <a class="skip" href="#main">本文へ移動</a>
+    <div class="bp" aria-hidden="true"></div>
+
+    <header class="site-head titleblock">
+      <span class="site-header__motion" aria-hidden="true"></span
+      ><span class="site-header__light-sweep" aria-hidden="true"></span>
+      <div class="tb-in">
+        <a class="logo" href="../index.html"
+          ><img
+            class="site-header__logo-mark"
+            src="../assets/logo-mark-01.svg"
+            alt=""
+            width="34"
+            height="34" /><img
+            class="site-header__logo-type"
+            src="../assets/logo-type-01.svg"
+            alt="ディスコード宣伝"
+            height="22"
+        /></a>
+        <nav data-nav>
+          <a href="../index.html"><b>宣伝とは</b><i>Promotion</i></a>
+          <a href="../how-to/"><b>宣伝のやり方</b><i>How to</i></a>
+          <a href="../places/"><b>宣伝できる場所</b><i>Places</i></a>
+          <a href="../recruit/"><b>メンバー募集</b><i>Recruit</i></a>
+          <a href="../find/"><b>サーバーの探し方</b><i>Find</i></a>
+          <a href="index.html" aria-current="page"
+            ><b>サーバーの作り方</b><i>Create</i></a
+          >
+          <a href="../manage/"><b>サーバーの運営</b><i>Manage</i></a>
+          <a href="../features/"><b>タグ・ブースト</b><i>Features</i></a>
+          <a href="../trouble/"><b>荒らし対策</b><i>Security</i></a>
+        </nav>
+        <button data-burger type="button" aria-expanded="false">
+          <span></span><span></span><span></span><i class="sr">メニュー</i>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="hero-media" aria-hidden="true"></div>
+        <div class="hero-veil" aria-hidden="true"></div>
+        <div class="hero-in wrap">
+          <nav class="crumb" aria-label="パンくず">
+            <a href="../index.html">ディスコードの宣伝とは</a> ／
+            サーバーの作り方
+          </nav>
+          <p class="no">CREATE ／ 設計図</p>
+          <h1>部屋は3つでいい。<br /><em>増やすのは、人が来てから。</em></h1>
+          <p class="lead">
+            サーバーの作り方で最初に間違えるのは、<b>部屋を作りすぎること</b>です。10人のサーバーに部屋が15個あれば、全部が無人に見えます。ここでは<b>宣伝を始められる状態</b>までを、5工程で作ります。
+          </p>
+        </div>
+      </section>
+
+      <!-- ★横スクロールの工程（Made With Gsap 型：番号付き・引いて探索） -->
+      <!--WAVE-->
+      <div class="wave-wrap wave-bp2">
+        <svg
+          class="wave"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path d="M0 16 L1440 91 L1440 120 L0 120 Z" fill="currentColor" />
+        </svg>
+      </div>
+      <!--WAVE-->
+      <div class="track-h">
+        <h2>作る順番</h2>
+        <span class="cnt">/ 05</span>
+        <p class="drag">DRAG TO EXPLORE ／ 横に引いて進む<i></i></p>
+      </div>
+      <div class="track">
+        <div class="step">
+          <span class="n">01</span><span class="of">/ 05</span>
+          <h3>サーバーを作る</h3>
+          <p>
+            Discordの左側にある「＋」から作成します。<strong>テンプレートは使わなくて構いません</strong>。「自分で作る」を選び、名前だけ決めます。
+          </p>
+          <p class="tick">✓ 名前にジャンルを入れておく</p>
+        </div>
+        <div class="step">
+          <span class="n">02</span><span class="of">/ 05</span>
+          <h3>部屋を3つだけ作る</h3>
+          <p>
+            <strong>ルール／雑談／自己紹介</strong
+            >の3つ。最初はこれで足ります。テンプレートで大量に作られた部屋がある場合は、消してください。
+          </p>
+          <p class="tick">✓ 消すのは今のうちが楽</p>
+        </div>
+        <div class="step">
+          <span class="n">03</span><span class="of">/ 05</span>
+          <h3>入口を整える</h3>
+          <p>
+            入った直後に見える部屋に、<strong>ルールと「何のサーバーか」の1行</strong>を置きます。ここが空だと数秒で抜けられます。
+          </p>
+          <p class="tick">✓ 宣伝より先にここ</p>
+        </div>
+        <div class="step">
+          <span class="n">04</span><span class="of">/ 05</span>
+          <h3>権限を決める</h3>
+          <p>
+            <strong>@everyone から管理系の権限を外します。</strong
+            >チャンネル管理・メンバー管理・全体メンションの3つが特に重要です。
+          </p>
+          <p class="tick">✓ 荒らし対策の第一歩</p>
+        </div>
+        <div class="step">
+          <span class="n">05</span><span class="of">/ 05</span>
+          <h3>招待リンクを作る</h3>
+          <p>
+            有効期限を<strong>なし</strong>、最大使用回数を<strong>無制限</strong>にして発行します。ここを直さないと、貼ったリンクが数日で切れます。
+          </p>
+          <p class="tick">✓ 作ったら自分で踏んで確認</p>
+        </div>
+      </div>
+
+      <!--WAVE-->
+      <div class="wave-wrap wave-bp2">
+        <svg
+          class="wave"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path d="M0 16 L1440 91 L1440 120 L0 120 Z" fill="currentColor" />
+        </svg>
+      </div>
+      <!--WAVE-->
+
+      <!--SPLIT--><!--ICON-->
+      <div class="mark-row" aria-hidden="true">
+        <picture class="mark"
+          ><source srcset="../assets/create-icon-01.gif" type="image/gif" />
+          <img
+            src="../assets/create-icon-01.png"
+            alt=""
+            loading="lazy"
+            decoding="async"
+        /></picture>
+      </div>
+      <!--ICON-->
+      <section class="doc">
+        <div class="toc">
+          <p class="toc-h">目次 / CONTENTS</p>
+          <ol>
+            <li><a href="#s1">1. サーバーの作り方</a></li>
+            <li><a class="lv3" href="#s1-1">作る前に決めること</a></li>
+            <li><a class="lv3" href="#s1-2">テンプレートを使わない理由</a></li>
+            <li><a href="#s2">2. 最初に作る部屋</a></li>
+            <li><a class="lv3" href="#s2-1">3つだけ作る</a></li>
+            <li>
+              <a class="lv3" href="#s2-2">部屋を増やしすぎるとどうなるか</a>
+            </li>
+            <li><a class="lv3" href="#s2-3">構成図（完成形）</a></li>
+            <li><a href="#s3">3. 入口の作り方</a></li>
+            <li><a class="lv3" href="#s3-1">最初の3秒で決まる</a></li>
+            <li><a class="lv3" href="#s3-2">入口に置くもの</a></li>
+            <li><a href="#s4">4. おすすめ設定と権限</a></li>
+            <li><a class="lv3" href="#s4-1">@everyoneから外す権限</a></li>
+            <li><a class="lv3" href="#s4-2">通知の初期設定</a></li>
+            <li><a class="lv3" href="#s4-3">コミュニティ機能は後で</a></li>
+            <li><a href="#s5">5. 作った後にやること</a></li>
+            <li><a href="#faq">よくある質問</a></li>
+          </ol>
+        </div>
+
+        <h2 id="s1"><span class="n">01</span>サーバーの作り方</h2>
+
+        <h3 id="s1-1">作る前に決めること</h3>
+        <p>
+          決めるのは<strong>「何をする場所か」の1行だけ</strong>です。これが決まっていないと、部屋の名前もルールも決まりません。逆にここさえ決まれば、あとは10分で作れます。
+        </p>
+
+        <h3 id="s1-2">テンプレートを使わない理由</h3>
+        <p>
+          Discordにはサーバーテンプレートがありますが、<strong>部屋が多く作られることがあります。</strong>人数が少ないうちは、それが全部「無人の部屋」に見えます。<strong
+            >自分で3つ作るほうが早く、後から自由に変えられます。</strong
+          >
+        </p>
+
+        <h2 id="s2"><span class="n">02</span>最初に作る部屋</h2>
+
+        <h3 id="s2-1">3つだけ作る</h3>
+        <ul>
+          <li><strong>ルール</strong>——禁止事項3つと、何のサーバーかの1行</li>
+          <li><strong>雑談</strong>——何でも書ける場所。ここが本体</li>
+          <li><strong>自己紹介</strong>——書かなくてもいい場所として置く</li>
+        </ul>
+
+        <h3 id="s2-2">部屋を増やしすぎるとどうなるか</h3>
+        <div class="note">
+          <p>
+            <b>10人のサーバーに部屋が15個あれば、全部が無人に見えます。</b
+            >会話が薄く広がるからです。逆に3つなら、同じ10人でも常に何かが動いて見えます。<b
+              >部屋は人数が増えてから足してください。</b
+            >
+          </p>
+        </div>
+
+        <h3 id="s2-3">構成図（完成形）</h3>
+        <p>
+          人が増えてきた時の形です。<strong>最初からこれを作らないでください。</strong>★が付いているものだけを先に作ります。
+        </p>
+        <div class="plan">
+          <p class="plan-h">SERVER STRUCTURE ／ 構成図</p>
+          <div class="cat">
+            <b>▸ はじめに</b>
+            <div class="ch">
+              <span class="must"><i>#</i>ルール<em>★最初に</em></span>
+              <span><i>#</i>お知らせ</span>
+              <span class="must"><i>#</i>自己紹介<em>★最初に</em></span>
+            </div>
+          </div>
+          <div class="cat">
+            <b>▸ はなす</b>
+            <div class="ch">
+              <span class="must"><i>#</i>雑談<em>★最初に</em></span>
+              <span><i>#</i>質問</span>
+              <span><i>🔊</i>通話</span>
+            </div>
+          </div>
+          <div class="cat">
+            <b>▸ ジャンル別（人が増えてから）</b>
+            <div class="ch">
+              <span><i>#</i>〈ジャンル1〉</span>
+              <span><i>#</i>〈ジャンル2〉</span>
+              <span><i>#</i>募集</span>
+            </div>
+          </div>
+          <div class="cat">
+            <b>▸ 運営（必要になったら）</b>
+            <div class="ch">
+              <span><i>#</i>運営用</span>
+              <span><i>#</i>通報</span>
+              <span><i>#</i>ログ</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="wave-wrap wave-bp2">
+        <svg
+          class="wave"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M0 62 C180 50 330 74 510 61 C690 48 840 70 1020 58 C1180 47 1320 56 1440 51 L1440 120 L0 120 Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+      <section class="eyecatch" data-rv>
+        <div
+          class="ec-img"
+          style="
+            background-image: url(&quot;../assets/create-motion-01.webp&quot;);
+          "
+        ></div>
+        <div class="ec-cap">
+          <b>部屋を増やす前に、通り道を1本</b
+          >入った人が最初にどこへ行くか。そこが決まっていないサーバーは、人数が増えても静かなままです。
+        </div>
+      </section>
+      <section class="doc">
+        <h2 id="s3"><span class="n">03</span>入口の作り方</h2>
+
+        <h3 id="s3-1">最初の3秒で決まる</h3>
+        <p>
+          宣伝で人が来ても、<strong>入った直後に何も無ければ数秒で抜けられます。</strong>宣伝の効果が出ない原因の多くは、宣伝ではなくここにあります。
+        </p>
+
+        <h3 id="s3-2">入口に置くもの</h3>
+        <ol>
+          <li><strong>何のサーバーか</strong>——1行。紹介文と同じ内容でいい</li>
+          <li><strong>禁止事項3つ</strong>——多いと読まれません</li>
+          <li>
+            <strong>どこで話せばいいか</strong>——「まずは #雑談 へ」の一言
+          </li>
+        </ol>
+        <p>
+          この3つだけで、離脱は目に見えて減ります。凝った案内画像より、<strong
+            >この3行のほうが効きます。</strong
+          >
+        </p>
+
+        <h2 id="s4"><span class="n">04</span>おすすめ設定と権限</h2>
+
+        <h3 id="s4-1">@everyoneから外す権限</h3>
+        <div class="scroll-x">
+          <table>
+            <thead>
+              <tr>
+                <th>権限</th>
+                <th>外す理由</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>チャンネルの管理</b></td>
+                <td>部屋を消される・作られる。荒らしの主な手口です</td>
+              </tr>
+              <tr>
+                <td><b>メンバーの管理（キック・BAN）</b></td>
+                <td>他の人を追い出せてしまいます</td>
+              </tr>
+              <tr>
+                <td><b>@everyone のメンション</b></td>
+                <td>全員に通知を飛ばせます。最も嫌がられる荒らし</td>
+              </tr>
+              <tr>
+                <td><b>ロールの管理</b></td>
+                <td>自分に権限を付けられてしまいます</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">
+          <p>
+            <b>ここを外しておくだけで、荒らしの被害はかなり小さくなります。</b
+            >Botを入れるより先に、この設定です。詳しくは<a href="../trouble/"
+              >荒らし対策</a
+            >で書いています。
+          </p>
+        </div>
+
+        <h3 id="s4-2">通知の初期設定</h3>
+        <p>
+          サーバーの通知設定は<strong>「@メンションのみ」</strong>にしておくのが無難です。全メッセージ通知が初期値だと、入った人が通知の多さで抜けます。
+        </p>
+
+        <h3 id="s4-3">コミュニティ機能は後で</h3>
+        <p>
+          コミュニティ機能を有効にすると、ルール画面やオンボーディングが使えます。ただし<strong>設定項目が一気に増えます。</strong>人が来るところまで進めてから検討してください。
+        </p>
+      </section>
+      <div class="wave-wrap wave-bp2">
+        <svg
+          class="wave"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path d="M0 16 L1440 91 L1440 120 L0 120 Z" fill="currentColor" />
+        </svg>
+      </div>
+      <figure class="side-fig" data-rv>
+        <picture
+          ><img
+            src="../assets/create-glow-01.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+        /></picture>
+      </figure>
+      <section class="doc">
+        <h2 id="s5"><span class="n">05</span>作った後にやること</h2>
+        <p>
+          <strong>サーバーは作っただけでは誰にも見つかりません。</strong
+          >Discordには「新しいサーバーを一覧で見せる」仕組みがほとんど無いためです。
+        </p>
+        <ol>
+          <li>
+            <a href="../how-to/">紹介文を3行で書く</a>——何の／誰向け／何がある
+          </li>
+          <li>
+            <a href="../places/">貼れる場所に貼る</a
+            >——宣伝サーバーと一覧サイトの両方へ
+          </li>
+          <li><a href="../recruit/">足りない役割は募集で埋める</a></li>
+          <li><a href="../manage/">来た人が残るようにする</a></li>
+        </ol>
+
+        <a class="back" href="../index.html">
+          <b>「ディスコードの宣伝とは？」へ戻る</b>
+          <small
+            >サーバーができたら、次は見つけてもらう番です。宣伝の全体像と、貼れる場所の種類へ戻れます。</small
+          >
+        </a>
+
+        <h2 id="faq"><span class="n">FAQ</span>よくある質問</h2>
+        <details>
+          <summary>ディスコードのサーバーの作り方を教えてください。</summary>
+          <p>
+            Discordの左側にある＋からサーバーを作成し、部屋をルール・雑談・自己紹介の3つだけ作ります。入口にルールと案内を置き、@everyoneの権限を絞ってから、期限なしの招待リンクを発行します。ここまでで宣伝を始められます。
+          </p>
+        </details>
+        <details>
+          <summary>最初にいくつ部屋を作ればいいですか？</summary>
+          <p>
+            3つで十分です。ルール・雑談・自己紹介から始めてください。人数が少ないうちに部屋を増やすと、会話が薄く広がってどこも無人に見えます。必要になってから足すほうが常に賑わって見えます。
+          </p>
+        </details>
+        <details>
+          <summary>サーバーテンプレートは使ったほうがいいですか？</summary>
+          <p>
+            使わなくて構いません。テンプレートは部屋が多く作られることがあり、人数が少ないうちは過疎に見える原因になります。自分で3つ作るほうが早く、後から自由に変えられます。
+          </p>
+        </details>
+        <details>
+          <summary>おすすめの設定はありますか？</summary>
+          <p>
+            @everyoneからチャンネル管理・メンバー管理・メンション全体などの権限を外すこと、招待リンクを期限なしにすること、入った直後に見える部屋を1つに絞ることの3つです。
+          </p>
+        </details>
+        <details>
+          <summary>コミュニティ機能は有効にしたほうがいいですか？</summary>
+          <p>
+            人数が増えてからで構いません。有効にするとルール画面やオンボーディングが使えますが、設定項目が増えます。まず人が来るところまで進めてから検討してください。
+          </p>
+        </details>
+        <details>
+          <summary>作ったのに人が来ません。</summary>
+          <p>
+            サーバーは作っただけでは誰にも見つかりません。宣伝サーバーやサーバー一覧サイトへ貼る必要があります。貼れる場所と書き方は宣伝のページで解説しています。
+          </p>
+        </details>
+
+        <h2><span class="n">NEXT</span>次に読むページ</h2>
+        <div class="rel">
+          <a href="../how-to/"
+            ><p>HOW TO</p>
+            <b>宣伝のやり方</b
+            ><small>作れたら、次は見つけてもらう番。</small></a
+          >
+          <a href="../trouble/"
+            ><p>SECURITY</p>
+            <b>荒らし対策</b
+            ><small>権限の設定は、そのまま防御になります。</small></a
+          >
+          <a href="../manage/"
+            ><p>MANAGE</p>
+            <b>サーバーの運営</b
+            ><small>作った後、続けるための考え方。</small></a
+          >
+        </div>
+      </section>
+      <!--SPLIT-->
+
+      <section class="cta">
+        <h2>できたら、貼りに行く。</h2>
+        <a class="go" href="../how-to/">宣伝のやり方を見る →</a>
+        <small>紹介文の3行・期限なしの招待リンク</small>
+      </section>
+    </main>
+
+    <footer>
+      <div class="ft">
+        <div>
+          <h4>ディスコードの宣伝</h4>
+          <a href="../index.html">ディスコードの宣伝とは</a>
+          <a href="../how-to/">宣伝のやり方</a>
+          <a href="../places/">宣伝できる場所</a>
+          <a href="../recruit/">メンバー募集</a>
+        </div>
+        <div>
+          <h4>サーバーを持つ</h4>
+          <a href="../create/">サーバーの作り方</a>
+          <a href="../manage/">サーバーの運営</a>
+          <a href="../features/">サーバータグ・ブースト</a>
+          <a href="../trouble/">荒らし対策・トラブル</a>
+        </div>
+        <div>
+          <h4>探す</h4>
+          <a href="../find/">サーバーの探し方</a>
+          <a href="../find/#search">検索で出てこない時</a>
+          <a href="../find/#mobile">スマホ・iPhoneで探す</a>
+          <a href="../find/#tag">タグから探す</a>
+        </div>
+        <div>
+          <h4>よく読まれている</h4>
+          <a href="../how-to/#s2-1">紹介文の3行</a>
+          <a href="../how-to/#s2-5">紹介文の添削例</a>
+          <a href="../how-to/#s3-1">期限なしの招待リンク</a>
+          <a href="../places/#s3-3">バンプとは</a>
+        </div>
+      </div>
+      <div class="ft-notes" aria-label="商標・情報・運営に関する注記">
+        <p>
+          ※ Discord ほか記載のサービス名・製品名は各社の商標または登録商標です。
+          ※
+          掲載内容は各記事の作成時点の情報です。仕様・価格は変更されることがあるため、最新情報は各公式サイトをご確認ください。
+          ※ 当サイトは Discord, Inc. とは関係のない非公式サイトです。
+        </p>
+      </div>
+      <div class="ft-btm">
+        <p>Copyright©2026 AKATSUKI SYSTEM All Rights Reserved.</p>
+      </div>
+    </footer>
+    <script src="../app.js?v=57ea167d" defer></script>
+  </body>
+</html>

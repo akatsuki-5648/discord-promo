@@ -1,0 +1,823 @@
+/* ═══════════════════════════════════════════════════════
+   /recruit/ 専用｜文法＝「募集票／クラフト紙のピンボード」
+   ★真似る先：MBS RECRUIT（mbs.jp/recruit）
+     ・All / Job / About / Topic / Column の【タブで一覧を切り替える】
+     ・大判スライド＋人物カードが並ぶ採用サイトの構造
+   ★独自性：クラフト紙・切り取り線・赤い判子・画鋲
+   ★他ページとの差：places=2カラム、how-to=1枚の紙、find=上固定、
+                    create=横スクロール、manage=格子、
+                    ここは【タブ切替＋高さの違う紙が貼られるピンボード】
+   ═══════════════════════════════════════════════════════ */
+[data-route="recruit"] {
+  --kr: #e8dcc8;
+  --kr-2: #ddcfb6;
+  --kr-3: #f2e9da;
+  --ik: #3b2e1e;
+  --ik-2: #5e4b34;
+  --rd: #d6453c;
+  --rd-2: #f0b8b3;
+  --ln: #c9b795;
+  --mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --serif: "Hiragino Mincho ProN", "Yu Mincho", serif;
+}
+[data-route="recruit"] body,
+body[data-route="recruit"] {
+  background: var(--kr);
+  color: var(--ik);
+}
+
+/* 地：クラフト紙（台帳§7：texture→pattern→object） */
+[data-route="recruit"] .board-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background: var(--kr);
+}
+[data-route="recruit"] .board-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/recruit-texture-01.webp") center/cover no-repeat;
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+}
+[data-route="recruit"] .board-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/recruit-pattern-01.webp") center/cover no-repeat;
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+}
+
+/* ヘッダ＝木枠の掲示板 */
+[data-route="recruit"] .frame {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgba(232, 220, 200, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 3px double var(--ik);
+}
+[data-route="recruit"] .fr-in {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 10px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+[data-route="recruit"] .frame .logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  color: var(--ik);
+}
+[data-route="recruit"] .frame .logo b {
+  font-size: 15px;
+  font-family: var(--serif);
+  letter-spacing: 0.03em;
+}
+[data-route="recruit"] .frame .logo i {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--ik-2);
+  display: block;
+}
+[data-route="recruit"] .frame nav {
+  margin-left: auto;
+  gap: 0;
+  flex-wrap: wrap;
+}
+[data-route="recruit"] .frame nav a {
+  padding: 6px 9px;
+}
+[data-route="recruit"] .frame nav a b {
+  font-size: 12px;
+  color: var(--ik-2);
+  font-weight: 600;
+}
+[data-route="recruit"] .frame nav a i {
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 0.14em;
+  color: #8a7658;
+  margin-top: 2px;
+}
+[data-route="recruit"] .frame nav a:hover b {
+  color: var(--ik);
+}
+[data-route="recruit"] .frame nav a[aria-current] b,
+[data-route="recruit"] .frame nav a[aria-current] i {
+  color: var(--rd);
+}
+[data-route="recruit"] [data-burger] {
+  width: 40px;
+  height: 36px;
+  background: none;
+  border: 1.5px solid var(--ik);
+  border-radius: 2px;
+  flex-direction: column;
+  gap: 4px;
+}
+[data-route="recruit"] [data-burger] span {
+  width: 16px;
+  height: 1.5px;
+  background: var(--ik);
+  display: block;
+}
+@media (max-width: 1180px) {
+  [data-route="recruit"] .frame nav a b {
+    font-size: 11px;
+  }
+  [data-route="recruit"] .frame nav a {
+    padding: 6px 6px;
+  }
+}
+@media (max-width: 900px) {
+  [data-route="recruit"] [data-nav] {
+    background: rgba(232, 220, 200, 0.985);
+  }
+  [data-route="recruit"] .frame nav a {
+    padding: 13px 20px;
+  }
+  [data-route="recruit"] .frame nav a b {
+    font-size: 17px;
+  }
+}
+
+/* Hero＝掲示板に貼られた大きな募集票 */
+[data-route="recruit"] .hero {
+  min-height: clamp(420px, 60vh, 660px);
+}
+[data-route="recruit"] .hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/recruit-texture-01.webp") center/cover no-repeat;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+}
+[data-route="recruit"] .hero-veil {
+  background: linear-gradient(180deg, rgba(232, 220, 200, 0.3), var(--kr) 92%);
+}
+[data-route="recruit"] .crumb {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #8a7658;
+  padding: 0 0 16px;
+}
+[data-route="recruit"] .crumb a {
+  color: #8a7658;
+  text-decoration: none;
+  border-bottom: 1px solid var(--ln);
+}
+[data-route="recruit"] .crumb a:hover {
+  color: var(--rd);
+  border-color: var(--rd);
+}
+[data-route="recruit"] .hero .no {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: var(--rd);
+  margin: 0 0 16px;
+}
+[data-route="recruit"] .hero h1 {
+  font-family: var(--serif);
+  font-size: var(--f1);
+  font-weight: 700;
+  line-height: 1.22;
+  margin: 0;
+  position: relative;
+  display: inline-block;
+}
+[data-route="recruit"] .hero h1 em {
+  font-style: normal;
+  color: var(--rd);
+}
+/* 赤い判子（h1の右上・外周） */
+[data-route="recruit"] .hero h1::after {
+  content: "";
+  position: absolute;
+  top: -26px;
+  right: -70px;
+  width: 96px;
+  height: 96px;
+  background: url("../assets/recruit-object-01.webp") center/contain no-repeat;
+  opacity: 0.85;
+  transform: rotate(-9deg);
+}
+@media (max-width: 900px) {
+  [data-route="recruit"] .hero h1::after {
+    right: -14px;
+    top: -40px;
+    width: 70px;
+    height: 70px;
+  }
+}
+[data-route="recruit"] .hero .lead {
+  margin-top: var(--s4);
+  max-width: 58ch;
+  font-size: 16px;
+  color: var(--ik-2);
+  line-height: 2.1;
+}
+[data-route="recruit"] .hero .lead b {
+  color: var(--ik);
+  border-bottom: 2px solid var(--rd-2);
+}
+
+/* ★★タブ切替（MBS RECRUIT 型：一覧を切り替える） */
+[data-route="recruit"] .tabs {
+  max-width: 1240px;
+  margin: var(--s6) auto var(--s4);
+  padding: 0 var(--pad);
+}
+[data-route="recruit"] .tabs-h {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-bottom: 2px solid var(--ik);
+  padding-bottom: 12px;
+  margin-bottom: var(--s4);
+}
+[data-route="recruit"] .tabs-h h2 {
+  font-family: var(--serif);
+  font-size: var(--f2);
+  font-weight: 700;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+[data-route="recruit"] .tabs-h .cnt {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--rd);
+  margin-left: auto;
+}
+[data-route="recruit"] .tabbtns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+[data-route="recruit"] .tabbtns button {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 9px 18px;
+  background: transparent;
+  border: 1.5px solid var(--ln);
+  color: var(--ik-2);
+  border-radius: 2px;
+  transition: 0.16s;
+}
+[data-route="recruit"] .tabbtns button:hover {
+  border-color: var(--ik);
+  color: var(--ik);
+}
+[data-route="recruit"] .tabbtns button[data-on] {
+  background: var(--ik);
+  border-color: var(--ik);
+  color: var(--kr-3);
+}
+
+/* ★ピンボード（高さの違う紙が2〜3列・整列させない） */
+[data-route="recruit"] .pin {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 var(--pad) var(--s5);
+  columns: 3;
+  column-gap: var(--gut);
+}
+@media (max-width: 1000px) {
+  [data-route="recruit"] .pin {
+    columns: 2;
+  }
+}
+@media (max-width: 640px) {
+  [data-route="recruit"] .pin {
+    columns: 1;
+  }
+}
+[data-route="recruit"] .slip {
+  break-inside: avoid;
+  background: var(--kr-3);
+  border: 1px solid var(--ln);
+  padding: 22px 22px 20px;
+  margin: 0 0 var(--gut);
+  position: relative;
+  box-shadow: 0 6px 18px rgba(59, 46, 30, 0.13);
+  transition: 0.2s;
+}
+[data-route="recruit"] .slip:nth-child(3n) {
+  transform: rotate(-0.5deg);
+}
+[data-route="recruit"] .slip:nth-child(4n) {
+  transform: rotate(0.6deg);
+}
+[data-route="recruit"] .slip:hover {
+  transform: rotate(0) translateY(-4px);
+  box-shadow: 0 12px 26px rgba(59, 46, 30, 0.2);
+}
+[data-route="recruit"] .slip[hidden] {
+  display: none;
+}
+/* 画鋲（外周・上端中央） */
+[data-route="recruit"] .slip::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  translate: -50% 0;
+  width: 26px;
+  height: 26px;
+  background: url("../assets/recruit-object-02.webp") center/contain no-repeat;
+}
+[data-route="recruit"] .slip .cat {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  color: var(--rd);
+  display: block;
+  margin-bottom: 10px;
+}
+[data-route="recruit"] .slip h3 {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: var(--ik);
+  border: 0;
+  padding: 0;
+}
+[data-route="recruit"] .slip p {
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: var(--ik-2);
+  margin: 0;
+}
+[data-route="recruit"] .slip .ex {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--kr-2);
+  font-size: 12.5px;
+  line-height: 1.85;
+  color: #4a3a26;
+  border-left: 3px solid var(--ln);
+  white-space: pre-line;
+}
+/* 切り取り線 */
+[data-route="recruit"] .slip .cut {
+  margin-top: 15px;
+  padding-top: 13px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: #8a7658;
+  border-top: 2px dashed var(--ln);
+  letter-spacing: 0.1em;
+}
+
+/* 本文 */
+[data-route="recruit"] .doc {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 var(--pad) var(--s8);
+}
+[data-route="recruit"] .toc {
+  background: var(--kr-3);
+  border: 1px solid var(--ln);
+  border-left: 5px solid var(--ik);
+  padding: 22px 26px;
+  margin: var(--s5) 0 0;
+}
+[data-route="recruit"] .toc-h {
+  font-family: var(--serif);
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  color: var(--ik);
+  border-bottom: 1px solid var(--ln);
+  padding-bottom: 8px;
+  margin-bottom: 13px;
+}
+[data-route="recruit"] .toc ol {
+  columns: 2;
+  column-gap: 32px;
+}
+[data-route="recruit"] .toc li {
+  break-inside: avoid;
+}
+[data-route="recruit"] .toc a {
+  display: block;
+  padding: 6px 0;
+  font-size: 13px;
+  color: var(--ik-2);
+  border-bottom: 1px dotted var(--ln);
+}
+[data-route="recruit"] .toc a:hover,
+[data-route="recruit"] .toc a[data-here] {
+  color: var(--rd);
+}
+[data-route="recruit"] .toc .lv3 {
+  padding-left: 16px;
+  font-size: 12px;
+}
+[data-route="recruit"] .toc .lv3::before {
+  content: "— ";
+  color: var(--ln);
+}
+@media (max-width: 640px) {
+  [data-route="recruit"] .toc ol {
+    columns: 1;
+  }
+}
+[data-route="recruit"] .doc h2 {
+  font-family: var(--serif);
+  font-size: var(--f2);
+  font-weight: 700;
+  margin: var(--s7) 0 8px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--ik);
+  scroll-margin-top: 76px;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+[data-route="recruit"] .doc h2 .n {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--rd);
+  letter-spacing: 0.2em;
+  border: 1.5px solid var(--rd);
+  padding: 3px 9px;
+  font-weight: 400;
+  flex: none;
+}
+[data-route="recruit"] .doc h3 {
+  font-family: var(--serif);
+  font-size: var(--f3);
+  font-weight: 700;
+  margin: var(--s5) 0 12px;
+  scroll-margin-top: 76px;
+  padding-left: 18px;
+  position: relative;
+}
+[data-route="recruit"] .doc h3::before {
+  content: "●";
+  position: absolute;
+  left: 0;
+  top: 0.06em;
+  color: var(--rd);
+  font-size: 11px;
+}
+[data-route="recruit"] .doc h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 22px 0 8px;
+  color: var(--ik-2);
+}
+[data-route="recruit"] .doc p {
+  font-size: var(--fb);
+  line-height: 2.1;
+  color: #4a3a26;
+  margin: 0 0 15px;
+  max-width: 74ch;
+}
+[data-route="recruit"] .doc strong {
+  border-bottom: 2px solid var(--rd-2);
+  font-weight: 700;
+  color: var(--ik);
+}
+[data-route="recruit"] .doc ul {
+  list-style: none;
+  margin: 12px 0 22px;
+}
+[data-route="recruit"] .doc ul li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 9px;
+  font-size: 14.5px;
+  line-height: 1.95;
+  color: #4a3a26;
+}
+[data-route="recruit"] .doc ul li::before {
+  content: "・";
+  position: absolute;
+  left: 4px;
+  color: var(--rd);
+  font-weight: 700;
+}
+[data-route="recruit"] .doc ol {
+  list-style: none;
+  margin: 12px 0 22px;
+  counter-reset: r;
+}
+[data-route="recruit"] .doc ol li {
+  position: relative;
+  padding-left: 34px;
+  margin-bottom: 11px;
+  counter-increment: r;
+  font-size: 14.5px;
+  line-height: 1.95;
+  color: #4a3a26;
+}
+[data-route="recruit"] .doc ol li::before {
+  content: counter(r);
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  width: 22px;
+  height: 22px;
+  background: var(--ik);
+  color: var(--kr-3);
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  border-radius: 2px;
+}
+[data-route="recruit"] .note {
+  background: var(--kr-3);
+  border: 1px dashed var(--ik-2);
+  padding: 17px 20px;
+  margin: 20px 0;
+}
+[data-route="recruit"] .note b {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--serif);
+}
+[data-route="recruit"] .note p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 2;
+}
+[data-route="recruit"] .warn {
+  background: #fff;
+  border: 1.5px solid var(--rd);
+  border-left: 5px solid var(--rd);
+  padding: 17px 20px;
+  margin: 20px 0;
+}
+[data-route="recruit"] .warn b {
+  color: var(--rd);
+}
+[data-route="recruit"] .warn p {
+  margin: 0;
+  font-size: 14.5px;
+}
+[data-route="recruit"] .doc table {
+  margin: 18px 0 26px;
+  background: var(--kr-3);
+  border: 1.5px solid var(--ik);
+}
+[data-route="recruit"] .doc th {
+  background: var(--ik);
+  color: var(--kr-3);
+  font-family: var(--serif);
+  font-size: 12.5px;
+  text-align: left;
+  padding: 11px 14px;
+  white-space: nowrap;
+}
+[data-route="recruit"] .doc td {
+  padding: 12px 14px;
+  font-size: 13.5px;
+  border-top: 1px solid var(--ln);
+  vertical-align: top;
+  line-height: 1.85;
+}
+/* 破った紙の縁（セクション境） */
+[data-route="recruit"] .tabs-h {
+  position: relative;
+}
+[data-route="recruit"] .tabs-h::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -26px;
+  height: 22px;
+  background: url("../assets/recruit-divider-01.webp") center/100% 100%
+    no-repeat;
+  opacity: 0.5;
+}
+[data-route="recruit"] .back {
+  display: block;
+  margin: var(--s6) 0 0;
+  padding: 23px 25px;
+  background: var(--kr-3);
+  border: 1.5px solid var(--ik);
+  border-left: 5px solid var(--rd);
+  text-decoration: none;
+}
+[data-route="recruit"] .back b {
+  display: block;
+  font-family: var(--serif);
+  font-size: 16.5px;
+  color: var(--ik);
+  margin-bottom: 7px;
+}
+[data-route="recruit"] .back small {
+  font-size: 13.5px;
+  color: var(--ik-2);
+  line-height: 1.95;
+  display: block;
+}
+[data-route="recruit"] .back:hover {
+  background: var(--kr-2);
+}
+[data-route="recruit"] .rel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 13px;
+}
+[data-route="recruit"] .rel a {
+  background: var(--kr-3);
+  border: 1px solid var(--ln);
+  border-top: 4px solid var(--ik);
+  padding: 18px;
+  text-decoration: none;
+  transition: 0.18s;
+}
+[data-route="recruit"] .rel a:hover {
+  border-top-color: var(--rd);
+  transform: translateY(-2px);
+}
+[data-route="recruit"] .rel p {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--rd);
+  margin: 0 0 6px;
+}
+[data-route="recruit"] .rel b {
+  display: block;
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--ik);
+  margin-bottom: 5px;
+}
+[data-route="recruit"] .rel small {
+  font-size: 12.5px;
+  color: var(--ik-2);
+}
+[data-route="recruit"] details {
+  background: var(--kr-3);
+  border: 1px solid var(--ln);
+  margin-bottom: -1px;
+}
+[data-route="recruit"] summary {
+  padding: 15px 20px;
+  font-size: 14.5px;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  gap: 12px;
+  font-family: var(--serif);
+  font-weight: 700;
+}
+[data-route="recruit"] summary::-webkit-details-marker {
+  display: none;
+}
+[data-route="recruit"] summary::before {
+  content: "問";
+  color: var(--rd);
+  flex: none;
+  font-size: 13px;
+}
+[data-route="recruit"] details[open] summary {
+  background: var(--kr-2);
+}
+[data-route="recruit"] details p {
+  padding: 15px 20px 19px 46px;
+  font-size: 14px;
+  color: #4a3a26;
+  border-top: 1px dotted var(--ln);
+  margin: 0;
+}
+[data-route="recruit"] .cta {
+  background: var(--ik);
+  color: var(--kr-3);
+  margin-top: var(--s7);
+  padding: var(--s6) 22px;
+  text-align: center;
+}
+[data-route="recruit"] .cta h2 {
+  border: 0;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: clamp(21px, 3.6vw, 32px);
+  margin: 0 0 22px;
+  color: #fff;
+}
+[data-route="recruit"] .cta .go {
+  display: inline-block;
+  background: var(--rd);
+  color: #fff;
+  padding: 15px 38px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15.5px;
+  font-family: var(--serif);
+}
+[data-route="recruit"] .cta .go:hover {
+  background: #e55a51;
+}
+[data-route="recruit"] .cta small {
+  display: block;
+  margin-top: 14px;
+  font-size: 12px;
+  color: #b5a288;
+}
+[data-route="recruit"] footer {
+  background: var(--kr-2);
+  border-top: 3px double var(--ik);
+}
+[data-route="recruit"] .ft {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 42px var(--pad) 22px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px 30px;
+}
+[data-route="recruit"] .ft h4 {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--rd);
+  margin-bottom: 11px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--ln);
+}
+[data-route="recruit"] .ft a {
+  display: block;
+  font-size: 12.5px;
+  color: var(--ik-2);
+  text-decoration: none;
+  padding: 4px 0;
+}
+[data-route="recruit"] .ft a:hover {
+  color: var(--rd);
+}
+[data-route="recruit"] .ft-btm {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 14px var(--pad) 28px;
+  border-top: 1px solid var(--ln);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 11.5px;
+  color: var(--ik-2);
+}
+@media (max-width: 900px) {
+  [data-route="recruit"] .ft {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ★波の色と斜め断面 */
+[data-route="recruit"] .wave-kr3 {
+  color: var(--kr-3);
+}
+[data-route="recruit"] .hero {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3.2vw), 0 100%);
+}
+@media (max-width: 700px) {
+  [data-route="recruit"] .hero {
+    clip-path: none;
+  }
+}
+
+/* ═══ ★ページ別の目標値（11サイト実測・2026-08-13） ═══
+   参考: FMHR／ジャンプ率 3.2／最大字 32px
+   ★9ページ全部を同じ数字にしない。ページの目的でここまで振れる：
+     にじのわクリニック(不安を扱う) 1.9 … DAIICHI SELECT(商品を立てる) 14.5   */
+[data-route="recruit"] .hero h1,
+[data-route="recruit"] h1 {
+  font-size: clamp(23px, 3vw, 32px);
+}
+[data-route="recruit"] .doc h2,
+[data-route="recruit"] .wall-head h2,
+[data-route="recruit"] .four-h h2,
+[data-route="recruit"] .tabs-h h2,
+[data-route="recruit"] .plan-h h2 {
+  font-size: clamp(19px, 2.2vw, 25px);
+}
+[data-route="recruit"] .doc h3 {
+  font-size: clamp(16px, 1.7vw, 19px);
+}
+
+/* ★節として潰れないための厚み（実測 2026-08-13）
+   .tabs は見出しを持つ節なのに上下paddingが0で、recruitでは高さ57pxまで潰れていた。
+   実測サイト（すまいとおかね210px / STORES434px）の一番小さい節に合わせて厚みを与える。
+   ★数字合わせではなく、実際に潰れて帯に見えていたので直す。 */
+[data-route="recruit"] .tabs {
+  padding-top: clamp(40px, 5.5vw, 76px);
+  padding-bottom: clamp(28px, 3.6vw, 48px);
+}
